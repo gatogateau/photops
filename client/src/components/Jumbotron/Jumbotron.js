@@ -1,12 +1,12 @@
+
+//sets up the reusable Jumbotron component
 import React from "react";
+import "./Jumbotron.css";
 
-const Jumbotron = ({ children }) => (
-	<div
-		style={{ height: 300, clear: "both", paddingTop: 120, textAlign: "center" }}
-		className="jumbotron"
-	>
-		{children}
-	</div>
+const Jumbotron = () => (
+	<header className = "header">
+		<img src="/thumbnail.png" alt="Image" circle responsive />
+		<h1></h1>
+	</header>
 );
-
 export default Jumbotron;
