@@ -11,6 +11,8 @@ import Home from './pages/homepage/home';
 import JoinGame from './pages/JoinGame/JoinGame';
 import Enrollcam from './pages/Enrollcam/Enrollcam';
 import Verifycam from './pages/Enrollcam/Enrollcam';
+import CreateGame from './pages/CreateGame/CreateGame';
+import CurrentGame from './pages/CurrentGame/CurrentGame';
 // import { Card, Button, CardHeader, CardFooter, CardBody,
 // CardTitle, CardText } from 'reactstrap';
 class App extends Component {
@@ -42,6 +44,16 @@ class App extends Component {
           {/*<Example />*/}
           {/*<TabsPage></TabsPage>
            <FacebookLogin />*/}
+           <Route path="/creategame" exact render={
+            () => {
+              return (<CreateGame />)
+            }
+          } />
+          <Route path="/currentgame" exact render={
+            () => {
+              return (<CurrentGame />)
+            }
+          } />
            <Route path="/enrollcam" exact render={
             () => {
               return ( <Enrollcam /> )
