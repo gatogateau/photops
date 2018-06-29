@@ -1,34 +1,41 @@
 const db = require("../models");
 
+// Defining methods for the gamesController
 module.exports = {
-    // find all users and sort by name
-    findAll: function (req, res) {
-        console.log("find me");
-        db.User
-            .find(req.query)
-            .sort(req.name)
-            .then(dbModel => res.json(dbModel))
-            .catch(err => res.status(422).json(err));
-        console.log("find all Users");
-    },
-
-    // find each current game by username  get
-    findGame: async function (req, res) {
-
-        // req.query = username
-        // const user=username
-        console.log(req)
-        const user = await db.User.find(req.param, (err, user) => {
-            if (err) return err;
-            return user;
-        });
-        res.send(user.activeGames);
+	findAll: function (req, res) {
+		db.User
+			.find(req.query)
+			.sort({ date: -1 })
+			.then(dbModel => res.json(dbModel))
+			.catch(err => res.status(422).json(err));
+	},
+	findById: function (req, res) {
+		db.User
+			.findById(req.params.id)
+			.then(dbModel => res.json(dbModel))
+			.catch(err => res.status(422).json(err));
+	},
+	create: function (req, res) {
+		db.User
+			.create(req.body)
+			.then(dbModel => res.json(dbModel))
+			.catch(err => res.status(422).json(err));
+	},
+	update: function (req, res) {
+		db.Games
+			.findOneAndUpdate({ _id: req.params.id }, req.body)
+			.then(dbModel => res.json(dbModel))
+			.catch(err => res.status(422).json(err));
+	},
+	remove: function (req, res) {
+		db.User
+			.findById({ _id: req.params.id })
+			.then(dbModel => dbModel.remove())
+			.then(dbModel => res.json(dbModel))
+			.catch(err => res.status(422).json(err));
     }
 
-
-
-
-// createUser  create new user - post
+    // createUser  create new user - post
 
 // findUser get user by username - GET
 // would I use this 
@@ -39,5 +46,23 @@ module.exports = {
 
 
 
-
 };
+
+    // find each current game by username  get
+    // findGame: async function (req, res) {
+
+    //     // req.query = username
+    //     // const user=username
+    //     console.log(req)
+    //     const user = await db.User.find(req.param, (err, user) => {
+    //         if (err) return err;
+    //         return user;
+    //     });
+    //     res.send(user.activeGames);
+    // }
+
+
+
+
+
+
