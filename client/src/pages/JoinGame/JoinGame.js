@@ -9,21 +9,7 @@ import { Button, Input } from "reactstrap";
 import './JoinGame.css';
 // import { List, ListItem } from "../../components/List";
 // import { Input, TextArea, FormBtn } from "../../components/Form";
-import Verifycam from '../../components/Verifycam';
 class JoinGame extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      showComponent: false,
-    };
-    this._onButtonClick = this._onButtonClick.bind(this);
-  }
-
-  _onButtonClick() {
-    this.setState({
-      showComponent: true,
-    });
-  }
   render() {
     return (
       <Container fluid>
@@ -41,11 +27,6 @@ class JoinGame extends Component {
                 placeholder="GameName" bsSize="md" />
               <Button type="Success">Join</Button>
             </div>
-            <button onClick={this._onButtonClick}>KIll CAM</button>
-            {this.state.showComponent ?
-              <Verifycam /> :
-              null
-            }
           </Col>
         </Row>
       </Container>

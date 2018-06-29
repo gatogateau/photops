@@ -9,6 +9,8 @@ import AuthPage from './pages/AuthPage/AuthPage';
 // import Example from './components/Nav/Nav';
 import Home from './pages/homepage/home';
 import JoinGame from './pages/JoinGame/JoinGame';
+import Enrollcam from './pages/Enrollcam/Enrollcam';
+import Verifycam from './pages/Enrollcam/Enrollcam';
 // import { Card, Button, CardHeader, CardFooter, CardBody,
 // CardTitle, CardText } from 'reactstrap';
 class App extends Component {
@@ -17,31 +19,42 @@ class App extends Component {
       <Router>
         <div className="App">
 
-        <Route path="/" exact render={
-          () => {
-            return (<div>
-              <AuthPage></AuthPage>
-              <FacebookLogin></FacebookLogin>
+          <Route path="/" exact render={
+            () => {
+              return (<div>
+                <AuthPage></AuthPage>
+                <FacebookLogin></FacebookLogin>
               </div>)
-          }
-        } />
+            }
+          } />
 
-        <Route path="/home" exact render={
-          () => {
-            return ( <Home /> )
-          }
-        } />
+          <Route path="/home" exact render={
+            () => {
+              return (<Home />)
+            }
+          } />
 
-        <Route path="/JoinGame" exact render={
-          () => {
-            return ( <JoinGame /> )
-          } 
-        } />
+          <Route path="/JoinGame" exact render={
+            () => {
+              return (<JoinGame />)
+            }
+          } />
           {/*<Example />*/}
           {/*<TabsPage></TabsPage>
            <FacebookLogin />*/}
+           <Route path="/enrollcam" exact render={
+            () => {
+              return ( <Enrollcam /> )
+            }
+          } />
+          <Route path="/verifycam" exact render={
+            () => {
+              return ( <Verifycam/> )
+            }
+          } />
 
-          
+
+
 
         </div>
       </Router>
