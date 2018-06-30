@@ -2,7 +2,7 @@ const mongoose = require("mongoose");
 const db = require("../models");
 mongoose.Promise = global.Promise;
 
-// This file empties the Books collection and inserts the books below
+// This file empties the Users collection and inserts the users below
 
 mongoose.connect(
 	process.env.MONGODB_URI || "mongodb://localhost/photops",
@@ -31,8 +31,40 @@ const userSeed = [
 		playerLevel:"1",
 		target:"2",
 		date: new Date(Date.now())
+	},
+
+	{
+		username: "1",
+		password: "password",
+		kills: "100",
+		deaths:"0",
+		gamesPlayed:"10",
+		playerLevel:"10",
+		target:"Hide and go Seek",
+		date: new Date(Date.now())
+	},
+	{
+		username: "Blurrr",
+		password: "password",
+		kills: "4",
+		deaths:"3",
+		gamesPlayed:"4",
+		playerLevel:"2",
+		target:"1",
+		date: new Date(Date.now())
+	},
+	{
+		username: "timid Streaker",
+		password: "password",
+		kills: "100",
+		deaths:"0",
+		gamesPlayed:"10",
+		playerLevel:"10",
+		target:"Blurrr",
+		date: new Date(Date.now())
 	}
 ];
+
 
 db.User
 	.remove({})
@@ -45,3 +77,4 @@ db.User
 		console.error(err);
 		process.exit(1);
 	});
+

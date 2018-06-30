@@ -11,12 +11,14 @@ const gamePlay= new Schema(
       game:String,
       // all the players in the game
 
-      // need to add players alive or not during game
-      // alive = yes (user still playing), 
-      players:[Number],
-      stats:Number,
-      
-      
+      //players alive or not during game
+      playersAlive:[String],
+      allPlayers:[String],
+      playersDead:[String],
+      dateCreated: { type: Date, default: Date.now },
+      startDate: { type: Date, default: Date.now },
+    
+    //   game in play or not  
       playing:Boolean,   
     });
 
