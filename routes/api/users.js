@@ -21,10 +21,10 @@ router.route("/allUsers")
     
 
 
-// matches with "/api/user"
-router.route("/allUsers")
-    .get(user.findAll);
-    // .post(gamesController.create);
+// // matches with "/api/user"
+// router.route("/Users")
+//     .get(user.findAll);
+//     // .post(gamesController.create);
 
     
 
@@ -34,8 +34,7 @@ router.route("/")
 	.post(userController.create);
 
 // Matches with "/api/user/:id"
-router
-	.route("/:id")
+router.route("/:id")
 	.get(userController.findById)
 	.put(userController.update)
     .delete(userController.remove);
