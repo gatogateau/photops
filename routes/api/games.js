@@ -22,15 +22,16 @@ router.route("/allGames")
 
 // Matches with "/api/games"
 router.route("/")
-	.get(gameController.findAll)
-	.post(gameController.create);
+	.get(gamesController.findAll)
+	.post(function (req,res) {
+        console.log("asdkfjasl;kjlkjslaksdjfklsa;jl;ksjfl;dks");
+    });
 
 // Matches with "/api/games/:id"
-router
-	.route("/:id")
-	.get(gameController.findById)
-	.put(gameController.update)
-	.delete(gameController.remove);
+// router.route("/:id")
+// 	.get(gamesController.findById)
+// 	.put(gamesController.update)
+// 	.delete(gamesController.remove);
 
 
 
@@ -41,4 +42,4 @@ module.exports = router;
 
 
 
-module.exports = router;
+// module.exports = router;

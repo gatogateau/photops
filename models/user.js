@@ -3,7 +3,7 @@ const Schema = mongoose.Schema;
 
 
 // connect and create database photoOps
-mongoose.connect("mongodb://localhost/photoOps");
+mongoose.connect("mongodb://localhost/photops");
 
 const eachUser = new Schema(
     {
