@@ -6,11 +6,7 @@
     padding-bottom: 140px;
     text-align: center;
 }
-
-img {
-    float: left;
-    width: 120px;
-    height: 120px;
-    border-radius: 50px;
+#userName {
+    margin-top: -60px;
 }
 

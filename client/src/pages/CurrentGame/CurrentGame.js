@@ -22,7 +22,12 @@ class CurrentGame extends Component {
           </Col>
           <Col size="md-12">
             <div className="card">
-              <h1>Current Game</h1>
+              <h1>Group Name</h1>
+              <br/>
+              <h2>Players</h2>
+              <li/>
+              <ul className="nutDeadYet">Not Dead Yet</ul>
+              <ul className="dead">The Fallen</ul>
             </div>
           </Col>
         </Row>

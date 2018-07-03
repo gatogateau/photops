@@ -23,11 +23,28 @@ class CreateGame extends Component {
           <Col size="md-12">
             <div className="card">
               <h1>Create Game</h1>
+              <form>
+                <Input type="submit text" name="input" id="example"
+                  placeholder="Game Name" bsSize="md" />
+                <Input type="input" name="input" id="example"
+                  placeholder="Start Date" bsSize="md" />
+                <Input type="input" name="input" id="example"
+                  placeholder="Duration" bsSize="md" />
+                <Input type="radio" name="Private" value="Private"/> Private<br/>
+                  <Input type="radio" name="Public" value="Public"/> Public<br/>
+                    <Button type="Success">Create</Button>
+                </form>
+                    <form>
+                      <Input type="input" name="input" id="example"
+                        placeholder="Users" bsSize="md" />
+                      <Button type="Success">Add Users</Button>
+                    <Button type="Success">Search Users</Button>
+                    </form>
             </div>
           </Col>
         </Row>
       </Container>
-    );
+              );
   }
 }
 
