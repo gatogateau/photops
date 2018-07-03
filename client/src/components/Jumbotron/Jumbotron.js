@@ -2,7 +2,7 @@
 //sets up the reusable Jumbotron component
 import React from "react";
 import "./Jumbotron.css";
-import Background from "../../images/Wallpaper-HD.jpg";
+// import Background from "../../images/Wallpaper-HD.jpg";
 
 const Jumbotron = () => (
 	<header className = "header">
