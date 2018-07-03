@@ -4,6 +4,15 @@ import React from "react";
 import { Image } from 'react-bootstrap';
 import "./Jumbotron.css";
 import Background from "../../images/Wallpaper-HD.jpg";
+import axios from "axios"
+
+axios.get('/api/users/allusers')
+  .then(function (response) {
+    console.log(response);
+  })
+  .catch(function (error) {
+    console.log(error);
+  });
 
 const Jumbotron = () => (
 	<header className = "header">
