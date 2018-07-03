@@ -5,12 +5,12 @@ import Navbar from "../../components/Navbar";
 // import API from "../../utils/API";
 // import { Link } from "react-router-dom";
 import { Col, Row, Container } from "../../components/Grid";
-import { Button } from "react-bootstrap";
-import './home.css';
+// import { Button,Input } from "reactstrap";
+import './GamePage.css';
 // import { List, ListItem } from "../../components/List";
 // import { Input, TextArea, FormBtn } from "../../components/Form";
 
-class Home extends Component {
+class GamePage extends Component {
   render() {
     return (
       <Container fluid>
@@ -22,18 +22,7 @@ class Home extends Component {
             <Jumbotron />
           </Col>
           <Col size="md-12">
-          <Button className="btns">
-          <h1>Current Game</h1>
-          </Button>
-          <Button className="btns">
-          <h1>Create Game</h1>
-          </Button>
-          <Button className="btns">
-          <h1>Join Game</h1>
-          </Button>
-          <Button className="btns">
-          <h1>Store</h1>
-          </Button>
+
           </Col>
         </Row>
       </Container>
@@ -41,4 +30,4 @@ class Home extends Component {
   }
 }
 
-export default Home;
+export default GamePage;

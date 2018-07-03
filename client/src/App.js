@@ -9,14 +9,69 @@ import AuthPage from './pages/AuthPage/AuthPage';
 // import Example from './components/Nav/Nav';
 import Home from './pages/homepage/home';
 import JoinGame from './pages/JoinGame/JoinGame';
-import Enrollcam from './pages/Enrollcam/Enrollcam';
-import Verifycam from './pages/Enrollcam/Enrollcam';
-import CreateGame from './pages/CreateGame/CreateGame';
-import CurrentGame from './pages/CurrentGame/CurrentGame';
+import GamePage from './pages/GamePage/GamePage';
+import 'whatwg-fetch';
+import {
+  getFromStorage
+} from './Utils/storage';
 // import { Card, Button, CardHeader, CardFooter, CardBody,
 // CardTitle, CardText } from 'reactstrap';
 class App extends Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      isLoading: true,
+      token: '',
+      signUpError: '',
+      signInError: ''
+    };
+  }
+
+  componentDidMount() {
+    const obj = getFromStorage('the_main_app');
+    if (obj && obj.token) {
+      const { token } = obj;
+      //very token
+      fetch('/api/account/verify?token' + token)
+        .then(res => res.json())
+        .then(json => {
+          if (json.success) {
+            this.setState({
+              token,
+              isLoading: false
+            });
+          } else {
+            this.setState({
+              isLoading: false,
+            })
+          }
+        });
+    } else {
+      this.setState({
+        isLoading: false
+      })
+    }
+
+  }
+
   render() {
+    const {
+      // isLoading,
+      token,
+      // signInError,
+      // signUpError
+    } = this.state;
+
+
+    if (!token) {
+      return (
+        <div>
+          <AuthPage />
+        </div>
+      );
+    }
+
     return (
       <Router>
         <div className="App">
@@ -41,37 +96,23 @@ class App extends Component {
               return (<JoinGame />)
             }
           } />
-          {/*<Example />*/}
-          {/*<TabsPage></TabsPage>
-           <FacebookLogin />*/}
-           <Route path="/creategame" exact render={
+          <Route path="/GamePage" exact render={
             () => {
-              return (<CreateGame />)
+              return (<GamePage />)
             }
           } />
-          <Route path="/currentgame" exact render={
-            () => {
-              return (<CurrentGame />)
-            }
-          } />
-           <Route path="/enrollcam" exact render={
-            () => {
-              return ( <Enrollcam /> )
-            }
-          } />
-          <Route path="/verifycam" exact render={
-            () => {
-              return ( <Verifycam/> )
-            }
-          } />
-
-
-
-
-        </div>
-      </Router>
-    );
-  }
-}
-
-export default App;
+          
+          
+          
+          </div>
+          </Router>
+        );
+        
+      }
+    }
+    
+    export default App;
+    
+    // <Example />
+    // <TabsPage></TabsPage>
+    // <FacebookLogin />

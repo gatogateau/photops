@@ -2,40 +2,24 @@ const router = require("express").Router();
 const userController = require("../../controllers/userController");
 
 
-
-
-
-// TEST ALL THE ROUTES
-
-
-
-
-
+// TEST ALL THE ROUTE
+// Matches with "/api/user"
+router.route("/")
+	.get(userController.findAll)
+	.post(userController.create);
 
 // /api/user/allUsers
 router.route("/allUsers")
     .get(userController.findAll);
     console.log("working");
 
-
-    
-
-
-// matches with "/api/user"
-router.route("/allUsers")
-    .get(user.findAll);
-    // .post(gamesController.create);
-
-    
-
-// Matches with "/api/user"
-router.route("/")
-	.get(userController.findAll)
-	.post(userController.create);
+// // matches with "/api/user"
+// router.route("/Users")
+//     .get(user.findAll);
+//     // .post(gamesController.create);
 
 // Matches with "/api/user/:id"
-router
-	.route("/:id")
+router.route("/:id")
 	.get(userController.findById)
 	.put(userController.update)
     .delete(userController.remove);
