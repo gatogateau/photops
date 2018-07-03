@@ -17,6 +17,7 @@ const gamePlay= new Schema(
       playersDead:[String],
       dateCreated: { type: Date, default: Date.now },
       startDate: { type: Date, default: Date.now },
+      duration:Number,
     
     //   game in play or not  
       playing:Boolean,   

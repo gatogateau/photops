@@ -23,6 +23,8 @@ const gamesSeed = [
 		dateCreated: new Date(Date.now()),
 		startDate: 12/12/2018,
 		playing:1,   
+		// add duration
+		duration:7,
 
 	},
 ];
