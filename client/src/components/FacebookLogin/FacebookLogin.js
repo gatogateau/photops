@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
-// import ReactDOM from 'react-dom';
-import FacebookAuth from 'react-facebook-login';
+import ReactDOM from 'react-dom';
+import FacebookAuth from 'react-facebook-auth';
 import MyButton from './MyButton';
 
 class FacebookLogin extends Component {
@@ -18,14 +18,11 @@ class FacebookLogin extends Component {
   render() {
     return (
       <div>
+        <h1>Facebook Auth</h1>
         <FacebookAuth
           appId="368173613704409"
-          autoLoad={true}
-          fields="name,email,picture"
           callback={this.authenticate}
-          component={MyButton}
-          cssClass="my-facebook-button-class"
-          icon="fa-facebook"/>
+          component={MyButton}/>
         
       </div>
     )}

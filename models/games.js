@@ -5,7 +5,7 @@ const Schema = mongoose.Schema;
 // connect and create database photoOps
 mongoose.connect("mongodb://localhost/photops");
 
-const gamePlay = new Schema (
+const gamePlay= new Schema(
     {
   // name of the game 
       game:String,

@@ -38,15 +38,16 @@ module.exports = {
 
         // find each game by name  get
 
-// findUser get user by username - GET
-// would I use this 
+    // find each current game  get
 
-// updateUser if user dies, or eliminates target - if >10 kills - level up
+    // create a game  post
 
-// getUser gets user profile for profile page.  show stats and games involved with
+    // load a game with all the players with their game status
 
+    // join a game Post - add user to game
 
+    // update game - if player dies, or eliminates target, change to not active and update the target.  
+
+    // 
 
 };
-
-
