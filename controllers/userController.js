@@ -56,7 +56,7 @@ module.exports = {
     //     // req.query = username
     //     // const user=username
     //     console.log(req)
-    //     const user = await db.User.find(req.param, (err, user) => {
+	//     const user = await db.Use.find(req.param, (err, user) => {
     //         if (err) return err;
     //         return user;
     //     });

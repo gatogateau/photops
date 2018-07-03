@@ -2,15 +2,11 @@ const router = require("express").Router();
 const userController = require("../../controllers/userController");
 
 
-
-
-
-// TEST ALL THE ROUTES
-
-
-
-
-
+// TEST ALL THE ROUTE
+// Matches with "/api/user"
+router.route("/")
+	.get(userController.findAll)
+	.post(userController.create);
 
 // /api/user/allUsers
 router.route("/allUsers")
@@ -26,12 +22,7 @@ router.route("/allUsers")
 //     .get(user.findAll);
 //     // .post(gamesController.create);
 
-    
 
-// Matches with "/api/user"
-router.route("/")
-	.get(userController.findAll)
-	.post(userController.create);
 
 // Matches with "/api/user/:id"
 router.route("/:id")

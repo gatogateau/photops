@@ -1,11 +1,13 @@
 
 //sets up the reusable Jumbotron component
 import React from "react";
+import { Image } from 'react-bootstrap';
 import "./Jumbotron.css";
 import Background from "../../images/Wallpaper-HD.jpg";
 
 const Jumbotron = () => (
 	<header className = "header">
+		<Image src="/thumbnail.png" alt="image" circle responsive />
 		<h4 id="userName">User Name</h4>
 		<h5>Kills</h5>
 		<h5 id="kills">0</h5>

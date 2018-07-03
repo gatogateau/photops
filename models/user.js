@@ -7,8 +7,11 @@ mongoose.connect("mongodb://localhost/photops");
 
 const eachUser = new Schema(
     {
-      username: {type:String, default: "username"},
-      password: {type:String, default: "password"}, 
+      firstName: {type:String, default: "firstname"},
+      lastName: {type:String, default: "lastname"}, 
+      userName: {type:String, default: "username"},
+      password: {type:String, default: "password"},
+
       kills:Number,
       deaths:Number,
       gamesPlayed:Number,
