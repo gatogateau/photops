@@ -5,12 +5,11 @@ import Navbar from "../../components/Navbar";
 // import API from "../../utils/API";
 // import { Link } from "react-router-dom";
 import { Col, Row, Container } from "../../components/Grid";
-import { Button,Input } from "reactstrap";
-import './JoinGame.css';
+import { Button, Input } from "reactstrap";
+import './CurrentGame.css';
 // import { List, ListItem } from "../../components/List";
 // import { Input, TextArea, FormBtn } from "../../components/Form";
-
-class JoinGame extends Component {
+class CurrentGame extends Component {
   render() {
     return (
       <Container fluid>
@@ -23,24 +22,12 @@ class JoinGame extends Component {
           </Col>
           <Col size="md-12">
             <div className="card">
-<<<<<<< HEAD
-            <h1>Enter Game</h1>
-            <Input type="input" name="input" id="example"
-            placeholder="GameName" bsSize="md" />
-            <Button type="Success">Join</Button>
-=======
-              <h1>Join</h1>
-              <form>
-              <Input type="input" name="input" id="example"
-                placeholder="Group Name" bsSize="md" />
-              <Input type="input" name="input" id="example"
-                placeholder="Game ID" bsSize="md" />
-              <Button type="Success">Join</Button>
-              </form>
+              <h1>Group Name</h1>
               <br/>
-              <Button className="fag" type="Success">Find All Games</Button>
-              <br/>
->>>>>>> master
+              <h2>Players</h2>
+              <li/>
+              <ul className="nutDeadYet">Not Dead Yet</ul>
+              <ul className="dead">The Fallen</ul>
             </div>
           </Col>
         </Row>
@@ -49,4 +36,4 @@ class JoinGame extends Component {
   }
 }
 
-export default JoinGame;
+export default CurrentGame;

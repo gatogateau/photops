@@ -9,11 +9,18 @@ import AuthPage from './pages/AuthPage/AuthPage';
 // import Example from './components/Nav/Nav';
 import Home from './pages/homepage/home';
 import JoinGame from './pages/JoinGame/JoinGame';
+<<<<<<< HEAD
 import GamePage from './pages/GamePage/GamePage';
 import 'whatwg-fetch';
 import {
   getFromStorage
 } from './Utils/storage';
+=======
+import Enrollcam from './pages/Enrollcam/Enrollcam';
+import Verifycam from './pages/Verifycam/Verifycam';
+import CreateGame from './pages/CreateGame/CreateGame';
+import CurrentGame from './pages/CurrentGame/CurrentGame';
+>>>>>>> master
 // import { Card, Button, CardHeader, CardFooter, CardBody,
 // CardTitle, CardText } from 'reactstrap';
 class App extends Component {

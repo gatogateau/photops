@@ -1,13 +1,13 @@
 const path= require("path");
 const router = require("express").Router();
-const userRoutes = require("./user");
+const userRoutes = require("./users");
 const gamesRoutes = require("./games");
 const signinRoutes = require("./signin");
 const signupRoutes = require("./signup");
 const logoutRoutes = require("./logout");
 
 // User routes
-router.use("/user", userRoutes);
+router.use("/users", userRoutes);
 
 // Game routes  
 router.use("/games", gamesRoutes);

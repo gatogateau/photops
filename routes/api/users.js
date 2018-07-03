@@ -13,10 +13,16 @@ router.route("/allUsers")
     .get(userController.findAll);
     console.log("working");
 
+
+    
+
+
 // // matches with "/api/user"
 // router.route("/Users")
 //     .get(user.findAll);
 //     // .post(gamesController.create);
+
+
 
 // Matches with "/api/user/:id"
 router.route("/:id")
