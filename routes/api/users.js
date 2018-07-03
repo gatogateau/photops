@@ -1,21 +1,13 @@
 const router = require("express").Router();
 const userController = require("../../controllers/userController");
 
-
-
-
-
 // TEST ALL THE ROUTES
 
-
-
-
-
-
+// commented them out, duplicate underneath
 // /api/user/allUsers
-router.route("/allUsers")
-    .get(userController.findAll);
-    console.log("working");
+// router.route("/allUsers")
+//     .get(userController.findAll);
+//     console.log("working");
 
 
     
@@ -28,10 +20,11 @@ router.route("/allUsers")
 
     
 
-// Matches with "/api/user"
-router.route("/")
+// /api/user/allUsers
+router.route("/allUsers")
 	.get(userController.findAll)
-	.post(userController.create);
+    .post(userController.create);
+    console.log("working");
 
 // Matches with "/api/user/:id"
 router.route("/:id")
