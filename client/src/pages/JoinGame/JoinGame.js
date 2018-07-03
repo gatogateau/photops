@@ -23,12 +23,10 @@ class JoinGame extends Component {
           </Col>
           <Col size="md-12">
             <div className="card">
-<<<<<<< HEAD
             <h1>Enter Game</h1>
             <Input type="input" name="input" id="example"
             placeholder="GameName" bsSize="md" />
             <Button type="Success">Join</Button>
-=======
               <h1>Join</h1>
               <form>
               <Input type="input" name="input" id="example"
@@ -40,7 +38,6 @@ class JoinGame extends Component {
               <br/>
               <Button className="fag" type="Success">Find All Games</Button>
               <br/>
->>>>>>> master
             </div>
           </Col>
         </Row>

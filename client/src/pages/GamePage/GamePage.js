@@ -22,9 +22,7 @@ class GamePage extends Component {
             <Jumbotron />
           </Col>
           <Col size="md-12">
-<<<<<<< HEAD:client/src/pages/GamePage/GamePage.js
 
-=======
             <div className="card">
               <h1>Create Game</h1>
               <form>
@@ -45,7 +43,6 @@ class GamePage extends Component {
                     <Button type="Success">Search Users</Button>
                     </form>
             </div>
->>>>>>> master:client/src/pages/CreateGame/CreateGame.js
           </Col>
         </Row>
       </Container>
