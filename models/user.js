@@ -1,5 +1,6 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
+const bcrypt = require('bcrypt');
 
 
 // connect and create database photoOps
@@ -20,6 +21,13 @@ const eachUser = new Schema(
       // How do i get the names of the games from db.Games
       activeGames:[String],
     });
+
+    eachUser.methods.generateHash = function(password) {
+      return bcrypt.hashSync(password, bcrypt.genSaltSync(8), null);
+    }
+    eachUser.methods.validPassword = function(password) {
+      return bcrypt.compareSync(password, this.password);
+    }
   
 
     const User = mongoose.model("User", eachUser);
