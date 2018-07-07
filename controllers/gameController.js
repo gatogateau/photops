@@ -78,17 +78,17 @@ module.exports = {
             console.log(gameData[0])
             // if already in game, do not add to game data
 
-            if (gameData[0].allPlayers.includes("test")) {
+            if (gameData[0].allPlayers.includes("test2")) {
                 res.json({message:"You are already in the game"})
                 
             } else {
 
-                gameData[0].allPlayers.push('test')
+                gameData[0].allPlayers.push('test2')
                 db.Games
                 .findOneAndUpdate({"game":req.params.game},{"allPlayers":gameData[0].allPlayers})
                 .then(newGameData => {
                     console.log (newGameData);
-                    res.json({data:gameData})
+                    res.json(gameData)
                 })
             }
         })
