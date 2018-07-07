@@ -26,7 +26,7 @@ router.route("/")
     });
     // api/games/game/:game
 router.route("/game/:game")
-    .put(gamesController.joinGameByGameName);
+    .get(gamesController.joinGameByGameName);
     
 // Matches with "/api/games/:id"
 // router.route("/:id")
