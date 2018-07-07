@@ -35,9 +35,19 @@ module.exports = {
 			.then(dbModel => dbModel.remove())
 			.then(dbModel => res.json(dbModel))
 			.catch(err => res.status(422).json(err));
-    }
+    },
 
-    // createUser  create new user - post
+    // createUser  create new user - create
+    createUser: function (req, res) {
+        db.User
+            .create(req.body)
+			.then(dbModel => res.json(dbModel))
+			.catch(err => res.status(422).json(err));
+    },
+    
+
+
+    
 
 // findUser get user by username - GET
 // would I use this 
