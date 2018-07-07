@@ -2,10 +2,11 @@ const db = require("../models");
 
 // Defining methods for the gamesController
 module.exports = {
-	findAll: function (req, res) {
+	findAllGameName: function (req, res) {
 		db.Games
-			.find(req.query)
-			.sort({ date: -1 })
+            .find(req.query)
+            .select ({"game":1, "allPlayers":1, "_id":0 })
+			// .sort({ date: -1 })
 			.then(dbModel => res.json(dbModel))
 			.catch(err => res.status(422).json(err));
 	},
