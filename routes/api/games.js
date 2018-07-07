@@ -6,7 +6,7 @@ const gamesController = require("../../controllers/gameController");
 
 // matches with "/api/games"
 router.route("/allGames")
-    .get(gamesController.findAll)
+    .get(gamesController.findAllGameName)
     .post(gamesController.create);
 
     
@@ -20,7 +20,7 @@ router.route("/:id")
 
 // Matches with "/api/games"
 router.route("/")
-	.get(gamesController.findAll)
+	.get(gamesController.findAllGameName)
 	.post(function (req,res) {
         console.log("asdkfjasl;kjlkjslaksdjfklsa;jl;ksjfl;dks");
     });
