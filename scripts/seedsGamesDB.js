@@ -27,6 +27,19 @@ const gamesSeed = [
 		duration:7,
 
 	},
+	{
+		game:"tester",
+		allplayers:["1", "timid Streaker","Blurrr"],
+		playersAlive:["1", "timid Streaker"],
+		playersDead:["Blurrr"],
+		dateCreated: new Date(Date.now()),
+		startDate: 12/12/2018,
+		playing:1,   
+		// add duration
+		duration:7,
+
+	},
+
 ];
 
 

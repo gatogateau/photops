@@ -10,6 +10,7 @@ module.exports = {
 			.catch(err => res.status(422).json(err));
 	},
 	findById: function (req, res) {
+        console.log("hit")
 		db.Games
 			.findById(req.params.id)
 			.then(dbModel => res.json(dbModel))
@@ -51,10 +52,52 @@ module.exports = {
             .catch(err => res.status(422).json(err));
     },
 
+    //  API route created.  
+    // add user to game.  
+    // commmented out for testing another function
+    // joinGameByGameName: function (req, res) {
+    //     console.log ("joinGameByGameName hit");
+    //     db.Games
+    //         .findOneAndUpdate({game: req.params.game},req.body)
+    //         .select({"game":1, "playersAlive":1, "playersDead":1, "game":1, "allPlayers":1})
+    //         // 
+    //         .then(gameData => res.json(gameData))
+    //         .catch(err => res.status(422).json(err));
+    // },
+
+       //  API route created.  
+    // add user to game. After user searches for game, button to add them to game.  If they are already in the game, res.message "you are already in the game", if res.data - post data 
+    joinGameByGameName: function (req, res) {
+        db.Games
+        .find({"game": req.params.game})
+        .select({"game":1, "playersAlive":1, "playersDead":1, "game":1, "allPlayers":1})
+        // 
+        .then(gameData => {
+            // gameData.allPlayers.push(req.session.userName)
+
+            console.log(gameData[0])
+            // if already in game, do not add to game data
+
+            if (gameData[0].allPlayers.includes("test")) {
+                res.json({message:"You are already in the game"})
+                
+            } else {
+
+                gameData[0].allPlayers.push('test')
+                db.Games
+                .findOneAndUpdate({"game":req.params.game},{"allPlayers":gameData[0].allPlayers})
+                .then(newGameData => {
+                    console.log (newGameData);
+                    res.json({data:gameData})
+                })
+            }
+        })
+        .catch(err => res.status(422).json(err));
+    },
     // start the game - find game by id, then copy all players to playersAlive
     startGame: function (req, res) {
         db.Games
-            findById({ _id: req.params.id }, req.body)
+            .findById({ _id: req.params.id }, req.body)
             .then(dbModel => res.json(dbModel))
             .catch(err => res.status(422).json(err));
 
@@ -78,18 +121,12 @@ module.exports = {
 
     
 
-        // find each game by name  get
 
     // find each current game  get
 
-    // create a game  post
 
     // load a game with all the players with their game status
 
-    // join a game Post - add user to game
 
-    // update game - if player dies, or eliminates target, change to not active and update the target.  
-
-    // 
 
 };
