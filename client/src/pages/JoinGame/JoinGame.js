@@ -7,9 +7,25 @@ import Navbar from "../../components/Navbar";
 import { Col, Row, Container } from "../../components/Grid";
 import { Button, Input } from "reactstrap";
 import './JoinGame.css';
+import axios from "axios"
 // import { List, ListItem } from "../../components/List";
 // import { Input, TextArea, FormBtn } from "../../components/Form";
 class JoinGame extends Component {
+findAllGames() {
+  axios.get('/api/games/allGames')
+  .then(function (response) {
+    // handle success
+    console.log(response);
+  })
+  .catch(function (error) {
+    // handle error
+    console.log(error);
+  })
+  .then(function () {
+    // always executed
+  });
+
+}
   render() {
     return (
       <Container fluid>
@@ -31,7 +47,7 @@ class JoinGame extends Component {
               <Button type="Success">Join</Button>
               </form>
               <br/>
-              <Button className="fag" type="Success">Find All Games</Button>
+              <Button className="fag" type="Success" onClick={this.findAllGames}>Find All Games</Button>
               <br/>
             </div>
           </Col>
