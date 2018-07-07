@@ -2,7 +2,7 @@ const path= require("path");
 const router = require("express").Router();
 const userRoutes = require("./users");
 const gamesRoutes = require("./games");
-const gamesRoutes = require("./account");
+// const gamesRoutes = require("./account");
 
 // User routes
 router.use("/users", userRoutes);
@@ -11,6 +11,6 @@ router.use("/users", userRoutes);
 router.use("/games", gamesRoutes);
 
 // account routes
-router.use("/account")
+// router.use("/account, ")
 
 module.exports = router;
