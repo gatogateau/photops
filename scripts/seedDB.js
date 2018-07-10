@@ -17,7 +17,7 @@ const userSeed = [
 		password: "",
 		kills: "0",
 		deaths:"0",
-		gamesPlayed:"1",
+		gamesPlayed:"0",
 		playerLevel:"1",
 		target:"1",
 		date: new Date(Date.now())

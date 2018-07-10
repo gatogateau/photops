@@ -16,14 +16,30 @@ import CurrentGame from './pages/CurrentGame/CurrentGame';
 // import { Card, Button, CardHeader, CardFooter, CardBody,
 // CardTitle, CardText } from 'reactstrap';
 class App extends Component {
+  constructor(props){
+    super(props)
+    
+    this.state = {
+      loggedIn : false,
+      userName : '',
+    }
+  }
+
+  //login function
+
+  //sign up function
+
   render() {
     return (
+      // if true, render this router, if false send back to login
+
       <Router>
         <div className="App">
 
           <Route path="/" exact render={
             () => {
               return (<div>
+                
                 <AuthPage></AuthPage>
                 <FacebookLogin></FacebookLogin>
               </div>)

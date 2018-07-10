@@ -9,7 +9,9 @@ module.exports = {
 			// .sort({ date: -1 })
 			.then(dbModel => res.json(dbModel))
 			.catch(err => res.status(422).json(err));
-	},
+    },
+    
+    
 	findById: function (req, res) {
         console.log("hit")
 		db.Games
@@ -46,9 +48,10 @@ module.exports = {
     },
 
     // find a game by game id, add username to allPlayers
+    // We may not need this one because joinGameByGameName
     joinGame: function (req, res) {
         db.Games   
-            .findOneAndUpdate({ _id: req.params.id}, req.body)
+            .findOneAndUpdate({ game: req.params.game}, req.body)
             .then(dbModel => res.json(dbModel))
             .catch(err => res.status(422).json(err));
     },
@@ -79,12 +82,12 @@ module.exports = {
             console.log(gameData[0])
             // if already in game, do not add to game data
 
-            if (gameData[0].allPlayers.includes("test2")) {
+            if (gameData[0].allPlayers.includes("test3")) {
                 res.json({message:"You are already in the game"})
                 
             } else {
 
-                gameData[0].allPlayers.push('test2')
+                // gameData[0].allPlayers.push('test3')
                 db.Games
                 .findOneAndUpdate({"game":req.params.game},{"allPlayers":gameData[0].allPlayers})
                 .then(newGameData => {

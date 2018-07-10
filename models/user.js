@@ -1,6 +1,7 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 const bcrypt = require('bcrypt');
+mongoose.promise = Promise
 
 
 // connect and create database photoOps
@@ -8,8 +9,8 @@ mongoose.connect("mongodb://localhost/photops");
 
 const eachUser = new Schema(
     {
-      username: {type:String, default: "username"},
-      password: {type:String, default: "password"}, 
+      username: {type:String, unique: true, required: false, default: "username"},
+      password: {type:String, unique: false, required: false, default: "password"}, 
       kills:Number,
       deaths:Number,
       gamesPlayed:Number,
@@ -22,13 +23,28 @@ const eachUser = new Schema(
       activeGames:[String],
     });
 
-    eachUser.methods.generateHash = function(password) {
-      return bcrypt.hashSync(password, bcrypt.genSaltSync(8), null);
-    }
-    eachUser.methods.validPassword = function(password) {
-      return bcrypt.compareSync(password, this.password);
-    }
-  
+    eachUser.methods = {
+		checkPassword: function (inputPassword) {
+			return bcrypt.compareSync(inputPassword, this.password)
+		},
+		hashPassword: plainTextPassword => {
+			return bcrypt.hashSync(plainTextPassword, 10)
+		}
+	}
+		
+
+  // Define hooks for pre-saving
+eachUser.pre('save', function (next) {
+	if (!this.password) {
+		console.log('models/user.js =======NO PASSWORD PROVIDED=======')
+		next()
+	} else {
+		console.log('models/user.js hashPassword in pre save');
+		
+		this.password = this.hashPassword(this.password)
+		next()
+	}
+})
 
     const User = mongoose.model("User", eachUser);
 
