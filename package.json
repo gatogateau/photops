@@ -38,7 +38,6 @@
     "react-facebook-auth": "^1.4.0",
     "react-facebook-login": "^4.0.1",
     "reactstrap": "^6.2.0",
-    "shuffle-array": "^1.0.1",
     "whatwg-fetch": "^2.0.4"
   }
 }
