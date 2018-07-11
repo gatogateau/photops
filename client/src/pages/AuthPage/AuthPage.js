@@ -11,8 +11,7 @@ class LoginForm extends Component {
             password: '',
             redirectTo: null
         }
-        this.login = this.login.bind(this)
-        this.signUp = this.signUp.bind(this)
+
         this.handleChange = this.handleChange.bind(this)
   
     }
@@ -23,68 +22,9 @@ class LoginForm extends Component {
         })
     }
 
-    login(event) {
-        event.preventDefault()
-        console.log('handleSubmit')
-// added login
-        axios
-            .post('/api/login', {
-                username: this.state.username,
-                password: this.state.password
-            })
-            .then(response => {
-                console.log('login response: ')
-                console.log(response)
-                if (response.status === 200) {
-                    // update App.js state
-                    // this.props.updateUser({
-                    //     loggedIn: true,
-                    //     username: response.data.username
-                    // })
-                    // update the state to redirect to home
-                    this.setState({
-                        redirectTo: '/home'
-                    })
-                }
-            }).catch(error => {
-                console.log('login error: ')
-                console.log(error);
-                
-            })
-    }
-    signUp(event) {
-        event.preventDefault()
-        console.log('handleSubmit')
-
-        axios
-            .post('/api/users/allUsers', {
-                username: this.state.username,
-                password: this.state.password
-            })
-            .then(response => {
-                console.log('login response: ')
-                console.log(response)
-                if (response.status === 200) {
-                    // update App.js state
-                    // this.props.updateUser({
-                    //     loggedIn: true,
-                    //     username: response.data.username
-                    // })
-                    // update the state to redirect to home
-                    this.setState({
-                        redirectTo: '/home'
-                    })
-                }
-            }).catch(error => {
-                console.log('login error: ')
-                console.log(error);
-                
-            })
-    }
-
     render() {
-        if (this.state.redirectTo) {
-            return <Redirect to={{ pathname: this.state.redirectTo }} />
+        if (this.props.redirectTo) {
+            return <Redirect to={{ pathname: this.props.redirectTo }} />
         } else {
             return (
                 <div>
@@ -101,7 +41,7 @@ class LoginForm extends Component {
                                     id="username"
                                     name="username"
                                     placeholder="Username"
-                                    value={this.state.username}
+                                    value={this.props.username}
                                     onChange={this.handleChange}
                                 />
                             </div>
@@ -115,7 +55,7 @@ class LoginForm extends Component {
                                     placeholder="password"
                                     type="password"
                                     name="password"
-                                    value={this.state.password}
+                                    value={this.props.password}
                                     onChange={this.handleChange}
                                 />
                             </div>
@@ -125,12 +65,12 @@ class LoginForm extends Component {
                             <button
                                 className="btn btn-primary col-1 col-mr-auto"
                                
-                                onClick={this.login}
+                                onClick={(e) => this.props.login(e, this.state.username, this.state.password)}
                                 type="submit">Login</button>
                             <button
                                 className="btn btn-primary col-1 col-mr-auto"
                                
-                                onClick={this.signUp}
+                                onClick={(e) => this.props.signUp(e, this.state.username, this.state.password)}
                                 type="submit">Sign Up</button>
                         </div>
                     </form>

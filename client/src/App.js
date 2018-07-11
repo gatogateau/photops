@@ -13,16 +13,89 @@ import Enrollcam from './pages/Enrollcam/Enrollcam';
 import Verifycam from './pages/Verifycam/Verifycam';
 import CreateGame from './pages/CreateGame/CreateGame';
 import CurrentGame from './pages/CurrentGame/CurrentGame';
+import axios from 'axios';
 // import { Card, Button, CardHeader, CardFooter, CardBody,
 // CardTitle, CardText } from 'reactstrap';
 class App extends Component {
-  constructor(props){
+  constructor(props) {
     super(props)
-    
+
     this.state = {
-      loggedIn : false,
-      userName : '',
+      loggedIn: false,
+      username: '',
+      redirectTo: null,
     }
+
+    this.login = this.login.bind(this)
+    this.signUp = this.signUp.bind(this)
+    this.handleChange = this.handleChange.bind(this)
+  }
+
+  handleChange(event) {
+    this.setState({
+      [event.target.name]: event.target.value
+    })
+  }
+
+  login(event, username, password) {
+    event.preventDefault()
+    console.log('handleSubmit')
+    // added login
+    axios
+      .post('/api/login', {
+        username: username,
+        password: password
+      })
+      .then(response => {
+        console.log('login response: ')
+        console.log(response)
+        if (response.status === 200) {
+          // update App.js state
+          // this.props.updateUser({
+          //     loggedIn: true,
+          //     username: response.data.username
+          // })
+          // update the state to redirect to home
+          this.setState({
+            loggedIn: true,
+            username: response.data.username,
+            redirectTo: '/home'
+          })
+        }
+      }).catch(error => {
+        console.log('login error: ')
+        console.log(error);
+
+      })
+  }
+  signUp(event, username, password) {
+    event.preventDefault()
+    console.log('handleSubmit')
+
+    axios
+      .post('/api/users/allUsers', {
+        username: username,
+        password: password
+      })
+      .then(response => {
+        console.log('login response: ')
+        console.log(response)
+        if (response.status === 200) {
+          // update App.js state
+          // this.props.updateUser({
+          //     loggedIn: true,
+          //     username: response.data.username
+          // })
+          // update the state to redirect to home
+          this.setState({
+            redirectTo: '/home'
+          })
+        }
+      }).catch(error => {
+        console.log('login error: ')
+        console.log(error);
+
+      })
   }
 
   //login function
@@ -30,17 +103,18 @@ class App extends Component {
   //sign up function
 
   render() {
+    console.log(this)
     return (
       // if true, render this router, if false send back to login
-
+      //<Route path="/abc" render={()=><TestWidget num="2" someProp={100}/>}/>
       <Router>
         <div className="App">
 
           <Route path="/" exact render={
             () => {
               return (<div>
-                
-                <AuthPage></AuthPage>
+
+                <AuthPage login={this.login} redirectTo={this.state.redirectTo} signUp={this.signUp} ></AuthPage>
                 <FacebookLogin></FacebookLogin>
               </div>)
             }
@@ -48,7 +122,7 @@ class App extends Component {
 
           <Route path="/home" exact render={
             () => {
-              return (<Home />)
+              return (<Home username={this.state.username}/>)
             }
           } />
 
@@ -60,7 +134,7 @@ class App extends Component {
           {/*<Example />*/}
           {/*<TabsPage></TabsPage>
            <FacebookLogin />*/}
-           <Route path="/creategame" exact render={
+          <Route path="/creategame" exact render={
             () => {
               return (<CreateGame />)
             }
@@ -70,14 +144,14 @@ class App extends Component {
               return (<CurrentGame />)
             }
           } />
-           <Route path="/enrollcam" exact render={
+          <Route path="/enrollcam" exact render={
             () => {
-              return ( <Enrollcam /> )
+              return (<Enrollcam username={this.state.username} />)
             }
           } />
           <Route path="/verifycam" exact render={
             () => {
-              return ( <Verifycam/> )
+              return (<Verifycam />)
             }
           } />
 
