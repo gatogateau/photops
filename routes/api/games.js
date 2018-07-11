@@ -9,7 +9,11 @@ router.route("/allGames")
     .get(gamesController.findAllGameName)
     .post(gamesController.create);
 
+router.route("/myGames")
+    .get(gamesController.findUserGames)
     
+router.route("/joinGameByGameName")
+    .put(gamesController.joinGameByGameName)
 // matches with "/api/games/:id"
 router.route("/:id")
     // .route("/:id")
