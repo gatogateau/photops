@@ -7,9 +7,24 @@ import Navbar from "../../components/Navbar";
 import { Col, Row, Container } from "../../components/Grid";
 import { Button, Input } from "reactstrap";
 import './CreateGame.css';
+import axios from 'axios';
 // import { List, ListItem } from "../../components/List";
 // import { Input, TextArea, FormBtn } from "../../components/Form";
 class CreateGame extends Component {
+  startGame() {
+    axios.get('/api/games/startGame')
+    .then(function (response) {
+      // handle success
+      console.log(response);
+    })
+    .catch(function (error) {
+      // handle error
+      console.log(error);
+    })
+    .then(function () {
+      // always executed
+    });
+  }
   render() {
     return (
       <Container fluid>
@@ -35,7 +50,7 @@ class CreateGame extends Component {
                     <Button type="Success">Create</Button>
                 </form>
                 <form>
-                <button>Start</button>
+                <button onClick={this.startGame}>Start</button>
                 </form>
                     <form>
                       <Input type="input" name="input" id="example"
