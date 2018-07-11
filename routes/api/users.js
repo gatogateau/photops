@@ -42,6 +42,14 @@ router.route("/:id")
 	.put(userController.update)
     .delete(userController.remove);
 
+// Matches with "/api/user/userStats"
+router.route("/userStats")
+    .get(userController.findUserStats);
+
+
+
+    
+
 // router  
 //     .route("/signup")
 //     .post(userController.create)

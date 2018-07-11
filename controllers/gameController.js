@@ -135,6 +135,8 @@ module.exports = {
     }
 
     
+// find games by game name, then return target and hitman
+
 
 
     // find each current game  get
