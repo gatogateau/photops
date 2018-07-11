@@ -22,12 +22,8 @@ class App extends Component {
 
     this.state = {
       loggedIn: false,
-      userName: '',
-      password: '',
+      username: '',
       redirectTo: null,
-      login: this.login,
-      signUp: this.signUp,
-      handleChange: this.handleChange
     }
 
     this.login = this.login.bind(this)
@@ -41,14 +37,14 @@ class App extends Component {
     })
   }
 
-  login(event) {
+  login(event, username, password) {
     event.preventDefault()
     console.log('handleSubmit')
     // added login
     axios
       .post('/api/login', {
-        username: this.state.username,
-        password: this.state.password
+        username: username,
+        password: password
       })
       .then(response => {
         console.log('login response: ')
@@ -61,6 +57,8 @@ class App extends Component {
           // })
           // update the state to redirect to home
           this.setState({
+            loggedIn: true,
+            username: response.data.username,
             redirectTo: '/home'
           })
         }
@@ -70,14 +68,14 @@ class App extends Component {
 
       })
   }
-  signUp(event) {
+  signUp(event, username, password) {
     event.preventDefault()
     console.log('handleSubmit')
 
     axios
       .post('/api/users/allUsers', {
-        username: this.state.username,
-        password: this.state.password
+        username: username,
+        password: password
       })
       .then(response => {
         console.log('login response: ')
@@ -105,9 +103,10 @@ class App extends Component {
   //sign up function
 
   render() {
+    console.log(this)
     return (
       // if true, render this router, if false send back to login
-
+      //<Route path="/abc" render={()=><TestWidget num="2" someProp={100}/>}/>
       <Router>
         <div className="App">
 
@@ -115,7 +114,7 @@ class App extends Component {
             () => {
               return (<div>
 
-                <AuthPage></AuthPage>
+                <AuthPage login={this.login} redirectTo={this.state.redirectTo} signUp={this.signUp} ></AuthPage>
                 <FacebookLogin></FacebookLogin>
               </div>)
             }
@@ -123,7 +122,7 @@ class App extends Component {
 
           <Route path="/home" exact render={
             () => {
-              return (<Home />)
+              return (<Home username={this.state.username}/>)
             }
           } />
 
@@ -147,7 +146,7 @@ class App extends Component {
           } />
           <Route path="/enrollcam" exact render={
             () => {
-              return (<Enrollcam />)
+              return (<Enrollcam username={this.state.username} />)
             }
           } />
           <Route path="/verifycam" exact render={

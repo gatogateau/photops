@@ -4,9 +4,9 @@ import React from "react";
 import "./Jumbotron.css";
 // import Background from "../../images/Wallpaper-HD.jpg";
 
-const Jumbotron = () => (
+const Jumbotron = (props) => (
 	<header className = "header">
-		<h4 id="userName">User Name</h4>
+		<h4 id="userName">{props.username}</h4>
 		<h5>Kills</h5>
 		<h5 id="kills">0</h5>
 		<h1 id="target">Target</h1>
