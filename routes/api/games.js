@@ -28,6 +28,7 @@ router.route("/")
 router.route("/game/:game")
     .get(gamesController.joinGameByGameName);
     
+    
 // Matches with "/api/games/:id"
 // router.route("/:id")
 // 	.get(gamesController.findById)
