@@ -34,6 +34,9 @@ class CreateGame extends Component {
                   <Input type="radio" name="Public" value="Public"/> Public<br/>
                     <Button type="Success">Create</Button>
                 </form>
+                <form>
+                <button>Start</button>
+                </form>
                     <form>
                       <Input type="input" name="input" id="example"
                         placeholder="Users" bsSize="md" />
