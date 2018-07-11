@@ -13,16 +13,91 @@ import Enrollcam from './pages/Enrollcam/Enrollcam';
 import Verifycam from './pages/Verifycam/Verifycam';
 import CreateGame from './pages/CreateGame/CreateGame';
 import CurrentGame from './pages/CurrentGame/CurrentGame';
+import axios from 'axios';
 // import { Card, Button, CardHeader, CardFooter, CardBody,
 // CardTitle, CardText } from 'reactstrap';
 class App extends Component {
-  constructor(props){
+  constructor(props) {
     super(props)
-    
+
     this.state = {
-      loggedIn : false,
-      userName : '',
+      loggedIn: false,
+      userName: '',
+      password: '',
+      redirectTo: null,
+      login: this.login,
+      signUp: this.signUp,
+      handleChange: this.handleChange
     }
+
+    this.login = this.login.bind(this)
+    this.signUp = this.signUp.bind(this)
+    this.handleChange = this.handleChange.bind(this)
+  }
+
+  handleChange(event) {
+    this.setState({
+      [event.target.name]: event.target.value
+    })
+  }
+
+  login(event) {
+    event.preventDefault()
+    console.log('handleSubmit')
+    // added login
+    axios
+      .post('/api/login', {
+        username: this.state.username,
+        password: this.state.password
+      })
+      .then(response => {
+        console.log('login response: ')
+        console.log(response)
+        if (response.status === 200) {
+          // update App.js state
+          // this.props.updateUser({
+          //     loggedIn: true,
+          //     username: response.data.username
+          // })
+          // update the state to redirect to home
+          this.setState({
+            redirectTo: '/home'
+          })
+        }
+      }).catch(error => {
+        console.log('login error: ')
+        console.log(error);
+
+      })
+  }
+  signUp(event) {
+    event.preventDefault()
+    console.log('handleSubmit')
+
+    axios
+      .post('/api/users/allUsers', {
+        username: this.state.username,
+        password: this.state.password
+      })
+      .then(response => {
+        console.log('login response: ')
+        console.log(response)
+        if (response.status === 200) {
+          // update App.js state
+          // this.props.updateUser({
+          //     loggedIn: true,
+          //     username: response.data.username
+          // })
+          // update the state to redirect to home
+          this.setState({
+            redirectTo: '/home'
+          })
+        }
+      }).catch(error => {
+        console.log('login error: ')
+        console.log(error);
+
+      })
   }
 
   //login function
@@ -39,7 +114,7 @@ class App extends Component {
           <Route path="/" exact render={
             () => {
               return (<div>
-                
+
                 <AuthPage></AuthPage>
                 <FacebookLogin></FacebookLogin>
               </div>)
@@ -60,7 +135,7 @@ class App extends Component {
           {/*<Example />*/}
           {/*<TabsPage></TabsPage>
            <FacebookLogin />*/}
-           <Route path="/creategame" exact render={
+          <Route path="/creategame" exact render={
             () => {
               return (<CreateGame />)
             }
@@ -70,14 +145,14 @@ class App extends Component {
               return (<CurrentGame />)
             }
           } />
-           <Route path="/enrollcam" exact render={
+          <Route path="/enrollcam" exact render={
             () => {
-              return ( <Enrollcam /> )
+              return (<Enrollcam />)
             }
           } />
           <Route path="/verifycam" exact render={
             () => {
-              return ( <Verifycam/> )
+              return (<Verifycam />)
             }
           } />
 

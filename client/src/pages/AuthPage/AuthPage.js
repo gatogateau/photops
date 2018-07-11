@@ -83,8 +83,8 @@ class LoginForm extends Component {
     }
 
     render() {
-        if (this.state.redirectTo) {
-            return <Redirect to={{ pathname: this.state.redirectTo }} />
+        if (this.props.redirectTo) {
+            return <Redirect to={{ pathname: this.props.redirectTo }} />
         } else {
             return (
                 <div>
@@ -101,8 +101,8 @@ class LoginForm extends Component {
                                     id="username"
                                     name="username"
                                     placeholder="Username"
-                                    value={this.state.username}
-                                    onChange={this.handleChange}
+                                    value={this.props.username}
+                                    onChange={this.props.handleChange}
                                 />
                             </div>
                         </div>
@@ -115,8 +115,8 @@ class LoginForm extends Component {
                                     placeholder="password"
                                     type="password"
                                     name="password"
-                                    value={this.state.password}
-                                    onChange={this.handleChange}
+                                    value={this.props.password}
+                                    onChange={this.props.handleChange}
                                 />
                             </div>
                         </div>
@@ -125,12 +125,12 @@ class LoginForm extends Component {
                             <button
                                 className="btn btn-primary col-1 col-mr-auto"
                                
-                                onClick={this.login}
+                                onClick={this.props.login}
                                 type="submit">Login</button>
                             <button
                                 className="btn btn-primary col-1 col-mr-auto"
                                
-                                onClick={this.signUp}
+                                onClick={this.props.signUp}
                                 type="submit">Sign Up</button>
                         </div>
                     </form>
