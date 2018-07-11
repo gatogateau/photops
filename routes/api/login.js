@@ -41,6 +41,8 @@ router.post('/',
         var userInfo = {
             username: req.user.username
         };
+        //creating a 'key' called userName and putting it on the passport session object
+        req.session.passport.user.userName = userInfo.username
         res.send(userInfo);
     }
 )
