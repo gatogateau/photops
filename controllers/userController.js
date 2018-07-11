@@ -48,6 +48,31 @@ module.exports = {
     },
 
 
+    // gets the user's stats by requesting passport.user.userName   
+    findUserStats: function (req, res) {
+        db.User
+            .findById({ "_id": req.session.passport.user.userName })
+            .select ({"kills":1, "deaths":1, "_id":0, "gamesPlayed":1, "playerLevel":1, "activeGames":1, "adOns":1})
+            .then(dbModel => res.json(dbModel))
+            console.log (res.json)
+            .catch(err => res.status(422).json(err));
+    },
+
+    // Delete the user by userID
+    deleteUser: function (req, res) {
+        db.User
+            .findById({_id: req.params.id})
+            .then (user => user.remove())
+            .then (user => res.json(user))
+            .catch(err => res.status(422).json(err));
+    },
+
+    // update stats after user "hits" target.
+    // find user by userName and update kills +1
+    // find target and update deaths +1
+    // update games move target death to players killed, and remove from current players
+
+
     
 
 
