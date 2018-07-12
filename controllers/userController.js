@@ -65,6 +65,21 @@ module.exports = {
     },
 
 
+    // add game to User.activeGames  req:username, game name
+    
+
+    addGameToActiveGames: function (req, res) {
+        console.log(req.body);
+        // db.Users
+		// 	.findOneAndUpdate({userName:req.session.passport.user.userName}, req.body)
+		// 	.then(gameRes => {
+        //         console.log(gameRes);
+        //         gameRes.activeGames.Push
+                
+        //     })
+		// 	.catch(err => res.status(422).json(err));
+	},
+
     // gets the user's stats by requesting passport.user.userName   
     findUserStats: function (req, res) {
         db.User

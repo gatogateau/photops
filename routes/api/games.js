@@ -7,7 +7,7 @@ const gamesController = require("../../controllers/gameController");
 // matches with "/api/games"
 router.route("/allGames")
     .get(gamesController.findAllGameName)
-    .post(gamesController.create);
+    .post(gamesController.createGame);
 
 router.route("/myGames")
     .get(gamesController.findUserGames)
@@ -35,7 +35,11 @@ router.route("/game/:game")
     // api/games/startGame
 router.route("/startGame")
     .get(gamesController.startGame);    
-    
+
+    // api/games/createGame
+    router.route("/createGame")
+    .post(gamesController.createGame);    
+
     
 // Matches with "/api/games/:id"
 // router.route("/:id")

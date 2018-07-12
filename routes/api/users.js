@@ -28,7 +28,10 @@ const userController = require("../../controllers/userController");
 // router.route("/login")
 //     .post(userController.userLogin)
 
-
+    // api/user/addToActive
+router.route("/addToActive")   
+.get(userController.addGameToActiveGames)
+console.log("added to active games");
 
 // /api/user/allUsers
 router.route("/allUsers")
