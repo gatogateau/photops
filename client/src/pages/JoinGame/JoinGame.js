@@ -15,43 +15,58 @@ class JoinGame extends Component {
     super(props)
 
     this.state = {
-      gameName: ""
+      gameName: "",
+      allGames: [ ]
     }
+    this.findAllGames = this.findAllGames.bind(this);
   }
-
+  
   findAllGames() {
+    let that = this;
     axios.get('/api/games/allGames')
-    .then(function (response) {
-      // handle success
-      console.log(response);
-    })
-    .catch(function (error) {
-      // handle error
-      console.log(error);
-    })
-    .then(function () {
-      // always executed
-    });
+      .then(function (response) {
+        // handle success
+        console.log(this, response.data, that);
+        that.setState({
+          allGames: response.data,
+        });
+
+      })
+      .catch(function (error) {
+        // handle error
+        console.log(error);
+      })
   }
 
   joinGame = (e) => {
     console.log("hit")
     e.preventDefault;
-    axios.put("/api/games/joinGameByGameName", {game:this.state.gameName})
-    .then(function (response){
-      if(response.data.message){
-        alert(response.data.message)
-      }
-      console.log(response);
-    })
+    axios.put("/api/games/joinGameByGameName", { game: this.state.gameName })
+      .then(function (response) {
+        if (response.data.message) {
+          alert(response.data.message)
+        }
+        console.log(response);
+      })
   }
-  
+
   handleGameNameInput = (e) => {
     console.log("hit")
     this.setState({
       gameName: e.target.value
     })
   }
+  joinSpecificGame = (e, gameName) => {
+    e.preventDefault;
+    axios.put("/api/games/joinGameByGameName", { game: gameName })
+      .then(function (response) {
+        if (response.data.message) {
+          alert(response.data.message)
+        }
+        console.log(response);
+      })
+
+  } 
 
   render() {
     console.log(this)
@@ -62,26 +77,29 @@ class JoinGame extends Component {
             <Navbar />
           </Col>
           <Col size="md-12">
-            <Jumbotron username={this.props.username}/>
+            <Jumbotron username={this.props.username} />
           </Col>
           <Col size="md-12">
             <div className="card">
               <h1>Join</h1>
               <form>
-              <Input onChange={(e) => this.handleGameNameInput(e)} type="input" name="input" id="example"
-                placeholder="Game Name" bsSize="md" />
-              <Input type="input" name="input" id="example"
-                placeholder="Game ID" bsSize="md" />
-              <Button onClick={(e) => this.joinGame(e)}>Join</Button>
+                <Input onChange={(e) => this.handleGameNameInput(e)} type="input" name="input" id="example"
+                  placeholder="Game Name" bsSize="md" />
+                <Input type="input" name="input" id="example"
+                  placeholder="Game ID" bsSize="md" />
+                <Button onClick={(e) => this.joinGame(e)}>Join</Button>
               </form>
-              <br/>
-              <Button 
-                className="fag" 
+              <br />
+              <Button
+                className="fag"
                 onClick={this.findAllGames}
               >
                 Find All Games
               </Button>
-              <br/>
+              {this.state.allGames.map((game, i) =>
+              <li key={i} onClick={(e) =>{this.joinSpecificGame(e, game.game)}}>{game.game}</li>
+            )}
+              <br />
             </div>
           </Col>
         </Row>

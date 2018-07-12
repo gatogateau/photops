@@ -26,4 +26,12 @@
 .Btn {
     color: rgb(248, 232, 4);
 }
-    
+.App {
+    background-image: url("./Jerson.png");
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+}
+
+.form-horizontal {
+    margin-top: 10%;
+}

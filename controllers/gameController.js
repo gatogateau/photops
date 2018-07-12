@@ -124,6 +124,7 @@ module.exports = {
     joinGameByGameName: function (req, res) {
         console.log(req.body)
         db.Games
+
             .find({
                 "game": req.body.game
             })
@@ -162,6 +163,8 @@ module.exports = {
                 }
             })
             .catch(err => res.status(422).json(err));
+
+
     },
     // start the game - find game by id, then copy all players to playersAlive
 

@@ -162,7 +162,6 @@ class App extends Component {
               return (<div>
 
                 <AuthPage login={this.login} redirectTo={this.state.redirectTo} signUp={this.signUp} ></AuthPage>
-                <FacebookLogin></FacebookLogin>
               </div>)
             }
           } />
