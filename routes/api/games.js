@@ -26,7 +26,7 @@ router.route("/:id")
 router.route("/")
 	.get(gamesController.findAllGameName)
 	.post(function (req,res) {
-        console.log("asdkfjasl;kjlkjslaksdjfklsa;jl;ksjfl;dks");
+        console.log("found all games");
     });
     // api/games/game/:game
 router.route("/game/:game")
