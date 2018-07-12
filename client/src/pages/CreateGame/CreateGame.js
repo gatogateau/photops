@@ -71,18 +71,18 @@ class CreateGame extends Component {
             <Jumbotron username={this.props.username}/>
           </Col>
           <Col size="md-12">
-            <div className="card">
+            <div className="card createGameForm">
               <h1>Create Game</h1>
               <form className='createGameForm'>
-                <Input type="submit text" name="input" id="game"
+                <Input className="gameFormInput" type="submit text" name="input" id="game"
                   placeholder="Game Name" bsSize="md" />
-                <Input type="input" name="input" id="startDate"
+                <Input className="gameFormInput" type="input" name="input" id="startDate"
                   placeholder="Start Date" bsSize="md" />
-                <Input type="input" name="input" id="duration"
+                <Input className="gameFormInput" type="input" name="input" id="duration"
                   placeholder="Duration" bsSize="md" />
                 <Input type="radio" name="Private" value="Private"/> Private<br/>
                   <Input type="radio" name="Public" value="Public"/> Public<br/>
-                    <Button onClick={this.createGame} type="Success">Create</Button>
+                    <Button className="createButton" onClick={this.createGame} type="Success">Create</Button>
                 </form>
                 <form>
                 <button onClick={this.startGame}>Start</button>

@@ -13,6 +13,7 @@ import Enrollcam from './pages/Enrollcam/Enrollcam';
 import Verifycam from './pages/Verifycam/Verifycam';
 import CreateGame from './pages/CreateGame/CreateGame';
 import CurrentGame from './pages/CurrentGame/CurrentGame';
+import StartGame from './pages/StartGame/StartGame';
 import axios from 'axios';
 import passport from 'passport';
 // import { Card, Button, CardHeader, CardFooter, CardBody,
@@ -198,6 +199,11 @@ class App extends Component {
           <Route path="/verifycam" exact render={
             () => {
               return (<Verifycam />)
+            }
+          } />
+          <Route path="/startgame" exact render={
+            () => {
+              return (<StartGame username={this.state.username} logOut={this.logOut} loggedIn={this.state.loggedIn}/>)
             }
           } />
 
