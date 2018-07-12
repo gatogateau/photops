@@ -15,7 +15,8 @@ class JoinGame extends Component {
     super(props)
 
     this.state = {
-      gameName: ""
+      gameName: "",
+      allGames: [ ]
     }
   }
 
@@ -23,7 +24,11 @@ class JoinGame extends Component {
     axios.get('/api/games/allGames')
     .then(function (response) {
       // handle success
-      console.log(response);
+      console.log(response.data);
+      this.setState({
+        allGames: response.data
+      })
+
     })
     .catch(function (error) {
       // handle error
