@@ -62,9 +62,11 @@ class Home extends Component {
                 <h1>Assassinate</h1>
               </Button>
             </a>
-            <Button className="btns">
-              <h1>Store</h1>
-            </Button>
+            <a href="/StartGame">
+              <Button className="btns">
+                <h1>Start Game</h1>
+              </Button>
+            </a>
           </Col>
         </Row>
       </Container>

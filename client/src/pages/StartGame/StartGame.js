@@ -6,7 +6,7 @@ import Navbar from "../../components/Navbar";
 // import { Link } from "react-router-dom";
 import { Col, Row, Container } from "../../components/Grid";
 import { Button, Input } from "reactstrap";
-import './JoinGame.css';
+import './StartGame.css';
 import axios from "axios"
 // import { List, ListItem } from "../../components/List";
 // import { Input, TextArea, FormBtn } from "../../components/Form";
@@ -56,9 +56,9 @@ class JoinGame extends Component {
       gameName: e.target.value
     })
   }
-  joinSpecificGame = (e, gameName) => {
+  startSpecificGame = (e, gameName) => {
     e.preventDefault;
-    axios.put("/api/games/joinGameByGameName", { game: gameName })
+    axios.put("/api/games/startGame", { game: gameName })
       .then(function (response) {
         if (response.data.message) {
           alert(response.data.message)
@@ -81,14 +81,7 @@ class JoinGame extends Component {
           </Col>
           <Col size="md-12">
             <div className="card">
-              <h1>Join</h1>
-              <form>
-                <Input className="inputField" onChange={(e) => this.handleGameNameInput(e)} type="input" name="input" id="example"
-                  placeholder="Game Name" bsSize="md" />
-                <Input className="inputField" type="input" name="input" id="example"
-                  placeholder="Game ID" bsSize="md" />
-                <button className="fag" onClick={(e) => this.joinGame(e)}><h4>Join</h4></button>
-              </form>
+              <h1>Start</h1>
               <br />
               <button
                 className="fag"
@@ -97,7 +90,7 @@ class JoinGame extends Component {
                 <h4>Find All Games</h4>
               </button>
               {this.state.allGames.map((game, i) =>
-              <li key={i} onClick={(e) =>{this.joinSpecificGame(e, game.game)}}>{game.game}</li>
+              <li key={i} onClick={(e) =>{this.startSpecificGame(e, game.game)}}>{game.game}</li>
             )}
               <br />
             </div>

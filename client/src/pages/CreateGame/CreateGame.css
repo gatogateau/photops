@@ -1,0 +1,18 @@
+.createGameForm {
+    margin:4%;
+    margin-bottom: 10%;
+}
+
+.createButton {
+
+    margin:4%;
+    border: .5px black solid;
+    border-radius:5px;
+}
+
+.gameFormInput {
+    border-radius:5px;
+    border: .5px black solid;
+    font:bolder;
+    margin: 1%
+}
