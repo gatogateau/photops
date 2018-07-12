@@ -38,7 +38,10 @@ router.route("/startGame")
 
     // api/games/createGame
     router.route("/createGame")
-    .post(gamesController.createGame);    
+    .post(gamesController.createGame);  
+    
+    router.route("/allofthem")
+    .get(gamesController.findAllGames);
 
     
 // Matches with "/api/games/:id"

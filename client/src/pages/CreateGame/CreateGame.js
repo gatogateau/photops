@@ -16,7 +16,7 @@ class CreateGame extends Component {
     super(props)
 
     this.state = {
-      createGameForm: [{gameName: "", startDate: "", duration: "", gameType: "Public"}]
+      createGameForm: [{game: "", startDate: "", duration: "", gameType: "Public"}]
     }
 
     this.createGame = this.createGame.bind(this)
@@ -42,7 +42,8 @@ class CreateGame extends Component {
   createGame(event) {
     event.preventDefault();
 
-   let createGameForm = [{gameName: document.getElementById("gameName").value, startDate: document.getElementById("startDate").value, duration: document.getElementById("duration").value}]
+   let createGameForm = {game: document.getElementById("game").value, startDate: document.getElementById("startDate").value, duration: document.getElementById("duration").value}
+   console.log(createGameForm);
 
 
 
@@ -73,7 +74,7 @@ class CreateGame extends Component {
             <div className="card">
               <h1>Create Game</h1>
               <form className='createGameForm'>
-                <Input type="submit text" name="input" id="gameName"
+                <Input type="submit text" name="input" id="game"
                   placeholder="Game Name" bsSize="md" />
                 <Input type="input" name="input" id="startDate"
                   placeholder="Start Date" bsSize="md" />
