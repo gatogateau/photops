@@ -175,7 +175,7 @@ class App extends Component {
 
           <Route path="/JoinGame" exact render={
             () => {
-              return (<JoinGame />)
+              return (<JoinGame username={this.state.username}/>)
             }
           } />
           {/*<Example />*/}
@@ -188,7 +188,7 @@ class App extends Component {
           } />
           <Route path="/currentgame" exact render={
             () => {
-              return (<CurrentGame />)
+              return (<CurrentGame username={this.state.username}/>)
             }
           } />
           <Route path="/enrollcam" exact render={
