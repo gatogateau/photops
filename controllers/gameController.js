@@ -3,15 +3,18 @@ const db = require("../models");
 // Defining methods for the gamesController
 module.exports = {
 
-    // create
+    // create - done
 
-    // get
+    // get - done
 
-    // addPlayer
+    // addPlayer  -join game by game name
+    // add game to active games
+
 
     // startGame
 
 
+// find all games active and inactive and return game name and allPlayers
 
 	findAllGameName: function (req, res) {
         db.Games
@@ -22,6 +25,16 @@ module.exports = {
         .then(dbModel => res.json(dbModel))
         .catch(err => res.status(422).json(err));
     },
+
+    // Get all the Games with all the information
+    findAllGames: function (req, res) {
+        db.Games
+        .find(req.query)
+        .then(allGamesRes =>res.json (allGamesRes))
+        .catch(err => res.status(422).json(err));
+    },
+
+    // take user._id and return activeGames
     findUserGames: function(req, res) {
         console.log(req.session.passport.user)
         db.User
@@ -39,8 +52,10 @@ module.exports = {
 			.findById(req.params.id)
 			.then(dbModel => res.json(dbModel))
 			.catch(err => res.status(422).json(err));
-	},
-	create: function (req, res) {
+    },
+    
+    // create new Game
+	createGame: function (req, res) {
 		db.Games
 			.create(req.body)
 			.then(dbModel => res.json(dbModel))
@@ -138,7 +153,8 @@ module.exports = {
             .catch(err => res.status(422).json(err));
 
     },
-    
+
+
 
     // if a player is assassinated, remove name from playersAlive and add to playersDead.  Finds by id, requests userName, 
     playerDie: function (req, res) {
