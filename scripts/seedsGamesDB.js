@@ -17,7 +17,7 @@ mongoose.connect(
 const gamesSeed = [
 	{
 		game:"best game",
-		allplayers:["1", "timid Streaker","Blurrr"],
+		allPlayers:["1", "timid Streaker","Blurrr"],
 		// playersAlive:["1", "timid Streaker"],
 		// playersDead:["Blurrr"],
 		dateCreated: new Date(Date.now()),
@@ -29,7 +29,7 @@ const gamesSeed = [
 	},
 	{
 		game:"tester",
-		allplayers:["1", "timid Streaker","Blurrr"],
+		allPlayers:["1", "timid Streaker","Blurrr"],
 		// playersAlive:["1", "timid Streaker"],
 		// playersDead:["Blurrr"],
 		dateCreated: new Date(Date.now()),
@@ -42,7 +42,7 @@ const gamesSeed = [
 
 	{
 		game:"Chads friend",
-		allplayers:["1", "timid Streaker","Blurrr, claymation, curly sue"],
+		allPlayers:["1", "timid Streaker","Blurrr, claymation, curly sue"],
 		// playersAlive:["1", "timid Streaker"],
 		// playersDead:["Blurrr"],
 		dateCreated: new Date(Date.now()),
