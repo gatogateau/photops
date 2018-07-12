@@ -6,7 +6,7 @@ import "./Jumbotron.css";
 
 const Jumbotron = (props) => (
 	<header className = "header">
-		<h4 id="userName">{props.username}</h4>
+		<h4 id="userName">{props.username.toUpperCase()}</h4>
 		<h5>Kills</h5>
 		<h5 id="kills">0</h5>
 		<h1 id="target">Target</h1>

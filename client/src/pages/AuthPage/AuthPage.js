@@ -9,7 +9,7 @@ class LoginForm extends Component {
         this.state = {
             username: '',
             password: '',
-            redirectTo: null
+            redirectTo: ''
         }
 
         this.handleChange = this.handleChange.bind(this)
@@ -23,6 +23,7 @@ class LoginForm extends Component {
     }
 
     render() {
+        console.log(this)
         if (this.props.redirectTo) {
             return <Redirect to={{ pathname: this.props.redirectTo }} />
         } else {

@@ -12,12 +12,26 @@ import 'whatwg-fetch';
 // import { List, ListItem } from "../../components/List";
 // import { Input, TextArea, FormBtn } from "../../components/Form";
 class Home extends Component {
+  constructor(props){
+    super(props)
+  }
+
+  componentWillMount(){
+    this.checkLoggedIn();
+  }
+  
+  checkLoggedIn = () => {
+    if(!this.props.loggedIn) {
+      window.location.pathname = '/'
+    }
+  }
+
   render() {
     return (
       <Container fluid>
         <Row>
           <Col size="md-12">
-            <Navbar />
+            <Navbar checkLoggedIn={this.checkLoggedIn} logOut={this.props.logOut} />
           </Col>
           <Col size="md-12">
             <Jumbotron username={this.props.username} />
