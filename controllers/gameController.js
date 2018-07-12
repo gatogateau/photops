@@ -30,7 +30,7 @@ module.exports = {
     findAllGames: function (req, res) {
         db.Games
         .find(req.query)
-        .then(allGamesRes =>res.json (allGamesRes))
+        .then(allGamesRes => res.json (allGamesRes))
         .catch(err => res.status(422).json(err));
     },
 

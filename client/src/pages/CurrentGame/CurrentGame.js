@@ -36,7 +36,7 @@ class CurrentGame extends Component {
             <Navbar />
           </Col>
           <Col size="md-12">
-            <Jumbotron />
+            <Jumbotron username={this.props.username}/>
           </Col>
           <Col size="md-12">
             <div className="card">
