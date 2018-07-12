@@ -18,11 +18,11 @@ const gamesSeed = [
 	{
 		game:"best game",
 		allplayers:["1", "timid Streaker","Blurrr"],
-		playersAlive:["1", "timid Streaker"],
-		playersDead:["Blurrr"],
+		// playersAlive:["1", "timid Streaker"],
+		// playersDead:["Blurrr"],
 		dateCreated: new Date(Date.now()),
 		startDate: 12/12/2018,
-		playing:1,   
+		active:1,   
 		// add duration
 		duration:7,
 
@@ -30,15 +30,30 @@ const gamesSeed = [
 	{
 		game:"tester",
 		allplayers:["1", "timid Streaker","Blurrr"],
-		playersAlive:["1", "timid Streaker"],
-		playersDead:["Blurrr"],
+		// playersAlive:["1", "timid Streaker"],
+		// playersDead:["Blurrr"],
 		dateCreated: new Date(Date.now()),
 		startDate: 12/12/2018,
-		playing:1,   
+		active:1,   
 		// add duration
 		duration:7,
 
 	},
+
+	{
+		game:"Chads friend",
+		allplayers:["1", "timid Streaker","Blurrr, claymation, curly sue"],
+		// playersAlive:["1", "timid Streaker"],
+		// playersDead:["Blurrr"],
+		dateCreated: new Date(Date.now()),
+		startDate: 12/12/2018,
+		active:1,   
+		// add duration
+		duration:14,
+
+	},
+
+
 
 ];
 

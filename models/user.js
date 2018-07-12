@@ -11,15 +11,22 @@ const eachUser = new Schema(
     {
       username: {type:String, unique: true, required: false, default: "username"},
       password: {type:String, unique: false, required: false, default: "password"}, 
+      // total kills since playing
       kills:Number,
+      // total deaths since playing
       deaths:Number,
+      // total number of games played since starting
       gamesPlayed:Number,
-      playerLevel:String,
+      // which level player has achieved
+      playerLevel:Number,
+      // additional add ons the player has purchased or won
       adOns:[String],
+      // date user signs up
       date: { type: Date, default: Date.now },
-      target:Number,
-      // does aciveGames need to be a [String] or [Interger]
+      // target:Number,
+
       // How do i get the names of the games from db.Games
+      // all the games currently playing
       activeGames:[String],
     });
 

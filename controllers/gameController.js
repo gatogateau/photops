@@ -2,6 +2,17 @@ const db = require("../models");
 
 // Defining methods for the gamesController
 module.exports = {
+
+    // create
+
+    // get
+
+    // addPlayer
+
+    // startGame
+
+
+
 	findAllGameName: function (req, res) {
         db.Games
         
@@ -110,13 +121,24 @@ module.exports = {
         .catch(err => res.status(422).json(err));
     },
     // start the game - find game by id, then copy all players to playersAlive
+
+    // this doesn't work yet
     startGame: function (req, res) {
         db.Games
-            .findById({ _id: req.params.id }, req.body)
-            .then(dbModel => res.json(dbModel))
+            .findById({ _id: req.params.id })
+
+            .then(dbModel => {
+                // change arrays
+                dbModel.playersAlive = dbModel.allPlayers;
+                req.body = dbModel
+                update(req, res)
+                res.json(dbModel)
+
+            })
             .catch(err => res.status(422).json(err));
 
     },
+    
 
     // if a player is assassinated, remove name from playersAlive and add to playersDead.  Finds by id, requests userName, 
     playerDie: function (req, res) {
@@ -135,14 +157,6 @@ module.exports = {
     }
 
     
-// find games by game name, then return target and hitman
-
-
-
-    // find each current game  get
-
-
-    // load a game with all the players with their game status
 
 
 
