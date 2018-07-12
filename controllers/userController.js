@@ -4,6 +4,23 @@ const passport = require("../models/passport");
 
 // Defining methods for the userController
 module.exports = {
+
+// create
+
+// kills
+
+
+// deaths
+
+// add Active games
+
+// delete Active games
+
+// add Player Level
+
+// add active games to users.activeGames
+
+
     findAll: function (req, res) {
         db.User
             .find(req.query)
