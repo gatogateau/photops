@@ -11,8 +11,42 @@ import axios from 'axios';
 // import { List, ListItem } from "../../components/List";
 // import { Input, TextArea, FormBtn } from "../../components/Form";
 class CreateGame extends Component {
+
+  constructor(props) {
+    super(props)
+
+    this.state = {
+      createGameForm: [{gameName: "", startDate: "", duration: "", gameType: "Public"}]
+    }
+
+    this.createGame = this.createGame.bind(this)
+  }
+
+
   startGame() {
     axios.get('/api/games/startGame')
+    .then(function (response) {
+      // handle success
+      console.log(response);
+    })
+    .catch(function (error) {
+      // handle error
+      console.log(error);
+    })
+    .then(function () {
+      // always executed
+    });
+  }
+
+
+  createGame(event) {
+    event.preventDefault();
+
+   let createGameForm = [{gameName: document.getElementById("gameName").value, startDate: document.getElementById("startDate").value, duration: document.getElementById("duration").value}]
+
+
+
+    axios.post('/api/games/createGame', createGameForm)
     .then(function (response) {
       // handle success
       console.log(response);
@@ -33,21 +67,21 @@ class CreateGame extends Component {
             <Navbar />
           </Col>
           <Col size="md-12">
-            <Jumbotron />
+            <Jumbotron username={this.props.username}/>
           </Col>
           <Col size="md-12">
             <div className="card">
               <h1>Create Game</h1>
-              <form>
-                <Input type="submit text" name="input" id="example"
+              <form className='createGameForm'>
+                <Input type="submit text" name="input" id="gameName"
                   placeholder="Game Name" bsSize="md" />
-                <Input type="input" name="input" id="example"
+                <Input type="input" name="input" id="startDate"
                   placeholder="Start Date" bsSize="md" />
-                <Input type="input" name="input" id="example"
+                <Input type="input" name="input" id="duration"
                   placeholder="Duration" bsSize="md" />
                 <Input type="radio" name="Private" value="Private"/> Private<br/>
                   <Input type="radio" name="Public" value="Public"/> Public<br/>
-                    <Button type="Success">Create</Button>
+                    <Button onClick={this.createGame} type="Success">Create</Button>
                 </form>
                 <form>
                 <button onClick={this.startGame}>Start</button>

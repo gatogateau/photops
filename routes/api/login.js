@@ -66,4 +66,29 @@ router.post('/logout', (req, res) => {
     }
 })
 
+router.get('/logOut', (req, res) => {
+    req.session.passport.user = null;
+    res.send({
+        redirectTo: '/',
+        loggedIn:false,
+        username:''
+    })
+})
+
+router.get('/isLoggedIn', (req, res) => {
+    if(req.session.passport.user) {
+        res.send({
+            redirectTo: '/home',
+            loggedIn:true,
+            username:req.session.passport.user.userName
+        })
+    } else {
+        res.send({
+            redirectTo: '/',
+            loggedIn:false,
+            username:''
+        })
+    }
+})
+
 module.exports = router

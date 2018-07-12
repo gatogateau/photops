@@ -42,6 +42,7 @@ class Enrollcam extends Component {
 
 
     takePicture() {
+        let that = this;
         this.camera.capture()
             .then(blob => {
                 this.img.src = URL.createObjectURL(blob);
@@ -51,7 +52,7 @@ class Enrollcam extends Component {
                     const base64data = reader.result;
                     cloudinary.uploader.upload(base64data, function (result) {
                         console.log(result);
-                        let payload = { "image": result.url, "subject_id": "player2", "gallery_name": "players" };
+                        let payload = { "image": result.url, "subject_id": that.props.username, "gallery_name": "players" };
                         let headers = {
                             "Content-type": "application/json",
                             "app_id": "3152266b",
@@ -64,6 +65,7 @@ class Enrollcam extends Component {
                             dataType: "text"
                         }).done(function (response) {
                             console.log(response);
+                            console.log(that);
                         });
 
                     });
