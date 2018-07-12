@@ -20,7 +20,7 @@ module.exports = {
         db.Games
         
         .find(req.query)
-        .select ({"game":1, "allPlayers":1, "_id":0 })
+        // .select ({"game":1, "allPlayers":1, "_id":0 })
         // .sort({ date: -1 })
         .then(dbModel => res.json(dbModel))
         .catch(err => res.status(422).json(err));
@@ -56,6 +56,7 @@ module.exports = {
     
     // create new Game
 	createGame: function (req, res) {
+        console.log(req.body);
 		db.Games
 			.create(req.body)
 			.then(dbModel => res.json(dbModel))
