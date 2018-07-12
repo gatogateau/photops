@@ -65,7 +65,7 @@ class CreateGame extends Component {
       <Container fluid>
         <Row>
           <Col size="md-12">
-            <Navbar />
+            <Navbar logOut={this.props.logOut}/>
           </Col>
           <Col size="md-12">
             <Jumbotron username={this.props.username}/>

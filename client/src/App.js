@@ -174,7 +174,7 @@ class App extends Component {
 
           <Route path="/JoinGame" exact render={
             () => {
-              return (<JoinGame username={this.state.username}/>)
+              return (<JoinGame username={this.state.username} logOut={this.logOut} loggedIn={this.state.loggedIn}/>)
             }
           } />
           {/*<Example />*/}
@@ -182,12 +182,12 @@ class App extends Component {
            <FacebookLogin />*/}
           <Route path="/creategame" exact render={
             () => {
-              return (<CreateGame username={this.state.username}/>)
+              return (<CreateGame username={this.state.username} logOut={this.logOut} loggedIn={this.state.loggedIn}/>)
             }
           } />
           <Route path="/currentgame" exact render={
             () => {
-              return (<CurrentGame username={this.state.username}/>)
+              return (<CurrentGame username={this.state.username} logOut={this.logOut} loggedIn={this.state.loggedIn}/>)
             }
           } />
           <Route path="/enrollcam" exact render={
