@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { Redirect } from 'react-router-dom'
 import axios from 'axios'
 import Navbar from "./Navbar";
+import './AuthPage.css';
 
 class LoginForm extends Component {
     constructor() {

@@ -130,7 +130,13 @@ module.exports = {
                 .findOneAndUpdate({"game":req.body.game},{"allPlayers":gameData[0].allPlayers})
                 .then(newGameData => {
                     console.log ("this is newGameData", newGameData);
-                    res.json(gameData)
+                    res.json(newGameData)
+                })
+                db.User
+                .findOneAndUpdate({"userName": req.session.passport.user.userName},{"activeGames": req.body.game})
+                .then(newUserData => {
+                    console.log ("this is newUserData", newUserData);
+                    res.json(newUserData)
                 })
             }
         })
