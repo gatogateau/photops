@@ -88,7 +88,8 @@ class CreateGame extends Component {
                 <button onClick={this.startGame}>Start</button>
                 </form>
                     <form>
-                      <Input type="input" name="input" id="example"
+                      {/* run the findUserName function from the api route /api/users/findUserName  in the model Users, username is not camelcase */}
+                      <Input type="input" name="findUser" id="example"
                         placeholder="Users" bsSize="md" />
                       <Button type="Success">Add Users</Button>
                     <Button type="Success">Search Users</Button>
