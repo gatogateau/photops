@@ -16,10 +16,31 @@ class CreateGame extends Component {
     super(props)
 
     this.state = {
-      createGameForm: [{game: "", startDate: "", duration: "", gameType: "Public"}]
+      createGameForm: [{game: "", startDate: "", duration: "", gameType: "Public"}],
+      allUsers: []
     }
 
     this.createGame = this.createGame.bind(this)
+    this.searchAllUsers =this.searchAllUsers.bind(this);
+  }
+
+  searchAllUsers() {
+    let that = this;
+    axios.get('/api/users/allUsers')
+    .then(function (response) {
+      // handle success
+      console.log(response);
+      that.setState({
+        allUsers: response.data,
+      });
+    })
+    .catch(function (error) {
+      // handle error
+      console.log(error);
+    })
+    .then(function () {
+      // always executed
+    });
   }
 
 
@@ -84,15 +105,16 @@ class CreateGame extends Component {
                   <Input type="radio" name="Public" value="Public"/> Public<br/>
                     <Button className="createButton" onClick={this.createGame} type="Success">Create</Button>
                 </form>
-                <form>
-                <button onClick={this.startGame}>Start</button>
-                </form>
-                    <form>
+                    <form className="searchUserForm">
                       {/* run the findUserName function from the api route /api/users/findUserName  in the model Users, username is not camelcase */}
                       <Input type="input" name="findUser" id="example"
                         placeholder="Users" bsSize="md" />
-                      <Button type="Success">Add Users</Button>
-                    <Button type="Success">Search Users</Button>
+                      <Button className="userButton">Add Users</Button>
+                      <br />
+                    <Button className="userButton" onClick={this.searchAllUsers}>Search Users</Button>
+                    {this.state.allUsers.map((user, i) =>
+                      <li key={i}>{user.username}</li>
+                    )}
                     </form>
             </div>
           </Col>
