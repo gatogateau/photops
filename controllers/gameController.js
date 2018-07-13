@@ -170,20 +170,22 @@ module.exports = {
 
     // this doesn't work yet
     startGame: function (req, res) {
-        db.Games
-            .findById({
-                _id: req.params.id
-            })
+        // console.log(req);
+        console.log("nothing on the start game");
+        // db.Games
+        //     .find({
+        //         game: req.params.game
+        //     })
 
-            .then(dbModel => {
-                // change arrays
-                dbModel.playersAlive = dbModel.allPlayers;
-                req.body = dbModel
-                update(req, res)
-                res.json(dbModel)
+        //     .then(dbModel => {
+        //         // change arrays
+        //         dbModel.playersAlive = dbModel.allPlayers;
+        //         req.body = dbModel
+        //         update(req, res)
+        //         res.json(dbModel)
 
-            })
-            .catch(err => res.status(422).json(err));
+        //     })
+        //     .catch(err => res.status(422).json(err));
 
     },
 

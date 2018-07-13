@@ -22,7 +22,7 @@ router.route("/joinGameByGameName")
     .put(gamesController.joinGameByGameName);
 
 // matches with "/api/games/:id"
-router.route("/:id")
+router.route("/somethingVerySpecific/:id")
     // .route("/:id")
     // any routes that need to be found by id
     .get(gamesController.findById)
