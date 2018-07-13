@@ -83,10 +83,12 @@ class JoinGame extends Component {
             <div className="card">
               <h1>Join</h1>
               <form>
-                <Input className="inputField" onChange={(e) => this.handleGameNameInput(e)} type="input" name="input" id="example"
+                <Input className="inputField" onChange={(e) => this.handleGameNameInput(e)} type="input" name="input" 
                   placeholder="Game Name" bsSize="md" />
-                <Input className="inputField" type="input" name="input" id="example"
+                  <br/>
+                <Input className="inputField" type="input" name="input" 
                   placeholder="Game ID" bsSize="md" />
+                  <br/>
                 <button className="fag" onClick={(e) => this.joinGame(e)}><h4>Join</h4></button>
               </form>
               <br />
