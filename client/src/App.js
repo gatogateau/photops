@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 // import logo from './logo.svg';
 import './App.css';
-import FacebookLogin from './components/FacebookLogin';
 import { BrowserRouter as Router } from 'react-router-dom';
 import Route from 'react-router-dom/Route';
 // import LogInPage from './components/LogInPage/TabsPage';
@@ -15,7 +14,6 @@ import CreateGame from './pages/CreateGame/CreateGame';
 import CurrentGame from './pages/CurrentGame/CurrentGame';
 import StartGame from './pages/StartGame/StartGame';
 import axios from 'axios';
-import passport from 'passport';
 // import { Card, Button, CardHeader, CardFooter, CardBody,
 // CardTitle, CardText } from 'reactstrap';
 class App extends Component {
