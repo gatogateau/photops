@@ -95,6 +95,7 @@ class Verifycam extends Component {
                         <button style={this.style.captureButton} />
                     </view>
                 </Camera>
+                <a href="/"><button>Back</button></a>
                 <img
                     style={this.style.captureImage}
                     ref={(img) => {
