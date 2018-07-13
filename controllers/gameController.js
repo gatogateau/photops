@@ -170,6 +170,7 @@ module.exports = {
 
     // this doesn't work yet
     startGame: function (req, res) {
+
         console.log(req.body, "this is the games route");
         
         db.Games
@@ -187,6 +188,7 @@ module.exports = {
 
             })
             .catch(err => res.status(422).json(err));
+
 
     },
 
