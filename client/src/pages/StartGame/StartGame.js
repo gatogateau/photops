@@ -58,7 +58,7 @@ class JoinGame extends Component {
   }
   startSpecificGame = (e, gameName) => {
     e.preventDefault;
-    axios.put("/api/games/startGame", { game: gameName })
+    axios.put("/api/games/start/startGame",{ game: gameName })
       .then(function (response) {
         if (response.data.message) {
           alert(response.data.message)
@@ -66,7 +66,7 @@ class JoinGame extends Component {
         console.log(response);
       })
 
-  } 
+   } 
 
   render() {
     console.log(this)
