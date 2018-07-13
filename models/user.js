@@ -24,6 +24,9 @@ const eachUser = new Schema(
       // date user signs up
       date: { type: Date, default: Date.now },
       // target:Number,
+      target: String,
+      // status = alive 1, dead 0
+      status:Boolean,
 
       // How do i get the names of the games from db.Games
       // all the games currently playing

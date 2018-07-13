@@ -4,6 +4,10 @@ const gamesController = require("../../controllers/gameController");
 
 // TEST ALL THE ROUTES
 
+// api/games/startGame
+router.route("/start/startGame")
+    .put(gamesController.startGame);
+
 // matches with "/api/games"
 router.route("/allGames")
     .get(gamesController.findAllGameName)
@@ -22,7 +26,7 @@ router.route("/joinGameByGameName")
     .put(gamesController.joinGameByGameName);
 
 // matches with "/api/games/:id"
-router.route("/:id")
+router.route("/somethingVerySpecific/:id")
     // .route("/:id")
     // any routes that need to be found by id
     .get(gamesController.findById)
@@ -39,9 +43,7 @@ router.route("/")
 router.route("/game/:game")
     .get(gamesController.joinGameByGameName);
 
-// api/games/startGame
-router.route("/startGame")
-    .get(gamesController.startGame);
+
 
 // api/games/createGame
 router.route("/createGame")
