@@ -2,6 +2,9 @@ const express = require('express')
 const router = express.Router()
 const User = require('../../models/user')
 const passport = require('../../models/passport')
+
+
+
 // all are at /api/login
 router.post('/signup', (req, res) => {
     console.log('user signup');

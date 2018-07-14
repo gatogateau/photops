@@ -8,9 +8,11 @@ const playerController = require("../../controllers/playerController");
 router.route("/allPlayers")
     .get(playerController.findAll)
     .post(playerController.create);
-    module.exports = router;
 
 
 
-    // module.exports = router;
-    
+
+module.exports = router;
+
+
+

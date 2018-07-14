@@ -8,20 +8,21 @@ const gamesController = require("../../controllers/gameController");
 router.route("/start/startGame")
     .put(gamesController.startGame);
 
-// matches with "/api/games"
+// matches with "/api/games/allGames"
 router.route("/allGames")
     .get(gamesController.findAllGameName)
     .post(gamesController.createGame);
 
-
+// matches with /api/games/allOfThem 
 router.route("/allOfThem")
     .get(gamesController.findAllGames);
     // .get(gamesController.findAllGameName);
 
-
+    // matches with /api/games/myGames
 router.route("/myGames")
     .get(gamesController.findUserGames)
 
+    // matches with /api/games/joinGameByGameName
 router.route("/joinGameByGameName")
     .put(gamesController.joinGameByGameName);
 
@@ -39,26 +40,20 @@ router.route("/")
     .post(function (req, res) {
         console.log("found all games");
     });
+
 // api/games/game/:game
 router.route("/game/:game")
     .get(gamesController.joinGameByGameName);
-
-
 
 // api/games/createGame
 router.route("/createGame")
     .post(gamesController.createGame);
 
-
-
-// Matches with "/api/games/:id"
-// router.route("/:id")
-// 	.get(gamesController.findById)
-// 	.put(gamesController.update)
-// 	.delete(gamesController.remove);
-
-
-
+// Matches with "/api/games/somethingVerySpecific/:id"
+router.route("/somethingVerySpecific/:id")
+	.get(gamesController.findById)
+	.put(gamesController.update)
+	.delete(gamesController.remove);
 
 
 
@@ -66,4 +61,3 @@ module.exports = router;
 
 
 
-// module.exports = router;
