@@ -1,5 +1,20 @@
 const db = require("../models");
+var shuffleLibrary = require('shuffle-array');
 
+
+
+function shuffle(a, users) {
+    console.log('hit');
+    shuffleLibrary(a)
+    for (let i = 0; i < users.length; i++) {
+        if (users[i] == a[i]) {
+            return shuffle(a, users);
+            break;
+        }
+    }
+    return a;
+
+}
 // Defining methods for the gamesController
 module.exports = {
 
@@ -16,13 +31,17 @@ module.exports = {
 
     // find all games active and inactive and return game name and allPlayers
 
-    
-    
+
+
     findAllGameName: function (req, res) {
         db.Games
 
             .find(req.query)
-            .select ({"game":1, "allPlayers":1, "_id":0 })
+            .select({
+                "game": 1,
+                "allPlayers": 1,
+                "_id": 0
+            })
             // .sort({ date: -1 })
             .then(dbModel => res.json(dbModel))
             .catch(err => res.status(422).json(err));
@@ -35,7 +54,7 @@ module.exports = {
         db.Games
 
             .find(req.query)
-            .then(whatever => res.json(whatever ))
+            .then(whatever => res.json(whatever))
             .catch(err => res.status(422).json(err));
     },
 
@@ -172,19 +191,123 @@ module.exports = {
     startGame: function (req, res) {
 
         console.log(req.body, "this is the games route");
-        
+
         db.Games
             .find({
                 game: req.body.game
             })
-
+            .select({
+                "allPlayers": 1,
+                "_id": 0,
+            })
             .then(game => {
-                console.log(game);
+                console.log("this is the game:--" + game);
                 // change arrays
-                game.playersAlive = game.allPlayers;
-                req.body = game
-                update(req, res)
-                res.json(game)
+                console.log("this is the all players  array ----" + game[0].allPlayers);
+                // console.log(req.body.game.allPlayers);
+                game[0].playersAlive = game[0].allPlayers;
+                console.log("players alive ----" + game[0].playersAlive)
+                var playersAlive = game[0].playersAlive;
+
+                // save to collection
+
+                db.Games
+                    .findOneAndUpdate({
+                        "game": req.body.game
+                    }, {
+                        "playersAlive": playersAlive
+                    })
+                    .then(newGameData => {
+                        console.log("this is newGameData", newGameData);
+
+                        // set users and target to playersAlive
+                        var users = newGameData.playersAlive;
+                        var targets = JSON.stringify(newGameData.playersAlive);
+                        targets = JSON.parse(targets);
+                        console.log("users: " + users, "targets: " + targets);
+
+                        // shuffle the target
+                        let shuffleTheTargets = shuffle(targets, users);
+                        console.log(shuffleTheTargets);
+                        var obj = [];
+
+                        for (let i = 0; i < users.length; i++) {
+                            obj.push({
+                                user: users[i],
+                                target: shuffleTheTargets[i]
+                            })
+                        }
+                        console.log(obj);
+
+                        for (let i = 0; i < obj.length; i++) {
+                            db.User
+                            .findOneAndUpdate({
+                                    username: users[i]
+                                }, {
+                                    target: shuffleTheTargets[i]
+                                })
+                                .then(user => {
+                                    console.log(user);
+                                })
+                        }
+
+
+                        //  var usertemp;
+
+                        //  var userObj = [];
+
+                        //  for (let i=0; i<users.length; i++){
+                        //      if(users[i]!==target[i]){
+                        //          userObj.push({user:users[i], target:target[i]})
+                        //      } else if (target[i]==users[i] && users.length<i){
+                        //          console.log (i);
+                        //          let temp=users[i];
+                        //          users[i]=users[i+1];
+                        //          users[i+1]=usertemp;
+                        //          userObj.push({user:users[i], target:target[i]})
+
+                        //      } else if
+                        //      (users.length==i){
+
+                        //          let temp=users[i];
+                        //          users[i]=users[0];
+                        //          users[0]=temp,
+                        //          i=0;
+                        //      } else {
+                        //      userObj.push({user:users[i], target:target[i]})
+
+                        //      }
+
+                        //  };
+
+
+
+
+
+                    })
+
+
+
+
+
+
+                // game[0].save (function(err) {
+                //     if (err) throw err;
+
+                //     console.log('User successfully updated!');
+                //   });
+
+
+                // push players alive array
+
+
+
+                // game.playersAlive = game.allPlayers;
+                // console.log(game.playersAlive);
+
+                // req.body =game
+                // update(req, res)
+                // res.json(game)
 
             })
             .catch(err => res.status(422).json(err));
