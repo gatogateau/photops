@@ -66,7 +66,7 @@ class Verifycam extends Component {
                         }).done(function (response) {
                             let confidence = JSON.parse(response).images["0"].transaction.confidence;
 
-                            confidence>=.80 ? console.log("Target Was Eliminated!") : console.log('Please try again!')
+                            confidence>=.80 ? alert("Target Was Eliminated!") : alert('Please try again!')
                             
                         });
 
