@@ -19,7 +19,7 @@ const userSeed = [
 		deaths:"0",
 		gamesPlayed:"0",
 		playerLevel:"1",
-		// target:"1",
+		target:"",
 		date: new Date(Date.now())
 	},
 	{
@@ -29,7 +29,7 @@ const userSeed = [
 		deaths:"0",
 		gamesPlayed:"1",
 		playerLevel:"1",
-		// target:"2",
+		target:"",
 		date: new Date(Date.now())
 	},
 
@@ -40,7 +40,7 @@ const userSeed = [
 		deaths:"0",
 		gamesPlayed:"10",
 		playerLevel:"10",
-		// target:"Hide and go Seek",
+		target:"",
 		date: new Date(Date.now())
 	},
 	{
@@ -50,7 +50,7 @@ const userSeed = [
 		deaths:"3",
 		gamesPlayed:"4",
 		playerLevel:"2",
-		// target:"1",
+		target:"",
 		date: new Date(Date.now())
 	},
 	{
@@ -60,7 +60,7 @@ const userSeed = [
 		deaths:"0",
 		gamesPlayed:"10",
 		playerLevel:"10",
-		// target:"Blurrr",
+		target:"",
 		date: new Date(Date.now())
 	}
 ];

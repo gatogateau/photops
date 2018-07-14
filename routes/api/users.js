@@ -55,7 +55,7 @@ router.route("/allUsers")
     console.log("working");
 
 // Matches with "/api/users/:id"
-router.route("/:id")
+router.route("/somethingVerySpecific/:id")
 	.get(userController.findById)
 	.put(userController.update)
     .delete(userController.remove);
