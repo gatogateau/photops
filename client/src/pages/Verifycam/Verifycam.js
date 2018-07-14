@@ -42,6 +42,7 @@ class Verifycam extends Component {
 
 
     takePicture() {
+        let that = this;
         this.camera.capture()
             .then(blob => {
                 this.img.src = URL.createObjectURL(blob);
@@ -51,7 +52,7 @@ class Verifycam extends Component {
                     const base64data = reader.result;
                     cloudinary.uploader.upload(base64data, function (result) {
                         console.log(result);
-                        let payload = { "image": result.url, "subject_id": "player1", "gallery_name": "players" };
+                        let payload = { "image": result.url, "subject_id": that.props.target, "gallery_name": "players" };
                         let headers = {
                             "Content-type": "application/json",
                             "app_id": "3152266b",

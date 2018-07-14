@@ -89,7 +89,7 @@ class CreateGame extends Component {
             <Navbar logOut={this.props.logOut}/>
           </Col>
           <Col size="md-12">
-            <Jumbotron username={this.props.username}/>
+            <Jumbotron username={this.props.username} target={this.props.target}/>
           </Col>
           <Col size="md-12">
             <div className="card createGameForm">
