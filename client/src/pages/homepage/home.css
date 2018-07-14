@@ -1,4 +1,10 @@
 .btns {
-    width: 50%;
-    height: 50%;
+    width: 40%;
+    height: 40%;
+    opacity: .6;
+    border-radius: 5px;
+    margin: .5%;
+    border: .5px black solid;
+    background-color:aliceblue;
+    color:black;
 }

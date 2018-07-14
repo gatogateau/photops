@@ -1,0 +1,34 @@
+.createGameForm {
+    margin:4%;
+    margin-bottom: 10%;
+}
+
+.createButton {
+
+    margin:4%;
+    border: .5px black solid;
+    border-radius:5px;
+}
+
+.gameFormInput {
+    border-radius:5px;
+    border: .5px black solid;
+    font:bolder;
+    margin: 1%
+}
+#example {
+    margin-top: -10%;
+    border-radius:5px;
+    border: .5px black solid;
+    font:bolder;
+    width: 90%;
+}
+.userButton {
+    margin: 1%;
+    border: .5px black solid;
+    border-radius:5px;
+}
+.searchUserForm {
+    margin-top: -1%;
+
+}

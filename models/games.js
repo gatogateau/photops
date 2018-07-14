@@ -3,21 +3,24 @@ const Schema = mongoose.Schema;
 
 
 // connect and create database photoOps
-mongoose.connect("mongodb://localhost/photoOps");
+mongoose.connect("mongodb://localhost/photops");
 
 const gamePlay= new Schema(
     {
-  // name of the game 
+      // name of the game 
       game:String,
-      // all the players in the game
 
-      // need to add players alive or not during game
-      // alive = yes (user still playing), 
-      players:[Number],
-      stats:Number,
-      
-      
-      playing:Boolean,   
+      //players alive or not during game
+      allPlayers:[String],
+      playersAlive:[String],
+      playersDead:[String],
+      dateCreated: { type: Date, default: Date.now },
+      startDate: { type: Date, default: Date.now },
+      duration:Number,
+    
+    //   game in play or not  
+      active:Boolean, 
+      gameCreator:String,  
     });
 
 
