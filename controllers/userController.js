@@ -64,6 +64,25 @@ module.exports = {
             .catch(err => res.status(422).json(err));
     },
 
+    // this is the get route to get the userTargets
+    // query with the username, return the target
+    // take user._id and return activeGames
+    userTarget: function (req, res) {
+        console.log(req.session.passport.user)
+        db.User
+            .findById({
+                "_id": req.session.passport.user._id
+            })
+            .select({
+                "target": 1,
+                "_id": 0
+            })
+            .then(user => {
+                res.json(user)
+            })
+    },
+
+
     // find all users and return username
     findUsers: function (req, res) {
         db.User
@@ -71,7 +90,10 @@ module.exports = {
             .sort({
                 date: -1
             })
-            .select({"username":1, "_id":0 })
+            .select({
+                "username": 1,
+                "_id": 0
+            })
             .then(dbModel => {
                 console.log(dbModel);
                 res.json(dbModel)
@@ -83,11 +105,17 @@ module.exports = {
     // need to find by username only.  then on click to add to game.  
     findUserName: function (req, res) {
         db.User
-            .find({"username":req.params.username})
+            .find({
+                "username": req.params.username
+            })
             // .sort({
             //     date: -1
             // })
-            .select({"username":1, "_id":0, "gamesPlayed":1 })
+            .select({
+                "username": 1,
+                "_id": 0,
+                "gamesPlayed": 1
+            })
             .then(dbModel => {
                 console.log(dbModel);
                 res.json(dbModel)

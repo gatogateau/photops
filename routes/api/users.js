@@ -64,6 +64,12 @@ router.route("/somethingVerySpecific/:id")
 router.route("/userStats")
     .get(userController.findUserStats);
 
+
+// Matches with "/api/users/userTargets"
+router.route("/userTargets")
+    .get(userController.userTarget);
+    
+    
     // .post(userController.create)
     // console.log ("working");
 
