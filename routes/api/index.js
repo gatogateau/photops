@@ -6,8 +6,6 @@ const loginRoutes = require("./login");
 const playerRoutes = require("./player");
 // const accountRoutes = require("./signin");
 
-
-
 // User routes
 router.use("/users", userRoutes);
 

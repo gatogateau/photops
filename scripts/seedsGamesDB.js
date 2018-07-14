@@ -3,7 +3,6 @@ const db = require("../models");
 mongoose.Promise = global.Promise;
 
 // This file empties the games collection and inserts the games below
-
 mongoose.connect(
 	process.env.MONGODB_URI || "mongodb://localhost/photops",
 	{
@@ -11,15 +10,12 @@ mongoose.connect(
 	}
 );
 
-
-
-
 const gamesSeed = [
 	{
 		game:"best game",
 		allPlayers:["1", "timid Streaker","Blurrr"],
-		// playersAlive:["1", "timid Streaker"],
-		// playersDead:["Blurrr"],
+		playersAlive:[String],
+		playersDead:[String],
 		dateCreated: new Date(Date.now()),
 		startDate: 12/12/2018,
 		active:1,   
@@ -30,33 +26,25 @@ const gamesSeed = [
 	{
 		game:"tester",
 		allPlayers:["1", "timid Streaker","Blurrr"],
-		// playersAlive:["1", "timid Streaker"],
-		// playersDead:["Blurrr"],
+		playersAlive:[String],
+		playersDead:[String],
 		dateCreated: new Date(Date.now()),
 		startDate: 12/12/2018,
 		active:1,   
-		// add duration
 		duration:7,
-
 	},
 
 	{
 		game:"Chads friend",
 		allPlayers:["1", "timid Streaker","Blurrr, claymation, curly sue"],
-		// playersAlive:["1", "timid Streaker"],
-		// playersDead:["Blurrr"],
+		playersAlive:[String],
+		playersDead:[String],
 		dateCreated: new Date(Date.now()),
 		startDate: 12/12/2018,
 		active:1,   
-		// add duration
 		duration:14,
-
 	},
-
-
-
 ];
-
 
 db.Games
 	.remove({})

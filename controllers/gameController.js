@@ -18,24 +18,10 @@ function shuffle(a, users) {
 // Defining methods for the gamesController
 module.exports = {
 
-    // create - done
 
-    // get - done
-
-    // addPlayer  -join game by game name
-    // add game to active games
-
-
-    // startGame
-
-
-    // find all games active and inactive and return game name and allPlayers
-
-
-
+    // search all games and get name and allPlayers
     findAllGameName: function (req, res) {
         db.Games
-
             .find(req.query)
             .select({
                 "game": 1,
@@ -47,12 +33,10 @@ module.exports = {
             .catch(err => res.status(422).json(err));
     },
 
-
     // Get all the Games with all the information
     findAllGames: function (req, res) {
         console.log("find all games?")
         db.Games
-
             .find(req.query)
             .then(whatever => res.json(whatever))
             .catch(err => res.status(422).json(err));
@@ -71,7 +55,6 @@ module.exports = {
             })
     },
 
-
     findById: function (req, res) {
         console.log("hit")
         db.Games
@@ -88,6 +71,14 @@ module.exports = {
             .then(dbModel => res.json(dbModel))
             .catch(err => res.status(422).json(err));
     },
+
+    create: function (req, res) {
+        db.Games
+            .create(req.body)
+            .then(dbModel => res.json(dbModel))
+            .catch(err => res.status(422).json(err));
+    },
+
     update: function (req, res) {
         db.Games
             .findOneAndUpdate({
@@ -106,13 +97,6 @@ module.exports = {
             .catch(err => res.status(422).json(err));
     },
 
-    // create game 
-    createGame: function (req, res) {
-        db.Games
-            .create(req.body)
-            .then(dbModel => res.json(dbModel))
-            .catch(err => res.status(422).json(err));
-    },
 
     // find a game by game id, add username to allPlayers
     // We may not need this one because joinGameByGameName
@@ -127,16 +111,23 @@ module.exports = {
 
     //  API route created.  
     // add user to game.  
-    // commmented out for testing another function
-    // joinGameByGameName: function (req, res) {
-    //     console.log ("joinGameByGameName hit");
-    //     db.Games
-    //         .findOneAndUpdate({game: req.params.game},req.body)
-    //         .select({"game":1, "playersAlive":1, "playersDead":1, "game":1, "allPlayers":1})
-    //         // 
-    //         .then(gameData => res.json(gameData))
-    //         .catch(err => res.status(422).json(err));
-    // },
+    joinGameByGameName: function (req, res) {
+        console.log("joinGameByGameName hit");
+        db.Games
+            .findOneAndUpdate({
+                game: req.params.game
+            }, req.body)
+            .select({
+                "game": 1,
+                "playersAlive": 1,
+                "playersDead": 1,
+                "game": 1,
+                "allPlayers": 1
+            })
+            // 
+            .then(gameData => res.json(gameData))
+            .catch(err => res.status(422).json(err));
+    },
 
     //  API route created.  
     // add user to game. After user searches for game, button to add them to game.  If they are already in the game, res.message "you are already in the game", if res.data - post data 
@@ -185,11 +176,10 @@ module.exports = {
 
 
     },
-    // start the game - find game by id, then copy all players to playersAlive
 
-    // this doesn't work yet
+
+    // start the game - find game by game name, then copy all players to playersAlive, create a target array, randomize the target array, match the user to a target.  If the user== target, randomize again using shuffle function
     startGame: function (req, res) {
-
         console.log(req.body, "this is the games route");
 
         db.Games
@@ -209,8 +199,7 @@ module.exports = {
                 console.log("players alive ----" + game[0].playersAlive)
                 var playersAlive = game[0].playersAlive;
 
-                // save to collection
-
+                // save to collection Games
                 db.Games
                     .findOneAndUpdate({
                         "game": req.body.game
@@ -241,7 +230,7 @@ module.exports = {
 
                         for (let i = 0; i < obj.length; i++) {
                             db.User
-                            .findOneAndUpdate({
+                                .findOneAndUpdate({
                                     username: users[i]
                                 }, {
                                     target: shuffleTheTargets[i]
@@ -250,69 +239,9 @@ module.exports = {
                                     console.log(user);
                                 })
                         }
-
-
-                        //  var usertemp;
-
-                        //  var userObj = [];
-
-                        //  for (let i=0; i<users.length; i++){
-                        //      if(users[i]!==target[i]){
-                        //          userObj.push({user:users[i], target:target[i]})
-                        //      } else if (target[i]==users[i] && users.length<i){
-                        //          console.log (i);
-                        //          let temp=users[i];
-                        //          users[i]=users[i+1];
-                        //          users[i+1]=usertemp;
-                        //          userObj.push({user:users[i], target:target[i]})
-
-                        //      } else if
-                        //      (users.length==i){
-
-                        //          let temp=users[i];
-                        //          users[i]=users[0];
-                        //          users[0]=temp,
-                        //          i=0;
-                        //      } else {
-                        //      userObj.push({user:users[i], target:target[i]})
-
-                        //      }
-
-                        //  };
-
-
-
-
-
                     })
-
-
-
-
-
-
-                // game[0].save (function(err) {
-                //     if (err) throw err;
-
-                //     console.log('User successfully updated!');
-                //   });
-
-
-                // push players alive array
-
-
-
-                // game.playersAlive = game.allPlayers;
-                // console.log(game.playersAlive);
-
-                // req.body =game
-                // update(req, res)
-                // res.json(game)
-
             })
             .catch(err => res.status(422).json(err));
-
-
     },
 
 
@@ -327,7 +256,8 @@ module.exports = {
             .catch(err => res.status(422).json(err));
     },
 
-    // player assassinates the target, target gets removed from playersAlive in db.Games
+    // player assassinates the target, target gets removed from playersAlive  and moved to playersDead in db.Games  -findOneAndUpdate. search db.User "target".  Take the target from the deceased, make sure it is not user==target and add to users target.  If user==target, take playersAlive and reshuffle to targets.
+    // work on this functionality. 
     playerKillsTarget: function (req, res) {
         db.Games
             .findOneAndUpdate({
@@ -337,8 +267,5 @@ module.exports = {
             .catch(err => res.stats(422).json(err));
     }
 
-
-
-
-
+    
 };

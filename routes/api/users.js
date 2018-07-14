@@ -3,31 +3,6 @@ const userController = require("../../controllers/userController");
 
 // TEST ALL THE ROUTES
 
-// commented them out, duplicate underneath
-// /api/user/allUsers
-// router.route("/allUsers")
-//     .get(userController.findAll);
-//     console.log("working");
-
-
-    
-
-
-// // matches with "/api/user"
-// router.route("/Users")
-//     .get(user.findAll);
-//     // .post(gamesController.create);
-
-
-// JJs routes
-
-// after the sign in page   /api/user/home
-// router.route("/home")
-//     .post(userController.userSignUp)
-  
-// router.route("/login")
-//     .post(userController.userLogin)
-
     // api/users/addToActive
 router.route("/addToActive")   
 .get(userController.addGameToActiveGames)
@@ -40,13 +15,11 @@ router.route("/findMe")
     .post(userController.create)
     console.log("working");
 
-    
 // "/api/users/findUserName" 
 // search by username and display. 
     router.route("/findUserName")
 	.get(userController.findUserName)
     .post(userController.create)
-
 
 // /api/users/allUsers
 router.route("/allUsers")
@@ -70,20 +43,5 @@ router.route("/userTargets")
     .get(userController.userTarget);
     
     
-    // .post(userController.create)
-    // console.log ("working");
-
-    
-
-// router  
-//     .route("/signup")
-//     .post(userController.create)
-    
-// router
-//     .route("/signin")
-
-//  router
-//     .route("/verify")
-
 
     module.exports = router;   

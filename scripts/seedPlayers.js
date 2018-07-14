@@ -3,7 +3,6 @@ const db = require("../models");
 mongoose.Promise = global.Promise;
 
 // This file empties the Users collection and inserts the users below
-
 mongoose.connect(
 	process.env.MONGODB_URI || "mongodb://localhost/photops",
 	{
