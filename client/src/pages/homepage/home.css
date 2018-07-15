@@ -1,10 +1,11 @@
 .btns {
     margin: 5% auto 5% auto;
+    padding: 1%;
     width: 50%;
     height: auto;
     display: block;
     text-align: center;
-    font-size: 27px;
+    font-size: 25px;
     background-color: #2c6abb;
     color: white;
     border: none;

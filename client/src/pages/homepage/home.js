@@ -37,32 +37,32 @@ class Home extends Component {
           <Col size="md-12">
             <a href="/enrollcam">
               <Button className="btns">
-                <h1>Upload Your Face</h1>
+                Upload Your Face
               </Button>
             </a>
             <a href="/currentgame">
               <Button className="btns">
-                <h1>Current Game</h1>
+                Current Game
               </Button>
             </a>
             <a href="/creategame">
               <Button className="btns">
-                <h1>Create Game</h1>
+                Create Game
               </Button>
             </a>
             <a href="/joingame">
               <Button className="btns">
-                <h1>Join Game</h1>
+                Join Game
               </Button>
             </a>
             <a href="/verifycam">
               <Button className="btns">
-                <h1>Assassinate</h1>
+                Assassinate
               </Button>
             </a>
             <a href="/StartGame">
               <Button className="btns">
-                <h1>Start Game</h1>
+                Start Game
               </Button>
             </a>
           </Col>
