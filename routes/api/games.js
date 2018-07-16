@@ -49,6 +49,11 @@ router.route("/game/:game")
 router.route("/createGame")
     .post(gamesController.createGame);
 
+    // runKillFunction
+    // api/games/killTarget
+    router.route("/killTarget")
+    .put(gamesController.runKillFunction);
+
 // Matches with "/api/games/somethingVerySpecific/:id"
 router.route("/somethingVerySpecific/:id")
 	.get(gamesController.findById)
