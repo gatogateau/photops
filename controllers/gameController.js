@@ -269,8 +269,9 @@ module.exports = {
 
     
     runKillFunction: function (req, res) {
-       console.log("suck a fucking dick!!! bitch!")
-    },
+jerson
+        console.log ("kill function working");
+    }
 
     
 };
