@@ -2,13 +2,13 @@ import React, { Component } from 'react';
 import Camera from 'react-camera';
 import $ from "jquery";
 import cloudinary from 'cloudinary';
+import axios from 'axios';
 
 cloudinary.config({
     cloud_name: 'notjarvis',
     api_key: '478844584369981',
     api_secret: 'vxEprjN0c5IMHkQHu_WUpz1b9hA'
 });
-
 class Verifycam extends Component {
 
     constructor(props) {
@@ -40,6 +40,23 @@ class Verifycam extends Component {
         }
     }
 
+    runKillFunction() {
+        let that = this;
+        axios.get('/api/games/killTarget')
+          .then(function (response) {
+            // handle success
+            console.log(this, response.data, that);
+            that.setState({
+              allGames: response.data,
+            });
+    
+          })
+          .catch(function (error) {
+            // handle error
+            console.log(error);
+          })
+      }
+
 
     takePicture() {
         let that = this;
@@ -66,7 +83,8 @@ class Verifycam extends Component {
                         }).done(function (response) {
                             let confidence = JSON.parse(response).images["0"].transaction.confidence;
 
-                            confidence>=.80 ? alert("Target Was Eliminated!") : alert('Please try again!')
+                            confidence>=.80 ? (alert("Target Was Eliminated!"), this.runKillFunction) : alert('Please try again!')
+                            // change alert to modal
                             
                         });
 

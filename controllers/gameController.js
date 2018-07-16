@@ -265,7 +265,11 @@ module.exports = {
             }, req.body)
             .then(dbModel => res.json(dbModel))
             .catch(err => res.stats(422).json(err));
-    }
+    },
 
+    
+    runKillFunction() {
+        console.log ("kill function working");
+    }
     
 };
