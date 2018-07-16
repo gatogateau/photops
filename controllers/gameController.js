@@ -268,7 +268,7 @@ module.exports = {
     },
 
     
-    runKillFunction() {
+    runKillFunction: function (req, res) {
         console.log ("kill function working");
     }
     
