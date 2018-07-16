@@ -14,6 +14,7 @@ class Verifycam extends Component {
     constructor(props) {
         super(props);
         this.takePicture = this.takePicture.bind(this);
+        this.runKillFunction = this.runKillFunction.bind(this);
     }
     style = {
         preview: {
@@ -41,14 +42,11 @@ class Verifycam extends Component {
     }
 
     runKillFunction() {
-        let that = this;
-        axios.get('/api/games/killTarget')
+        console.log("pre kill target");
+        axios.put('/api/games/killTarget')
           .then(function (response) {
             // handle success
-            console.log(this, response.data, that);
-            that.setState({
-              allGames: response.data,
-            });
+            console.log(response);
     
           })
           .catch(function (error) {
@@ -83,7 +81,7 @@ class Verifycam extends Component {
                         }).done(function (response) {
                             let confidence = JSON.parse(response).images["0"].transaction.confidence;
 
-                            confidence>=.80 ? (alert("Target Was Eliminated!"), this.runKillFunction) : alert('Please try again!')
+                            confidence>=.80 ? (alert("Target Was Eliminated!"), that.runKillFunction()) : alert('Please try again!')
                             // change alert to modal
                             
                         });

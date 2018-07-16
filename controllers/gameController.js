@@ -269,7 +269,9 @@ module.exports = {
 
     
     runKillFunction: function (req, res) {
+jerson
         console.log ("kill function working");
     }
+
     
 };
