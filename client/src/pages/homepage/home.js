@@ -32,7 +32,7 @@ class Home extends Component {
             <Navbar checkLoggedIn={this.checkLoggedIn} logOut={this.props.logOut} />
           </Col>
           <Col size="md-12">
-            <Jumbotron username={this.props.username} target={this.props.target}/>
+            <Jumbotron username={this.props.username} target={this.props.target} targetURL={this.props.targetURL}/>
           </Col>
           <Col size="md-12">
             <a href="/enrollcam">

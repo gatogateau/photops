@@ -49,10 +49,12 @@ router.route("/capturePic")
 
 // .post(userController.postPicOnPage);
 
-// grab the user photo from the DB and display
-// "api/users/snagPhoto"
+
+    // grab the user photo from the DB and display
+    // "api/users/snagPhoto"
 router.route("/snagPhotos")
-    .get(userController.snagPhoto);
+    .post(userController.snagPhotos);
+ master
 
 
 router.route("/snagPhotos")
