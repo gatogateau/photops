@@ -76,29 +76,40 @@ module.exports = {
         // dont forget the first param is the find, the second is what we change.  
             .findOneAndUpdate({
                 "_id": req.session.passport.user._id
-            },req.body)
+            },{"capturePic":req.body})
             // req.body needs to be the "capturePic":"url"
             .then(dbModel => res.json(dbModel))
             .catch(err => res.status(422).json(err));
     },
 
+    // get request to grab picture from Users.db and post to page. 
+    snagPhoto: function (req, res) {
+        db.User
+        .find({"_id": req.session.passport.user._id})
+        .select({
+            "capturePic": 1,
+            "_id": 0,
+        })
+        .then(photo => res.json (photo))
+        .catch(err => res.status (422).json(err));
+    }
 
     // this is the get route to get the userTargets
     // query with the username, return the target
     // take user._id and return activeGames
     userTarget: function (req, res) {
         console.log(req.session.passport.user)
-        db.User
-            .findById({
-                "_id": req.session.passport.user._id
-            })
-            .select({
-                "target": 1,
-                "_id": 0
-            })
-            .then(user => {
-                res.json(user)
-            })
+        // db.User
+        //     .findById({
+        //         "_id": req.session.passport.user._id
+        //     })
+        //     .select({
+        //         "target": 1,
+        //         "_id": 0
+        //     })
+        //     .then(user => {
+        //         res.json(user)
+        //     })
     },
 
 
