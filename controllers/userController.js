@@ -86,6 +86,26 @@ module.exports = {
             .catch(err => res.status(422).json(err));
     },
 
+
+    // gets username from page, goes to db and grabs picture url.  
+    snagPhotos: function (req, res) {
+        // console.log ("working");
+        db.User
+        .find(req.body)
+        .find({"username": req.session.passport.user._id})
+        .select({
+            "userPicture": 1,
+            "_id": 0,
+        })
+        .then(photo => {
+            console.log(photo);
+            res.json(photo);
+        })
+        .catch(err => res.status (422).json(err));
+    },
+
+
+
     // get request to grab picture from Users.db and post to page. 
     // not working yet, need to nest the second call.
     // need to nest the second call in the first function ?
@@ -107,7 +127,7 @@ module.exports = {
                     "userPicture":1
                 })
                 .then (picture => res.json(picture))
-                .catch (err => res.status(422).json(err));
+                // .catch (err => res.status(422).json(err));
 
         })
         .then(photo => res.json (photo))
