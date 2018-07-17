@@ -48,6 +48,7 @@ module.exports = {
     },
     update: function (req, res) {
         db.User
+        // dont forget the first param is the find, the second is what we change.  
             .findOneAndUpdate({
                 _id: req.params.id
             }, req.body)
@@ -63,6 +64,24 @@ module.exports = {
             .then(dbModel => res.json(dbModel))
             .catch(err => res.status(422).json(err));
     },
+
+
+// get the user's image from cloudinary and save in userPicture
+    capturePic: function (req, res) {
+        console.log("here i am");
+        console.log ("this is the  capture pic User " + req.session.passport.user._id);
+        console.log(req.body);
+
+        db.User
+        // dont forget the first param is the find, the second is what we change.  
+            .findOneAndUpdate({
+                "_id": req.sessions.passport.user._id
+            },req.body)
+            // req.body needs to be the "capturePic":"url"
+            .then(dbModel => res.json(dbModel))
+            .catch(err => res.status(422).json(err));
+    },
+
 
     // this is the get route to get the userTargets
     // query with the username, return the target
@@ -149,21 +168,26 @@ module.exports = {
 
     // gets the user's stats by requesting passport.user.userName   
     findUserStats: function (req, res) {
+        console.log ("this is the User " + req.session.passport.user.userName);
+        console.log ("this is the ID " + req.session.passport.user._id);
+
         db.User
-            .findById({
-                "_id": req.session.passport.user.userName
+            .find({
+                "_id": req.session.passport.user._id
             })
             .select({
                 "kills": 1,
                 "deaths": 1,
-                "_id": 0,
+                "_id": 1,
                 "gamesPlayed": 1,
                 "playerLevel": 1,
                 "activeGames": 1,
                 "adOns": 1
             })
-            .then(dbModel => res.json(dbModel))
+            .then(dbModel => {
+                res.json(dbModel)
         console.log(res.json)
+    })
             .catch(err => res.status(422).json(err));
     },
 
