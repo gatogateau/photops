@@ -51,7 +51,7 @@ router.route("/capturePic")
 
     // grab the user photo from the DB and display
     // "api/users/snagPhoto"
-router.router("/snagPhoto")
+router.route("/snagPhoto")
     .get(userController.snagPhoto);
 
 module.exports = router;

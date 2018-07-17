@@ -88,11 +88,24 @@ module.exports = {
 
     // get request to grab picture from Users.db and post to page. 
     snagPhoto: function (req, res) {
+        console.log ("working");
         db.User
         .find({"_id": req.session.passport.user._id})
         .select({
-            "capturePic": 1,
+            "target": 1,
             "_id": 0,
+        })
+        .then (resTarget =>{
+            console.log ("this is the target " + resTarget);
+            db.User
+                .find({resTarget})
+                // .find ({"username":req.body.resTarget})
+                .select ({
+                    "userPicture":1
+                })
+                .then (picture => res.json(picture))
+                .catch (err => res.status(422).json(err));
+
         })
         .then(photo => res.json (photo))
         .catch(err => res.status (422).json(err));
