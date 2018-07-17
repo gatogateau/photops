@@ -53,18 +53,10 @@ class Enrollcam extends Component {
                     const base64data = reader.result;
                     cloudinary.uploader.upload(base64data, function (result) {
                         console.log(result);
-<<<<<<< HEAD
-=======
-
->>>>>>> ae06dae1576c893a86436a555e239d45d180c933
-                        console.log(result.secure_url);
+                 console.log(result.secure_url);
                         axios.put('/api/users/capturePic', {
                             userPicture: result.secure_url
                           })
-<<<<<<< HEAD
-=======
-
->>>>>>> ae06dae1576c893a86436a555e239d45d180c933
                           .then(function (response) {
                             console.log(response);
                           })
