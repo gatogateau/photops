@@ -88,8 +88,9 @@ module.exports = {
 
     // get request to grab picture from Users.db and post to page. 
     // not working yet, need to nest the second call.
+    // need to nest the second call in the first function ?
     snagPhoto: function (req, res) {
-        console.log ("working");
+        // console.log ("working");
         db.User
         .find({"_id": req.session.passport.user._id})
         .select({
@@ -98,7 +99,7 @@ module.exports = {
         })
         
         .then (resTarget =>{
-            // console.log ("this is the target " + resTarget);
+            console.log ("this is the target " + resTarget);
             db.User
                 .find({resTarget})
                 // .find ({"username":req.body.resTarget})
