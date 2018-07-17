@@ -52,6 +52,7 @@ class Enrollcam extends Component {
                     const base64data = reader.result;
                     cloudinary.uploader.upload(base64data, function (result) {
                         console.log(result);
+                        console.log(result.secure_url)
                         let payload = { "image": result.url, "subject_id": that.props.username, "gallery_name": "players" };
                         let headers = {
                             "Content-type": "application/json",
