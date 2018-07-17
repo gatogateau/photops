@@ -88,47 +88,38 @@ module.exports = {
 
     // get request to grab picture from Users.db and post to page. 
     // not working yet, need to nest the second call.
-    snagPhoto: function (req, res) {
-        console.log ("working");
-        db.User
-        .find({"_id": req.session.passport.user._id})
-        .select({
-            "target": 1,
-            "_id": 0,
-        })
-        
-        .then (resTarget =>{
-            // console.log ("this is the target " + resTarget);
+    // need to nest the second call in the first function ?
+        // gets username from page, goes to db and grabs picture url.  
+        snagPhotos: function (req, res) {
+            console.log ("this is the req.body " + (req.body.username));
             db.User
-                .find({resTarget})
-                // .find ({"username":req.body.resTarget})
-                .select ({
-                    "userPicture":1
-                })
-                .then (picture => res.json(picture))
-                .catch (err => res.status(422).json(err));
-
-        })
-        .then(photo => res.json (photo))
-        .catch(err => res.status (422).json(err));
-    },
-
+            .find({"username": req.body.username})
+            .select({
+                "userPicture": 1,
+                "_id": 0,
+            })
+            .then(photo => {
+                console.log("this is the response "+photo);
+                res.json(photo);
+            })
+            .catch(err => res.status (422).json(err));
+        },
     // this is the get route to get the userTargets
     // query with the username, return the target
     // take user._id and return activeGames
     userTarget: function (req, res) {
         console.log(req.session.passport.user)
-        // db.User
-        //     .findById({
-        //         "_id": req.session.passport.user._id
-        //     })
-        //     .select({
-        //         "target": 1,
-        //         "_id": 0
-        //     })
-        //     .then(user => {
-        //         res.json(user)
-        //     })
+        db.User
+            .findById({
+                "_id": req.session.passport.user._id
+            })
+            .select({
+                "target": 1,
+                "_id": 0
+            })
+            .then(user => {
+                res.json(user)
+            })
     },
 
 
