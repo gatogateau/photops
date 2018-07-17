@@ -74,9 +74,13 @@ module.exports = {
 
         db.User
         // dont forget the first param is the find, the second is what we change.  
-            .findOneAndUpdate({
-                "_id": req.session.passport.user._id
-            },{"capturePic":req.body})
+            .findOneAndUpdate({_id: req.session.passport.user._id}, {$set:req.body}, {new: true}, function(err, doc){
+                if(err){
+                    console.log("Something wrong when updating data!");
+                }
+            
+                console.log(doc);
+            })
             // req.body needs to be the "capturePic":"url"
             .then(dbModel => res.json(dbModel))
             .catch(err => res.status(422).json(err));
@@ -92,7 +96,7 @@ module.exports = {
         })
         .then(photo => res.json (photo))
         .catch(err => res.status (422).json(err));
-    }
+    },
 
     // this is the get route to get the userTargets
     // query with the username, return the target
