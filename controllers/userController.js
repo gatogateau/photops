@@ -70,12 +70,12 @@ module.exports = {
     capturePic: function (req, res) {
         console.log("here i am");
         console.log ("this is the  capture pic User " + req.session.passport.user._id);
-        console.log(req.body);
+        console.log(typeof(req.body));
 
         db.User
         // dont forget the first param is the find, the second is what we change.  
             .findOneAndUpdate({
-                "_id": req.sessions.passport.user._id
+                "_id": req.session.passport.user._id
             },req.body)
             // req.body needs to be the "capturePic":"url"
             .then(dbModel => res.json(dbModel))

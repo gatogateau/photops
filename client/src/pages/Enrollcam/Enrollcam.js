@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import Camera from 'react-camera';
 import $ from "jquery";
 import cloudinary from 'cloudinary';
+import axios from 'axios';
 
 cloudinary.config({
     cloud_name: 'notjarvis',
@@ -52,7 +53,16 @@ class Enrollcam extends Component {
                     const base64data = reader.result;
                     cloudinary.uploader.upload(base64data, function (result) {
                         console.log(result);
-                        console.log(result.secure_url)
+                        console.log(typeof(result.secure_url));
+                        axios.put('/api/users/capturePic', {
+                            capturePic: result.secure_url
+                          })
+                          .then(function (response) {
+                            console.log(response);
+                          })
+                          .catch(function (error) {
+                            console.log(error);
+                          });
                         let payload = { "image": result.url, "subject_id": that.props.username, "gallery_name": "players" };
                         let headers = {
                             "Content-type": "application/json",
