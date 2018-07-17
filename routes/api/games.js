@@ -26,7 +26,7 @@ router.route("/myGames")
 router.route("/joinGameByGameName")
     .put(gamesController.joinGameByGameName);
 
-// matches with "/api/games/:id"
+// matches with "/api/games/somethingVerySpecific/:id"
 router.route("/somethingVerySpecific/:id")
     // .route("/:id")
     // any routes that need to be found by id
@@ -54,11 +54,7 @@ router.route("/createGame")
     router.route("/killTarget")
     .put(gamesController.runKillFunction);
 
-// Matches with "/api/games/somethingVerySpecific/:id"
-router.route("/somethingVerySpecific/:id")
-	.get(gamesController.findById)
-	.put(gamesController.update)
-	.delete(gamesController.remove);
+
 
 
 
