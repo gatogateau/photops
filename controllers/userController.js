@@ -87,6 +87,7 @@ module.exports = {
     },
 
     // get request to grab picture from Users.db and post to page. 
+    // not working yet
     snagPhoto: function (req, res) {
         console.log ("working");
         db.User
