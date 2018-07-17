@@ -43,15 +43,21 @@ router.route("/userTargets")
     .get(userController.userTarget);
 
 // get grabs pic from Cloudinary, then saves to userPicture
-    // "/api/users/capturePic" 
+// "/api/users/capturePic" 
 router.route("/capturePic")
     .put(userController.capturePic)
-    
-    // .post(userController.postPicOnPage);
+
+// .post(userController.postPicOnPage);
+
 
     // grab the user photo from the DB and display
     // "api/users/snagPhoto"
 router.route("/snagPhotos")
     .post(userController.snagPhotos);
+ master
+
+
+router.route("/snagPhotos")
+    .get(userController.snagPhotos);
 
 module.exports = router;
