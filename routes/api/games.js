@@ -44,7 +44,6 @@ router.route("/")
 // api/games/game/:game
 router.route("/game/:game")
     .get(gamesController.joinGameByGameName);
-
 // api/games/createGame
 router.route("/createGame")
     .post(gamesController.createGame);
@@ -52,8 +51,8 @@ router.route("/createGame")
     // runKillFunction
     // api/games/killTarget
     router.route("/killTarget")
-    .put(gamesController.runKillFunction);
-
+    .put(gamesController.runKillFunction)
+    // .put(gamesController.testtwofinds);
 
 
 
