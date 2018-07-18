@@ -88,21 +88,21 @@ module.exports = {
 
 
     // gets username from page, goes to db and grabs picture url.  
-    snagPhotos: function (req, res) {
-        // console.log ("working");
-        db.User
-        .find(req.body)
-        .find({"username": req.session.passport.user._id})
-        .select({
-            "userPicture": 1,
-            "_id": 0,
-        })
-        .then(photo => {
-            console.log(photo);
-            res.json(photo);
-        })
-        .catch(err => res.status (422).json(err));
-    },
+    // snagPhotos: function (req, res) {
+    //     // console.log ("working");
+    //     db.User
+    //     .find(req.body)
+    //     .find({"username": req.session.passport.user._id})
+    //     .select({
+    //         "userPicture": 1,
+    //         "_id": 0,
+    //     })
+    //     .then(photo => {
+    //         console.log(photo);
+    //         res.json(photo);
+    //     })
+    //     .catch(err => res.status (422).json(err));
+    // },
 
 
 
