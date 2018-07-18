@@ -1,13 +1,14 @@
 .header {
     display: block;
     width: 100% !important;
-    background-color: #086066;
+    background-color: rgba(10, 4, 3, 0.842);
     color: #fff;
     height: auto;
     padding-top: 150px;
     padding-bottom: 10px;
     text-align: center;
     margin-bottom: 5px;
+    border-radius: 10px;
 }
 #userName {
     margin-top: -60px;
@@ -19,8 +20,9 @@
     border-radius: 50%;
 }
 #targetpic {
-    max-width: 200px;
-    border-radius: 5px;
+    max-width: 150px;
+    height: 150px;
+    border-radius: 50%;
 }
 
 

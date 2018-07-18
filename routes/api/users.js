@@ -56,6 +56,7 @@ router.route("/snagPhotos")
     .post(userController.snagPhotos);
 
 
+
 router.route("/snagPhotos")
     .get(userController.snagPhotos);
 

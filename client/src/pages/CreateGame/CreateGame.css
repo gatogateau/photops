@@ -1,32 +1,58 @@
 .createGameForm {
-    margin:4%;
-    margin-bottom: 10%;
+    width: 325px;
+    margin: 5% auto 2% auto;
+    text-align: center;
+    height: auto;
+    background-color: rgba(54, 54, 54, 0.438);
+    border-radius: 10px;
+    box-shadow: 0 10px 50px rgba(0,0,0,0.4);
+}
+
+.usersResults {
+    width: 325px;
+    margin: 15% auto 2% auto;
+    text-align: center;
+    height: auto;
+    background-color: rgba(27, 27, 27, 0.925);
+    border-radius: 10px;
+    box-shadow: 0 10px 50px rgba(0,0,0,0.4);
+    color: white;
 }
 
 .createButton {
 
-    margin:4%;
-    border: .5px black solid;
-    border-radius:5px;
+    margin: 2% auto 2% auto;
+    width: 50%;
+    background-color: #9d364d;
+    border: none;
+    border-radius: 10px;
+}
+
+#title {
+    color: white;
+    padding: 5%;
 }
 
 .gameFormInput {
-    border-radius:5px;
-    border: .5px black solid;
-    font:bolder;
-    margin: 1%
+    width: 80%;
+    background-color:  rgb(221, 221, 219);
+    border-radius: 10px;
+    margin: 2% auto 2% auto;
+    font-weight: bolder;
 }
-#example {
+/* #example {
     margin-top: -10%;
     border-radius:5px;
     border: .5px black solid;
     font:bolder;
     width: 90%;
-}
+} */
 .userButton {
-    margin: 1%;
-    border: .5px black solid;
-    border-radius:5px;
+    width: 35%;
+    margin: 2% 1% 2% 1%;
+    border: none;
+    border-radius: 10px;
+    background-color: #9d364d;
 }
 .searchUserForm {
     margin-top: -1%;
