@@ -95,7 +95,6 @@ class CreateGame extends Component {
 
           <Col size="md-12">
             <Jumbotron username={this.props.username} target={this.props.target} targetURL={this.props.targetURL}/>
-
           </Col>
 
           <Col size="md-12">
