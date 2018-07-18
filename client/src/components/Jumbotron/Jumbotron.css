@@ -18,6 +18,9 @@
     border: 6px solid rgb(78, 77, 77);
     border-radius: 50%;
 }
-
+#targetpic {
+    max-width: 200px;
+    border-radius: 5px;
+}
 
 

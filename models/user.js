@@ -31,6 +31,8 @@ const eachUser = new Schema(
       // How do i get the names of the games from db.Games
       // all the games currently playing
       activeGames:[String],
+      // user's pic sent to cloudinary
+      userPicture:String,
     });
 
     eachUser.methods = {

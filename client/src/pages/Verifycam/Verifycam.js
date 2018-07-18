@@ -2,18 +2,24 @@ import React, { Component } from 'react';
 import Camera from 'react-camera';
 import $ from "jquery";
 import cloudinary from 'cloudinary';
+import axios from 'axios';
+import Modal from 'react-awesome-modal';
+import './Verifycam.css';
 
 cloudinary.config({
     cloud_name: 'notjarvis',
     api_key: '478844584369981',
     api_secret: 'vxEprjN0c5IMHkQHu_WUpz1b9hA'
 });
-
 class Verifycam extends Component {
 
     constructor(props) {
         super(props);
+        this.state = {
+            visible: false
+        };
         this.takePicture = this.takePicture.bind(this);
+        this.runKillFunction = this.runKillFunction.bind(this);
     }
     style = {
         preview: {
@@ -39,6 +45,32 @@ class Verifycam extends Component {
             width: '100%',
         }
     }
+
+    openModal() {
+        this.setState({
+            visible : true
+        });
+    }
+ 
+    closeModal() {
+        this.setState({
+            visible : false
+        });
+    }
+
+    runKillFunction() {
+        console.log("pre kill target");
+        axios.put('/api/games/killTarget')
+          .then(function (response) {
+            // handle success
+            console.log(response);
+    
+          })
+          .catch(function (error) {
+            // handle error
+            console.log(error);
+          })
+      }
 
 
     takePicture() {
@@ -66,7 +98,8 @@ class Verifycam extends Component {
                         }).done(function (response) {
                             let confidence = JSON.parse(response).images["0"].transaction.confidence;
 
-                            confidence>=.80 ? alert("Target Was Eliminated!") : alert('Please try again!')
+                            confidence>=.80 ? (that.openModal(), that.runKillFunction()) : alert('Please try again!')
+                            // change alert to modal
                             
                         });
 
@@ -96,6 +129,12 @@ class Verifycam extends Component {
                         <button style={this.style.captureButton} />
                     </view>
                 </Camera>
+                <Modal visible={this.state.visible} width="400" height="300" effect="fadeInUp" onClickAway={() => this.closeModal()}>
+                    <div>
+                        <h1 className="eliminated">Target Eliminated!</h1>
+                        <a href="javascript:void(0);" onClick={() => this.closeModal()}>Close</a>
+                    </div>
+                </Modal>
                 <a href="/"><button>Back</button></a>
                 <img
                     style={this.style.captureImage}

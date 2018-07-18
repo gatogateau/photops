@@ -24,7 +24,8 @@ class App extends Component {
       loggedIn: false,
       username: '',
       redirectTo: null,
-      target: ''
+      target: '',
+      targetURL: ''
     }
 
     this.login = this.login.bind(this)
@@ -36,52 +37,73 @@ class App extends Component {
     this.isLoggedIn();
     this.getTarget();
   }
-
   handleChange(event) {
     this.setState({
       [event.target.name]: event.target.value
     })
   }
+  
   getTarget() {
     axios
-      .get('/api/users/userTargets')
+    .get('/api/users/userTargets')
+    .then(response => {
+      console.log(response)
+      if(response.data){
+        this.setState({
+          target: response.data.target,
+        });
+        this.snagPhotos();
+      }
+    }).catch(error => {
+      console.log(error);
+      
+    })
+  }
+  
+  isLoggedIn() {
+    axios
+    .get('/api/login/isLoggedIn')
+    .then(response => {
+      console.log(response)
+      if(response.data.loggedIn){
+        this.setState({
+          loggedIn: response.data.loggedIn,
+          username: response.data.username,
+          redirectTo: response.data.redirectTo
+        });
+      } else {
+        this.setState({
+          loggedIn: false,
+          username:'',
+        })
+      }
+      
+    }).catch(error => {
+      console.log(error);
+      
+    })
+  }
+  
+  snagPhotos() {
+    let that = this;
+    console.log("this is supposed to be the target " +typeof(this.state.target));
+    axios
+      .post('/api/users/snagPhotos', {
+        username: that.state.target
+      })
       .then(response => {
         console.log(response)
         if(response.data){
           this.setState({
-            target: response.data.target,
+            targetURL: response.data[0].userPicture,
           });
+          console.log(response.data[0].userPicture)
         }
       }).catch(error => {
         console.log(error);
 
       })
   }
-
-  isLoggedIn() {
-    axios
-      .get('/api/login/isLoggedIn')
-      .then(response => {
-        console.log(response)
-        if(response.data.loggedIn){
-          this.setState({
-            loggedIn: response.data.loggedIn,
-            username: response.data.username,
-            redirectTo: response.data.redirectTo
-          });
-        } else {
-          this.setState({
-            loggedIn: false,
-            username:'',
-          })
-        }
-
-      }).catch(error => {
-        console.log(error);
-
-      })
-  }
-
   logOut = (event) => {
     console.log("hit")
     event.preventDefault();
@@ -184,13 +206,13 @@ class App extends Component {
 
           <Route path="/home" exact render={
             () => {
-              return (<Home logOut={this.logOut} loggedIn={this.state.loggedIn} username={this.state.username} target={this.state.target}/>)
+              return (<Home logOut={this.logOut} loggedIn={this.state.loggedIn} username={this.state.username} target={this.state.target} targetURL={this.state.targetURL}/>)
             }
           } />
 
           <Route path="/JoinGame" exact render={
             () => {
-              return (<JoinGame username={this.state.username} target={this.state.target} logOut={this.logOut} loggedIn={this.state.loggedIn}/>)
+              return (<JoinGame username={this.state.username} target={this.state.target} logOut={this.logOut} loggedIn={this.state.loggedIn} targetURL={this.state.targetURL}/>)
             }
           } />
           {/*<Example />*/}
@@ -198,12 +220,12 @@ class App extends Component {
            <FacebookLogin />*/}
           <Route path="/creategame" exact render={
             () => {
-              return (<CreateGame username={this.state.username} target={this.state.target} logOut={this.logOut} loggedIn={this.state.loggedIn}/>)
+              return (<CreateGame username={this.state.username} target={this.state.target} logOut={this.logOut} loggedIn={this.state.loggedIn} targetURL={this.state.targetURL}/>)
             }
           } />
           <Route path="/currentgame" exact render={
             () => {
-              return (<CurrentGame username={this.state.username} target={this.state.target} logOut={this.logOut} loggedIn={this.state.loggedIn}/>)
+              return (<CurrentGame username={this.state.username} target={this.state.target} logOut={this.logOut} loggedIn={this.state.loggedIn} targetURL={this.state.targetURL}/>)
             }
           } />
           <Route path="/enrollcam" exact render={
@@ -218,7 +240,7 @@ class App extends Component {
           } />
           <Route path="/startgame" exact render={
             () => {
-              return (<StartGame username={this.state.username} target={this.state.target} logOut={this.logOut} loggedIn={this.state.loggedIn}/>)
+              return (<StartGame username={this.state.username} target={this.state.target} logOut={this.logOut} loggedIn={this.state.loggedIn} targetURL={this.state.targetURL}/>)
             }
           } />
 

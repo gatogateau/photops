@@ -10,7 +10,7 @@ const Jumbotron = (props) => (
 		<h5>Kills</h5>
 		<h5 id="kills">0</h5>
 		<h1 id="target">Target : {props.target}</h1>
-		<img id="targetpic" alt="target"></img>
+		<img src={props.targetURL}id="targetpic" alt="Target needs to upload a picture"></img>
 		
 	</header>
 );

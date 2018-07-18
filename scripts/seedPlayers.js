@@ -21,7 +21,9 @@ const userSeed = [
         user:"Chad",
         status:1,
         target:"",
-        kills:0, 
+		kills:0,
+		userPicture:"",
+		password:"password", 
     }
     
 ]    

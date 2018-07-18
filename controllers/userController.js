@@ -48,6 +48,7 @@ module.exports = {
     },
     update: function (req, res) {
         db.User
+        // dont forget the first param is the find, the second is what we change.  
             .findOneAndUpdate({
                 _id: req.params.id
             }, req.body)
@@ -63,6 +64,92 @@ module.exports = {
             .then(dbModel => res.json(dbModel))
             .catch(err => res.status(422).json(err));
     },
+
+
+// get the user's image from cloudinary and save in userPicture
+    capturePic: function (req, res) {
+        console.log("here i am");
+        console.log ("this is the  capture pic User " + req.session.passport.user._id);
+        console.log(typeof(req.body));
+
+        db.User
+        // dont forget the first param is the find, the second is what we change.  
+            .findOneAndUpdate({_id: req.session.passport.user._id}, {$set:req.body}, {new: true}, function(err, doc){
+                if(err){
+                    console.log("Something wrong when updating data!");
+                }
+            
+                console.log(doc);
+            })
+            // req.body needs to be the "capturePic":"url"
+            .then(dbModel => res.json(dbModel))
+            .catch(err => res.status(422).json(err));
+    },
+
+
+    // gets username from page, goes to db and grabs picture url.  
+    // snagPhotos: function (req, res) {
+    //     // console.log ("working");
+    //     db.User
+    //     .find(req.body)
+    //     .find({"username": req.session.passport.user._id})
+    //     .select({
+    //         "userPicture": 1,
+    //         "_id": 0,
+    //     })
+    //     .then(photo => {
+    //         console.log(photo);
+    //         res.json(photo);
+    //     })
+    //     .catch(err => res.status (422).json(err));
+    // },
+
+
+
+    // get request to grab picture from Users.db and post to page. 
+    // not working yet, need to nest the second call.
+    // need to nest the second call in the first function ?
+
+        // gets username from page, goes to db and grabs picture url.  
+        snagPhotos: function (req, res) {
+            console.log ("this is the req.body " + (req.body.username));
+            db.User
+            .find({"username": req.body.username})
+            .select({
+                "userPicture": 1,
+                "_id": 0,
+            })
+            .then(photo => {
+                console.log("this is the response "+photo);
+                res.json(photo);
+            })
+            .catch(err => res.status (422).json(err));
+        },
+
+//     snagPhoto: function (req, res) {
+//         // console.log ("working");
+//         db.User
+//         .find({"_id": req.session.passport.user._id})
+//         .select({
+//             "target": 1,
+//             "_id": 0,
+//         })
+        
+//         .then (resTarget =>{
+//             console.log ("this is the target " + resTarget);
+//             db.User
+//                 .find({resTarget})
+//                 // .find ({"username":req.body.resTarget})
+//                 .select ({
+//                     "userPicture":1
+//                 })
+//                 .then (picture => res.json(picture))
+//                 // .catch (err => res.status(422).json(err));
+
+//         })
+//         .then(photo => res.json (photo))
+//         .catch(err => res.status (422).json(err));
+//     },
 
     // this is the get route to get the userTargets
     // query with the username, return the target
@@ -149,21 +236,26 @@ module.exports = {
 
     // gets the user's stats by requesting passport.user.userName   
     findUserStats: function (req, res) {
+        console.log ("this is the User " + req.session.passport.user.userName);
+        console.log ("this is the ID " + req.session.passport.user._id);
+
         db.User
-            .findById({
-                "_id": req.session.passport.user.userName
+            .find({
+                "_id": req.session.passport.user._id
             })
             .select({
                 "kills": 1,
                 "deaths": 1,
-                "_id": 0,
+                "_id": 1,
                 "gamesPlayed": 1,
                 "playerLevel": 1,
                 "activeGames": 1,
                 "adOns": 1
             })
-            .then(dbModel => res.json(dbModel))
+            .then(dbModel => {
+                res.json(dbModel)
         console.log(res.json)
+    })
             .catch(err => res.status(422).json(err));
     },
 
