@@ -3,6 +3,8 @@ import Camera from 'react-camera';
 import $ from "jquery";
 import cloudinary from 'cloudinary';
 import axios from 'axios';
+import Modal from 'react-awesome-modal';
+import './Verifycam.css';
 
 cloudinary.config({
     cloud_name: 'notjarvis',
@@ -13,6 +15,10 @@ class Verifycam extends Component {
 
     constructor(props) {
         super(props);
+        this.state = {
+            visible1: false,
+            visible2: false 
+        };
         this.takePicture = this.takePicture.bind(this);
         this.runKillFunction = this.runKillFunction.bind(this);
     }
@@ -39,6 +45,29 @@ class Verifycam extends Component {
         captureImage: {
             width: '100%',
         }
+    }
+
+    openModal1() {
+        this.setState({
+            visible1: true
+        });
+    }
+ 
+    closeModal1() {
+        this.setState({
+            visible1: false
+        });
+    }
+    openModal2() {
+        this.setState({
+            visible2: true
+        });
+    }
+ 
+    closeModal2() {
+        this.setState({
+            visible2: false
+        });
     }
 
     runKillFunction() {
@@ -81,7 +110,7 @@ class Verifycam extends Component {
                         }).done(function (response) {
                             let confidence = JSON.parse(response).images["0"].transaction.confidence;
 
-                            confidence>=.80 ? (alert("Target Was Eliminated!"), that.runKillFunction()) : alert('Please try again!')
+                            confidence>=.80 ? (that.openModal1(), that.runKillFunction()) : that.openModal2();
                             // change alert to modal
                             
                         });
@@ -112,6 +141,19 @@ class Verifycam extends Component {
                         <button style={this.style.captureButton} />
                     </view>
                 </Camera>
+                <Modal visible={this.state.visible1} width="400" height="300" effect="fadeInUp" onClickAway={() => this.closeModal1()}>
+                    <div>
+                        <h1 className="eliminated">Target Eliminated!</h1>
+                        <a href="javascript:void(0);" onClick={() => this.closeModal1()}>Close</a>
+                    </div>
+                </Modal>
+                <Modal visible={this.state.visible2} width="400" height="300" effect="fadeInDown" onClickAway={() => this.closeModal2()}>
+                    <div>
+                        <h1 className="missed">Oops, you missed!</h1>
+                        <p>Please try again.</p>
+                        <a href="javascript:void(0);" onClick={() => this.closeModal2()}>Close</a>
+                    </div>
+                </Modal>
                 <a href="/"><button>Back</button></a>
                 <img
                     style={this.style.captureImage}
