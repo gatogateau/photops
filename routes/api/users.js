@@ -54,7 +54,7 @@ router.route("/capturePic")
     // "api/users/snagPhoto"
 router.route("/snagPhotos")
     .post(userController.snagPhotos);
- master
+ 
 
 
 router.route("/snagPhotos")
