@@ -247,7 +247,7 @@ module.exports = {
 
 
     // if a player is assassinated, remove name from playersAlive and add to playersDead.  Finds by id, requests userName, 
-    
+
     playerDie: function (req, res) {
         // request.body needs to be move player from playersAlive to playersDead
         db.Games
@@ -269,31 +269,32 @@ module.exports = {
             .catch(err => res.stats(422).json(err));
     },
 
- 
+
     runKillFunction: function (req, res) {
-        console.log ("kill function working");
+        console.log("kill function working");
+        console.log(req.body);
         // if target was elimnated page sends a message
         var killed = "target eliminated";
-        var unharmed= "target missed";
+        var unharmed = "target missed";
         // if target kill is successful
-        if (target="assassinated") {
+        // if (target = "assassinated") {
             // kill function
 
             // move target from playersAlive, to playersDead
             // findOneAndUpdate
             // get the playersAlive array
-            var array= playersAlivearray;
+            var array = "playersAlivearray";
             // get playersDead array
-            var array2 = playersDeadarray;
-
+            var array2 = "playersDeadarray";
+            var target= [1,2,3,4,5,6]
             var index = array.indexOf(target);
-            if (index >-1) {
-                array.splice (index,1);
+            if (index > -1) {
+                array.splice(index, 1);
                 // push target to playersDead
                 // findOneAndUpdate
-                array
+                
             };
-            
+
             // alert target "you have been eliminated"
 
             // get target's target, make sure it does not equal user
@@ -303,11 +304,11 @@ module.exports = {
                 // push target's target to user's target
             } else {
                 console.log("target's target = username, recalling all contracts and redeploying")
-                  // if not, reshuffle targets.
-            // alert all players, "contracts have been recalled, and new assignments sent.  "
+                // if not, reshuffle targets.
+                // alert all players, "contracts have been recalled, and new assignments sent.  "
             };
 
-           
+
             // take target's target and updated to user's target
 
 
@@ -315,11 +316,32 @@ module.exports = {
 
 
 
-        }
-        else {
-            alert ("target was not eliminated")
-        };
-    }
+        // } else {
+        //     alert("target was not eliminated")
+        // };
+    },
 
-    
+
+    // testtwofinds: function (req, res) {
+    //     console.log(req.body)
+    //     db.User
+    //         .findOneAndUpdate({
+    //             username: req.params.username
+    //         }, req.body)
+    //         .then(dbModel => res.json(dbModel))
+    //         .catch(err => res.status(422).json(err))
+
+    //     db.User
+    //         .findOneAndUpdate({
+    //             username: req.params.username
+    //         }, req.body)
+    //         .then(dbModel => res.json(dbModel))
+    //         .catch(err => res.status(422).json(err))
+
+    // },
+
+
+
+
+
 };
