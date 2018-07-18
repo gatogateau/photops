@@ -94,14 +94,8 @@ class CreateGame extends Component {
           </Col>
 
           <Col size="md-12">
-// <<<<<<< DrWood89
-//             <Jumbotron
-//               username={this.props.username}
-//               target={this.props.target}
-//             />
-// =======
             <Jumbotron username={this.props.username} target={this.props.target} targetURL={this.props.targetURL}/>
-// >>>>>>> master
+
           </Col>
 
           <Col size="md-12">

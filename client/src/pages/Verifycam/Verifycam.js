@@ -71,8 +71,11 @@ class Verifycam extends Component {
     }
 
     runKillFunction() {
+        let that = this;
         console.log("pre kill target");
-        axios.put('/api/games/killTarget')
+        axios.put('/api/games/killTarget', {
+            username: that.props.target
+        })
           .then(function (response) {
             // handle success
             console.log(response);
