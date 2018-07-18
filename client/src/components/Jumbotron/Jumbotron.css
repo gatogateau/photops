@@ -20,8 +20,9 @@
     border-radius: 50%;
 }
 #targetpic {
-    max-width: 200px;
-    border-radius: 5px;
+    max-width: 150px;
+    height: 150px;
+    border-radius: 50%;
 }
 
 

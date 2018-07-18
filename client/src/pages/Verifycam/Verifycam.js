@@ -16,7 +16,8 @@ class Verifycam extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            visible: false
+            visible1: false,
+            visible2: false 
         };
         this.takePicture = this.takePicture.bind(this);
         this.runKillFunction = this.runKillFunction.bind(this);
@@ -46,21 +47,35 @@ class Verifycam extends Component {
         }
     }
 
-    openModal() {
+    openModal1() {
         this.setState({
-            visible : true
+            visible1: true
         });
     }
  
-    closeModal() {
+    closeModal1() {
         this.setState({
-            visible : false
+            visible1: false
+        });
+    }
+    openModal2() {
+        this.setState({
+            visible2: true
+        });
+    }
+ 
+    closeModal2() {
+        this.setState({
+            visible2: false
         });
     }
 
     runKillFunction() {
+        let that = this;
         console.log("pre kill target");
-        axios.put('/api/games/killTarget')
+        axios.put('/api/games/killTarget', {
+            username: that.props.target
+        })
           .then(function (response) {
             // handle success
             console.log(response);
@@ -98,7 +113,7 @@ class Verifycam extends Component {
                         }).done(function (response) {
                             let confidence = JSON.parse(response).images["0"].transaction.confidence;
 
-                            confidence>=.80 ? (that.openModal(), that.runKillFunction()) : alert('Please try again!')
+                            confidence>=.80 ? (that.openModal1(), that.runKillFunction()) : that.openModal2();
                             // change alert to modal
                             
                         });
@@ -129,10 +144,17 @@ class Verifycam extends Component {
                         <button style={this.style.captureButton} />
                     </view>
                 </Camera>
-                <Modal visible={this.state.visible} width="400" height="300" effect="fadeInUp" onClickAway={() => this.closeModal()}>
+                <Modal visible={this.state.visible1} width="400" height="300" effect="fadeInUp" onClickAway={() => this.closeModal1()}>
                     <div>
                         <h1 className="eliminated">Target Eliminated!</h1>
-                        <a href="javascript:void(0);" onClick={() => this.closeModal()}>Close</a>
+                        <a href="javascript:void(0);" onClick={() => this.closeModal1()}>Close</a>
+                    </div>
+                </Modal>
+                <Modal visible={this.state.visible2} width="400" height="300" effect="fadeInDown" onClickAway={() => this.closeModal2()}>
+                    <div>
+                        <h1 className="missed">Oops, you missed!</h1>
+                        <p>Please try again.</p>
+                        <a href="javascript:void(0);" onClick={() => this.closeModal2()}>Close</a>
                     </div>
                 </Modal>
                 <a href="/"><button>Back</button></a>
