@@ -247,10 +247,12 @@ module.exports = {
 
 
     // if a player is assassinated, remove name from playersAlive and add to playersDead.  Finds by id, requests userName, 
+    
     playerDie: function (req, res) {
+        // request.body needs to be move player from playersAlive to playersDead
         db.Games
             .findOneAndUpdate({
-                _id: req.params.id
+                game: req.params.game
             }, req.body)
             .then(dbModel => res.json(dbModel))
             .catch(err => res.status(422).json(err));
@@ -267,9 +269,56 @@ module.exports = {
             .catch(err => res.stats(422).json(err));
     },
 
-    
+ 
     runKillFunction: function (req, res) {
         console.log ("kill function working");
+        // if target was elimnated page sends a message
+        var killed = "target eliminated";
+        var unharmed= "target missed";
+        // if target kill is successful
+        if (target="assassinated") {
+            // kill function
+
+            // move target from playersAlive, to playersDead
+            // findOneAndUpdate
+            // get the playersAlive array
+            var array= playersAlivearray;
+            // get playersDead array
+            var array2 = playersDeadarray;
+
+            var index = array.indexOf(target);
+            if (index >-1) {
+                array.splice (index,1);
+                // push target to playersDead
+                // findOneAndUpdate
+                array
+            };
+            
+            // alert target "you have been eliminated"
+
+            // get target's target, make sure it does not equal user
+            // if target does not equal user, then add to user's target
+            if ("username != target's target") {
+                console.log("target's target does not equal user, adding new target")
+                // push target's target to user's target
+            } else {
+                console.log("target's target = username, recalling all contracts and redeploying")
+                  // if not, reshuffle targets.
+            // alert all players, "contracts have been recalled, and new assignments sent.  "
+            };
+
+           
+            // take target's target and updated to user's target
+
+
+
+
+
+
+        }
+        else {
+            alert ("target was not eliminated")
+        };
     }
 
     
