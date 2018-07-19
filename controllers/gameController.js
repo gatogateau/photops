@@ -266,7 +266,7 @@ module.exports = {
                 _id: req.params.id
             }, req.body)
             .then(dbModel => res.json(dbModel))
-            .catch(err => res.stats(422).json(err));
+            .catch(err => res.status(422).json(err));
     },
 
 
@@ -274,11 +274,30 @@ module.exports = {
         console.log("kill function working");
         console.log(req.body);
         // if target was elimnated page sends a message
-        var killed = "target eliminated";
+        var target = req.body;
         var unharmed = "target missed";
         // if target kill is successful
         // if (target = "assassinated") {
             // kill function
+            console.log (target);
+        db.User
+            // this works            
+            // .findOneAndUpdate({username:req.body.username},{$inc:{"deaths":1,"kills":1}})
+
+            .findOneAndUpdate({username:req.body.username},{$inc:{"deaths":1}})
+            .then(dbModel => {
+                console.log("the UserID inside Kill function " + req.session.passport.user._id);
+                db.User
+                .findOneAndUpdate({"_id": req.session.passport.user._id},{$inc:{"kills":1}})
+                .then(dbModel => {
+                    res.json
+                })
+                .catch(err => res.status(422).json(err));
+
+                res.json(dbModel)
+            }) 
+            .catch(err => res.status(422).json(err));
+
 
             // move target from playersAlive, to playersDead
             // findOneAndUpdate

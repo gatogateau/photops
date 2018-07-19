@@ -12,13 +12,13 @@ const eachUser = new Schema(
       username: {type:String, unique: true, required: false, default: "username"},
       password: {type:String, unique: false, required: false, default: "password"}, 
       // total kills since playing
-      kills:Number,
+      kills: {type:Number, default:0},
       // total deaths since playing
-      deaths:Number,
+      deaths:{type:Number, default:0},
       // total number of games played since starting
-      gamesPlayed:Number,
+      gamesPlayed:{type:Number, default:0},
       // which level player has achieved
-      playerLevel:Number,
+      playerLevel:{type:Number, default:0},
       // additional add ons the player has purchased or won
       adOns:[String],
       // date user signs up

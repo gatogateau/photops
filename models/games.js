@@ -19,8 +19,8 @@ const gamePlay= new Schema(
       duration:Number,
     
     //   game in play or not  
-      active:Boolean, 
-      gameCreator:String,  
+      active:{type:Boolean}, 
+      gameCreator:{type:String},  
     });
 
 
