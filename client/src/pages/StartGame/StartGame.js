@@ -81,7 +81,7 @@ class JoinGame extends Component {
             <Navbar logOut={this.props.logOut} />
           </Col>
           <Col size="md-12">
-            <Jumbotron username={this.props.username} logOut={this.props.logOut} targetURL={this.props.targetURL} currentGame={this.props.currentGame} />
+            <Jumbotron username={this.props.username} logOut={this.props.logOut} target={this.props.target} targetURL={this.props.targetURL} currentGame={this.props.currentGame} />
           </Col>
           <Col size="md-12">
             <div className="card">
