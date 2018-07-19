@@ -25,22 +25,34 @@ class App extends Component {
       username: '',
       redirectTo: null,
       target: '',
-      targetURL: ''
+      targetURL: '',
+      currentGame: '',
+      getCurrentGame: this.getCurrentGame
     }
 
-    this.login = this.login.bind(this)
-    this.signUp = this.signUp.bind(this)
-    this.handleChange = this.handleChange.bind(this)
+    this.login = this.login.bind(this);
+    this.signUp = this.signUp.bind(this);
+    this.handleChange = this.handleChange.bind(this);
+    this.getCurrentGame = this.getCurrentGame.bind(this);
   }
 
   componentWillMount = () => {
     this.isLoggedIn();
     this.getTarget();
+    this.getCurrentGame();
   }
   handleChange(event) {
     this.setState({
       [event.target.name]: event.target.value
     })
+  }
+  getCurrentGame = (event) => {
+    console.log("hit the getCurrentGame");
+    console.log(event);
+    this.setState({
+      currentGame: event
+    })
+    console.log("this is the current game on state " +this.state.currentGame)
   }
   
   getTarget() {
@@ -208,13 +220,13 @@ class App extends Component {
 
           <Route path="/home" exact render={
             () => {
-              return (<Home logOut={this.logOut} loggedIn={this.state.loggedIn} username={this.state.username} target={this.state.target} targetURL={this.state.targetURL}/>)
+              return (<Home logOut={this.logOut} loggedIn={this.state.loggedIn} username={this.state.username} target={this.state.target} targetURL={this.state.targetURL} currentGame={this.state.currentGame}/>)
             }
           } />
 
           <Route path="/JoinGame" exact render={
             () => {
-              return (<JoinGame username={this.state.username} target={this.state.target} logOut={this.logOut} loggedIn={this.state.loggedIn} targetURL={this.state.targetURL}/>)
+              return (<JoinGame username={this.state.username} target={this.state.target} logOut={this.logOut} loggedIn={this.state.loggedIn} targetURL={this.state.targetURL} currentGame={this.state.currentGame}/>)
             }
           } />
           {/*<Example />*/}
@@ -222,12 +234,12 @@ class App extends Component {
            <FacebookLogin />*/}
           <Route path="/creategame" exact render={
             () => {
-              return (<CreateGame username={this.state.username} target={this.state.target} logOut={this.logOut} loggedIn={this.state.loggedIn} targetURL={this.state.targetURL}/>)
+              return (<CreateGame username={this.state.username} target={this.state.target} logOut={this.logOut} loggedIn={this.state.loggedIn} targetURL={this.state.targetURL} currentGame={this.state.currentGame}/>)
             }
           } />
           <Route path="/currentgame" exact render={
             () => {
-              return (<CurrentGame username={this.state.username} target={this.state.target} logOut={this.logOut} loggedIn={this.state.loggedIn} targetURL={this.state.targetURL}/>)
+              return (<CurrentGame username={this.state.username} target={this.state.target} logOut={this.logOut} loggedIn={this.state.loggedIn} targetURL={this.state.targetURL} currentGame={this.state.currentGame}/>)
             }
           } />
           <Route path="/enrollcam" exact render={
@@ -242,7 +254,7 @@ class App extends Component {
           } />
           <Route path="/startgame" exact render={
             () => {
-              return (<StartGame username={this.state.username} target={this.state.target} logOut={this.logOut} loggedIn={this.state.loggedIn} targetURL={this.state.targetURL}/>)
+              return (<StartGame username={this.state.username} target={this.state.target} logOut={this.logOut} loggedIn={this.state.loggedIn} targetURL={this.state.targetURL} getCurrentGame={this.state.getCurrentGame} currentGame={this.state.currentGame}/>)
             }
           } />
 
