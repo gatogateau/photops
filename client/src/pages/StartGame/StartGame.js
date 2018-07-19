@@ -65,6 +65,7 @@ class JoinGame extends Component {
         }
         console.log(response);
       })
+      window.location.pathname = '/'
 
    } 
 

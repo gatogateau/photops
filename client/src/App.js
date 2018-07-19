@@ -173,6 +173,8 @@ class App extends Component {
           // })
           // update the state to redirect to home
           this.setState({
+            loggedIn: true,
+            username: response.data.username,
             redirectTo: '/home'
           })
         }
