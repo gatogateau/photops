@@ -3,7 +3,7 @@ import React, { Component } from "react";
 import Jumbotron from "../../components/Jumbotron";
 import Navbar from "../../components/Navbar";
 // import API from "../../utils/API";
-// import { Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { Col, Row, Container } from "../../components/Grid";
 import { Button} from "react-bootstrap";
 import './home.css';
@@ -35,36 +35,36 @@ class Home extends Component {
             <Jumbotron username={this.props.username} target={this.props.target} targetURL={this.props.targetURL} currentGame={this.props.currentGame}/>
           </Col>
           <Col size="md-12">
-            <a href="/enrollcam">
+            <Link to="/enrollcam">
               <Button className="btns">
                 Upload Your Face
               </Button>
-            </a>
-            <a href="/currentgame">
+            </Link>
+            <Link to="/currentgame">
               <Button className="btns">
                 Current Game
               </Button>
-            </a>
-            <a href="/creategame">
+            </Link>
+            <Link to="/creategame">
               <Button className="btns">
                 Create Game
               </Button>
-            </a>
-            <a href="/joingame">
+            </Link>
+            <Link to="/joingame">
               <Button className="btns">
                 Join Game
               </Button>
-            </a>
-            <a href="/verifycam">
+            </Link>
+            <Link to="/verifycam">
               <Button className="btns">
                 Assassinate
               </Button>
-            </a>
-            <a href="/StartGame">
+            </Link>
+            <Link to="/StartGame">
               <Button className="btns">
                 Start Game
               </Button>
-            </a>
+            </Link>
           </Col>
         </Row>
       </Container>
