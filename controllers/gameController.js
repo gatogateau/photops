@@ -239,6 +239,7 @@ module.exports = {
                                     console.log(user);
                                 })
                         }
+                        res.send("game started")
                     })
             })
             .catch(err => res.status(422).json(err));

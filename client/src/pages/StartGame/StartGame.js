@@ -3,7 +3,7 @@ import React, { Component } from "react";
 import Jumbotron from "../../components/Jumbotron";
 import Navbar from "../../components/Navbar";
 // import API from "../../utils/API";
-// import { Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { Col, Row, Container } from "../../components/Grid";
 import { Button, Input } from "reactstrap";
 import './StartGame.css';
@@ -16,11 +16,11 @@ class JoinGame extends Component {
 
     this.state = {
       gameName: "",
-      allGames: [ ]
+      allGames: []
     }
     this.findAllGames = this.findAllGames.bind(this);
   }
-  
+
   findAllGames() {
     let that = this;
     axios.get('/api/games/allGames')
@@ -57,17 +57,20 @@ class JoinGame extends Component {
     })
   }
   startSpecificGame = (e, gameName) => {
+    console.log('anything')
     e.preventDefault;
     axios.put("/api/games/start/startGame", { game: gameName })
       .then(function (response) {
         if (response.data.message) {
           alert(response.data.message)
         }
-        console.log(response);
+        console.log("this should be the start game respons" +response);
       })
-      window.location.pathname = '/'
+    this.props.getCurrentGame(gameName);
+    console.log("this should be the current game" + this.props.currentGame);
+    document.getElementById("linkHome").click()
 
-   } 
+  }
 
   render() {
     console.log(this)
@@ -75,10 +78,10 @@ class JoinGame extends Component {
       <Container fluid>
         <Row>
           <Col size="md-12">
-            <Navbar logOut={this.props.logOut}/>
+            <Navbar logOut={this.props.logOut} />
           </Col>
           <Col size="md-12">
-            <Jumbotron username={this.props.username} logOut={this.props.logOut} targetURL={this.props.targetURL}/>
+            <Jumbotron username={this.props.username} logOut={this.props.logOut} targetURL={this.props.targetURL} currentGame={this.props.currentGame} />
           </Col>
           <Col size="md-12">
             <div className="card">
@@ -91,12 +94,13 @@ class JoinGame extends Component {
                 <h4>Find All Games</h4>
               </button>
               {this.state.allGames.map((game, i) =>
-              <li key={i} onClick={(e) =>{this.startSpecificGame(e, game.game)}}>{game.game}</li>
-            )}
+                <li key={i} onClick={(e) => { this.startSpecificGame(e, game.game) }}>{game.game}</li>
+              )}
               <br />
             </div>
           </Col>
         </Row>
+        <Link style={{visibility: "hidden"}} to="/" id="linkHome">Home</Link>
       </Container>
     );
   }
