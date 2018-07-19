@@ -269,66 +269,114 @@ module.exports = {
             .catch(err => res.status(422).json(err));
     },
 
-
+// need to get target. 
     runKillFunction: function (req, res) {
         console.log("kill function working");
         console.log(req.body);
         // if target was elimnated page sends a message
         var target = req.body;
         var unharmed = "target missed";
-        // if target kill is successful
-        // if (target = "assassinated") {
-            // kill function
-            console.log (target);
+        console.log(target);
         db.User
             // this works            
             // .findOneAndUpdate({username:req.body.username},{$inc:{"deaths":1,"kills":1}})
 
-            .findOneAndUpdate({username:req.body.username},{$inc:{"deaths":1}})
+            // update the targets death
+            .findOneAndUpdate({
+                username: req.body.username
+            }, {
+                $inc: {
+                    "deaths": 1
+                }
+            })
             .then(dbModel => {
                 console.log("the UserID inside Kill function " + req.session.passport.user._id);
+                // update the user's kills
                 db.User
-                .findOneAndUpdate({"_id": req.session.passport.user._id},{$inc:{"kills":1}})
-                .then(dbModel => {
-                    res.json
-                })
-                .catch(err => res.status(422).json(err));
+                    .findOneAndUpdate({
+                        "_id": req.session.passport.user._id
+                    }, {
+                        $inc: {
+                            "kills": 1
+                        }
+                    })
+                    .then(dbModel => {
+                        // update the playersAlive array
+                        // need the game Name
+                        console.log(req.body.game);
+                        db.Games
+                        find({
+                                game: req.body.game
+                            })
+                            .select({
+                                "playersAlive": 1,
+                                "_id": 0
+                            })
+                            .res(dbModel => {
+                                console.log(dbModel);
+                                var playersAlive=dbModel;
+
+                                db.Games
+                                    
+
+                                    .findOneAndUpdate({
+                                        game: req.body.game
+                                    }, {
+                                        "playersAlive": playersAlive
+                                    })
+                                    .res(dbModel => {
+
+
+                                        var index = array.indexOf(req.body.username);
+                                        if (index > -1) {
+                                            array.splice(index, 1);
+
+                                        }
+                                        res.json(dbModel);
+                                    })
+                                    .catch(err => res.status(422).json(err));
+
+                            })
+
+                        res.json(dbModel)
+                    })
+                    .catch(err => res.status(422).json(err));
 
                 res.json(dbModel)
-            }) 
+            })
             .catch(err => res.status(422).json(err));
 
 
-            // move target from playersAlive, to playersDead
+        // move target from playersAlive, to playersDead
+        // findOneAndUpdate
+        // get the playersAlive array
+        var array = "playersAlivearray";
+        // get playersDead array
+        var array2 = "playersDeadarray";
+        var target = [1, 2, 3, 4, 5, 6]
+        var index = array.indexOf(target);
+        if (index > -1) {
+            array.splice(index, 1);
+            // push target to playersDead
             // findOneAndUpdate
-            // get the playersAlive array
-            var array = "playersAlivearray";
-            // get playersDead array
-            var array2 = "playersDeadarray";
-            var target= [1,2,3,4,5,6]
-            var index = array.indexOf(target);
-            if (index > -1) {
-                array.splice(index, 1);
-                // push target to playersDead
-                // findOneAndUpdate
-                
-            };
 
-            // alert target "you have been eliminated"
+        };
 
-            // get target's target, make sure it does not equal user
-            // if target does not equal user, then add to user's target
-            if ("username != target's target") {
-                console.log("target's target does not equal user, adding new target")
-                // push target's target to user's target
-            } else {
-                console.log("target's target = username, recalling all contracts and redeploying")
-                // if not, reshuffle targets.
-                // alert all players, "contracts have been recalled, and new assignments sent.  "
-            };
+        // alert target "you have been eliminated"
+
+        // get target's target, make sure it does not equal user
+        // if target does not equal user, then add to user's target
+        if ("username != target's target") {
+            console.log("target's target does not equal user, adding new target")
+            // push target's target to user's target
+        } else {
+            console.log("target's target = username, recalling all contracts and redeploying")
+            // if not, reshuffle targets.
+            // alert all players, "contracts have been recalled, and new assignments sent.  "
+        };
 
 
-            // take target's target and updated to user's target
+        // take target's target and updated to user's target
 
 
 
