@@ -249,7 +249,7 @@ class App extends Component {
           } />
           <Route path="/verifycam" exact render={
             () => {
-              return (<Verifycam target={this.state.target}/>)
+              return (<Verifycam target={this.state.target} currentGame={this.state.currentGame}/>)
             }
           } />
           <Route path="/startgame" exact render={
