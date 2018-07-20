@@ -148,7 +148,7 @@ module.exports = {
             // 
             .then(gameData => {
                 // gameData.allPlayers.push(req.session.userName)
-
+                console.log("got this far");
                 console.log(gameData[0])
                 // if already in game, do not add to game data
 
@@ -239,7 +239,6 @@ module.exports = {
                                     console.log(user);
                                 })
                         }
-                        res.send("game started")
                     })
             })
             .catch(err => res.status(422).json(err));
@@ -259,6 +258,10 @@ module.exports = {
             .catch(err => res.status(422).json(err));
     },
 
+// list of all games the user is in.
+
+
+
     // player assassinates the target, target gets removed from playersAlive  and moved to playersDead in db.Games  -findOneAndUpdate. search db.User "target".  Take the target from the deceased, make sure it is not user==target and add to users target.  If user==target, take playersAlive and reshuffle to targets.
     // work on this functionality. 
     playerKillsTarget: function (req, res) {
@@ -270,7 +273,9 @@ module.exports = {
             .catch(err => res.status(422).json(err));
     },
 
-// need to get target. 
+
+
+    // need the game name.
     runKillFunction: function (req, res) {
         console.log("kill function working");
         console.log(req.body);
@@ -291,7 +296,7 @@ module.exports = {
                 }
             })
             .then(dbModel => {
-                console.log("the UserID inside Kill function " + req.session.passport.user._id);
+                console.log("the UserID inside Kill function ", req.session.passport.user._id);
                 // update the user's kills
                 db.User
                     .findOneAndUpdate({
@@ -300,10 +305,14 @@ module.exports = {
                         $inc: {
                             "kills": 1
                         }
+                        
+                        // working until here
                     })
                     .then(dbModel => {
+                        console.log("working until now");
                         // update the playersAlive array
-                        // need the game Name
+
+                        // **** need the game Name ******
                         console.log(req.body.game);
                         db.Games
                         find({
@@ -338,8 +347,7 @@ module.exports = {
                                     .catch(err => res.status(422).json(err));
 
                             })
-
-                        res.json(dbModel)
+                            .catch(err => res.status(422).json(err));
                     })
                     .catch(err => res.status(422).json(err));
 
@@ -408,6 +416,17 @@ module.exports = {
 
     // },
 
+
+// Delete game function
+deleteGame: function (req, res) {
+            db.Games
+            .findById({
+                _id: req.params.id
+            })
+            .then(dbModel => dbModel.remove())
+            .then(dbModel => res.json(dbModel))
+            .catch(err => res.status(422).json(err));
+    },
 
 
 
