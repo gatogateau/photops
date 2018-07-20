@@ -28,6 +28,16 @@ router.post('/signup', (req, res) => {
                 if (err) return res.json(err)
                 res.json(savedUser)
             })
+            passport.authenticate('local'), 
+            (req, res) => {
+                console.log('logged in', req.user);
+                var userInfo = {
+                    username: req.user.username
+                };
+                //creating a 'key' called userName and putting it on the passport session object
+                req.session.passport.user.userName = userInfo.username
+                res.send(userInfo);
+            } 
         }
     })
 })
