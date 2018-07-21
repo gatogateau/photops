@@ -5,6 +5,7 @@ import cloudinary from 'cloudinary';
 import axios from 'axios';
 import Modal from 'react-awesome-modal';
 import './Verifycam.css';
+import { Link } from "react-router-dom";
 
 cloudinary.config({
     cloud_name: 'notjarvis',
@@ -17,7 +18,8 @@ class Verifycam extends Component {
         super(props);
         this.state = {
             visible1: false,
-            visible2: false 
+            visible2: false,
+            currentGame: this.props.currentGame
         };
         this.takePicture = this.takePicture.bind(this);
         this.runKillFunction = this.runKillFunction.bind(this);
@@ -75,7 +77,7 @@ class Verifycam extends Component {
         console.log("pre kill target");
         axios.put('/api/games/killTarget', {
             username: that.props.target,
-            game: that.props.currentGame
+            game: that.state.currentGame
 
         })
           .then(function (response) {
@@ -159,7 +161,7 @@ class Verifycam extends Component {
                         <a href="javascript:void(0);" onClick={() => this.closeModal2()}>Close</a>
                     </div>
                 </Modal>
-                <a href="/"><button>Back</button></a>
+                <Link to="/"><button>Back</button></Link>
                 <img
                     style={this.style.captureImage}
                     ref={(img) => {
