@@ -3,6 +3,7 @@ import Camera from 'react-camera';
 import $ from "jquery";
 import cloudinary from 'cloudinary';
 import axios from 'axios';
+import { Link } from "react-router-dom";
 
 cloudinary.config({
     cloud_name: 'notjarvis',
@@ -108,7 +109,7 @@ class Enrollcam extends Component {
                         <button style={this.style.captureButton} />
                     </view>
                 </Camera>
-                <a href="/"><button>Back</button></a>
+                <Link to="/"><button>Back</button></Link>
                 <img
                     style={this.style.captureImage}
                     ref={(img) => {
