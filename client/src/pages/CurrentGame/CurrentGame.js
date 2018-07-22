@@ -6,7 +6,7 @@ import Navbar from "../../components/Navbar";
 // import API from "../../utils/API";
 // import { Link } from "react-router-dom";
 import { Col, Row, Container } from "../../components/Grid";
-import { Button, Input } from "reactstrap";
+// import { Button, Input } from "reactstrap";
 import './CurrentGame.css';
 // import { List, ListItem } from "../../components/List";
 // import { Input, TextArea, FormBtn } from "../../components/Form";
