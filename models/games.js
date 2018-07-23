@@ -18,8 +18,8 @@ const gamePlay= new Schema(
       startDate: { type: Date, default: Date.now },
       duration:Number,
     
-    //   game in play or not  
-      active:{type:Boolean}, 
+    //   game in play or not  off=0 started = 1
+      active:{type:Boolean, default:0}, 
       gameCreator:{type:String},  
     });
 
