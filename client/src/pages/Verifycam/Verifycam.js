@@ -128,7 +128,6 @@ class Verifycam extends Component {
                 //this.img.onload = () => { URL.revokeObjectURL(this.src); }
 
 
-
             })
     }
 
