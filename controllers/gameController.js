@@ -182,25 +182,25 @@ module.exports = {
     // add current game to everyuser's User.activeGames
     updateActiveGames: function (req, res) {
 
-    console.log (req.body);
-    db.Games    
-        .find (req.body)
-        .select({
-            "allPlayers": 1,
-            "_id":0,
-        })
-        .then(dbModel => {
-            console.log(res.json);
-            // loop through all users and add to current game
-            
-            db.User
-                findOneAndUpdate
+        console.log("this is the active games route", req.body);
+        // db.Games
+        //     .find(req.body)
+        //     .select({
+        //         "allPlayers": 1,
+        //         "_id": 0,
+        //     })
+        //     .then(dbModel => {
+        //         console.log(res.json);
+        //         // loop through all users and add to current game
 
-        })
-        .catch(err => res.status(422).json(err));
-    
-    
-    
+        //         db.User
+        //         findOneAndUpdate
+
+        //     })
+        //     .catch(err => res.status(422).json(err));
+
+
+
     },
 
     grabActiveGame: function (req, res) {
@@ -290,6 +290,25 @@ module.exports = {
     },
 
     // list of all games the user is in.
+    currentGameToUsers: function (req, res) {
+        console.log("this is the game:--" + game);
+        var players = game[0].allPlayers;
+        console.log(players);
+        // for (let i = 0; i < players.length; i++) {
+        //     players.(players => {
+                db.User
+                .findOneAndUpdate.players.forEach(element => {
+                    
+                });({
+                        username: player[i]
+                    }, {
+                        activeGames: req.body.game
+                    })
+                    .then(dbModel => res.json(dbModel))
+                    .catch(err => res.status(422).json(err));
+            // })
+        
+    },
 
 
 
@@ -310,15 +329,15 @@ module.exports = {
     runKillFunction: function (req, res) {
         console.log("kill function working");
         console.log(req.body);
-// username = target  game: game playing
+        // username = target  game: game playing
 
         // if target was elimnated page sends a message
         var target = req.body.username;
-        var theGame=req.body.game;
+        var theGame = req.body.game;
 
         // var unharmed = "target missed";
-        console.log("the target is: ",target);
-        console.log("the current game is: ",theGame);
+        console.log("the target is: ", target);
+        console.log("the current game is: ", theGame);
         db.User
             // this works            
             // .findOneAndUpdate({username:req.body.username},{$inc:{"deaths":1,"kills":1}})
@@ -362,84 +381,96 @@ module.exports = {
                                 console.log("next is updating the playersAlive array");
                                 console.log(dbModel);
                                 // playersLeft = array of playersAlive
-                                let playersLeft=dbModel[0].playersAlive;
+                                let playersLeft = dbModel[0].playersAlive;
                                 console.log(playersLeft);
                                 // remove the target from playersAlive
 
-                                let indexTarget=playersLeft.indexOf(req.body.username);
+                                let indexTarget = playersLeft.indexOf(req.body.username);
                                 console.log(indexTarget);
-                                console.log (playersLeft.indexOf(req.body.username));
+                                console.log(playersLeft.indexOf(req.body.username));
                                 if (indexTarget > -1) {
-                                               var playerRemoved= playersLeft.splice(indexTarget, 1);
-                                                
-                                            };
-                                            console.log ("made it this far line 345");
-                                            console.log("new playersLeft ",playersLeft);
-                                             console.log("player was removed ",playerRemoved[0]);
-                                            
-                                            console.log ("working up until this point"); 
-                                            console.log(req.body.game); 
-                                            
-                                            // Set playersAlive to playersLeft
-                                                db.Games
-                                                    .findOneAndUpdate({
-                                                        game: req.body.game
-                                                    },{ $pull: {playersAlive: playerRemoved[0]}})
+                                    var playerRemoved = playersLeft.splice(indexTarget, 1);
+
+                                };
+                                console.log("made it this far line 345");
+                                console.log("new playersLeft ", playersLeft);
+                                console.log("player was removed ", playerRemoved[0]);
+
+                                console.log("working up until this point");
+                                console.log(req.body.game);
+
+                                // Set playersAlive to playersLeft
+                                db.Games
+                                    .findOneAndUpdate({
+                                        game: req.body.game
+                                    }, {
+                                        $pull: {
+                                            playersAlive: playerRemoved[0]
+                                        }
+                                    })
+                                    .then(dbModel => {
+                                        console.log(dbModel);
+                                        // console.log(game.playersAlive);
+                                        // get the target
+
+                                        // move target to playersDead
+                                        db.Games
+                                            .findOneAndUpdate({
+                                                game: req.body.game
+                                            }, {
+                                                $push: {
+                                                    playersDead: playerRemoved[0]
+                                                }
+                                            })
+                                            .then(dbModel => {
+                                                console.log(dbModel);
+                                                console.log("get the target: line 369")
+                                                // get the target
+                                                db.User
+                                                    .find({
+                                                        username: req.body.username
+                                                    })
+                                                    .select({
+                                                        "target": 1,
+                                                        "_id": 0,
+                                                    })
                                                     .then(dbModel => {
-                                                        console.log(dbModel);
-                                                        // console.log(game.playersAlive);
-                                                        // get the target
+                                                        // findOneAndUpdate to updated target
+                                                        console.log("hopefullly this is the new target: ", dbModel[0].target);
+                                                        console.log("users id    ", req.session.passport.user._id);
+                                                        console.log("users username: ", req.session.passport.user.userName);
+                                                        // if the target = username, reshuffle, else, continue
 
-                                                        // move target to playersDead
-                                                        db.Games
-                                                        .findOneAndUpdate({
-                                                            game: req.body.game
-                                                        },{ $push: {playersDead:playerRemoved[0]}})
-                                                        .then(dbModel => {
-                                                            console.log(dbModel);
-                                                            console.log ("get the target: line 369")
-                                                            // get the target
+                                                        if (req.session.passport.user.userName == dbModel[0].target) {
+                                                            // shuffle and restart
+                                                            console.log("you done Fucked up ---line 386");
+
+                                                        } else {
+                                                            // assign user's target to target's target
+                                                            console.log("the else statement");
                                                             db.User
-                                                                .find({username:req.body.username})
-                                                                .select({
-                                                                    "target": 1,
-                                                                    "_id": 0,
+                                                            findOneAndUpdate({
+                                                                    "_id": req.session.passport.user._id
+                                                                }, {
+                                                                    "target": dbModel[0].target
                                                                 })
-                                                                .then(dbModel => {
-                                                                    // findOneAndUpdate to updated target
-                                                                    console.log ("hopefullly this is the new target: ",dbModel[0].target);
-                                                                    console.log("users id    ",req.session.passport.user._id);
-                                                                    console.log ("users username: ",req.session.passport.user.userName);
-                                                                    // if the target = username, reshuffle, else, continue
+                                                                .then(dbModel => res.json(dbModel))
 
-                                                                    if(req.session.passport.user.userName == dbModel[0].target){
-                                                                        // shuffle and restart
-                                                                        console.log ("you done Fucked up ---line 386");
-                                                                        
-                                                                    } else {
-                                                                        // assign user's target to target's target
-                                                                        console.log("the else statement");
-                                                                    db.User
-                                                                        findOneAndUpdate({
-                                                                            "_id": req.session.passport.user._id
-                                                                        }, {"target": dbModel[0].target})
-                                                                        .then(dbModel => res.json(dbModel))
+                                                                // .then (newTarget => {
+                                                                //     // console.log(dbModel); 
+                                                                //     console.log("new target is has been assigned.");  
+                                                                // })
+                                                                .catch(err => res.status(4223).json(err));
+                                                        };
 
-                                                                        // .then (newTarget => {
-                                                                        //     // console.log(dbModel); 
-                                                                        //     console.log("new target is has been assigned.");  
-                                                                        // })
-                                                                        .catch(err => res.status(4223).json(err)); 
-                                                                    };
-
-                                                                })
-                                                                .catch(err => res.status(422).json(err)); 
-
-                                                            
-                                                        })
-                                                        .catch(err => res.status(422).json(err)); 
                                                     })
                                                     .catch(err => res.status(422).json(err));
+
+
+                                            })
+                                            .catch(err => res.status(422).json(err));
+                                    })
+                                    .catch(err => res.status(422).json(err));
 
 
 

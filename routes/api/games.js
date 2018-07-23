@@ -4,9 +4,10 @@ const gamesController = require("../../controllers/gameController");
 
 // TEST ALL THE ROUTES
 
-// api/games/startGame
+// api/games/start/startGame
 router.route("/start/startGame")
-    .put(gamesController.startGame);
+    .put(gamesController.startGame)
+    .post(gamesController.currentGameToUsers);
 
 // matches with "/api/games/allGames"
 router.route("/allGames")
