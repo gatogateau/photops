@@ -54,6 +54,11 @@ router.route("/createGame")
     .put(gamesController.runKillFunction)
     // .put(gamesController.testtwofinds);
 
+    // finds current game's players, adds current game to user's activeGames
+//  api/games/updateActiveGames
+router.route("/updateActiveGames")
+    .post(gamesController.updateActiveGames) 
+    .get(gamesController.grabActiveGame);
 
 
 
