@@ -64,14 +64,14 @@ class JoinGame extends Component {
         if (response.data.message) {
           alert(response.data.message)
         }
-        console.log("this should be the start game respons" +response);
+        console.log("this should be the start game response" +response);
       })
       axios.post("/api/games/updateActiveGames", { game: gameName })
       .then(function (response) {
         if (response.data.message) {
           alert(response.data.message)
         }
-        console.log("this should be the start game respons" +response);
+        console.log("this should be the start game response" +response);
       })
     console.log("this should be the current game" + this.props.currentGame);
     document.getElementById("linkHome").click()
