@@ -178,6 +178,37 @@ module.exports = {
     },
 
 
+
+    // add current game to everyuser's User.activeGames
+    updateActiveGames: function (req, res) {
+
+    console.log (req.body);
+    db.Games    
+        .find (req.body)
+        .select({
+            "allPlayers": 1,
+            "_id":0,
+        })
+        .then(dbModel => {
+            console.log(res.json);
+            // loop through all users and add to current game
+            
+            db.User
+                findOneAndUpdate
+
+        })
+        .catch(err => res.status(422).json(err));
+    
+    
+    
+    },
+
+    grabActiveGame: function (req, res) {
+
+    },
+
+
+
     // start the game - find game by game name, then copy all players to playersAlive, create a target array, randomize the target array, match the user to a target.  If the user== target, randomize again using shuffle function
     startGame: function (req, res) {
         console.log(req.body, "this is the games route");
