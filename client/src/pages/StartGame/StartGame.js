@@ -66,7 +66,13 @@ class JoinGame extends Component {
         }
         console.log("this should be the start game respons" +response);
       })
-    this.props.getCurrentGame(gameName);
+      axios.post("/api/games/updateActiveGames", { game: gameName })
+      .then(function (response) {
+        if (response.data.message) {
+          alert(response.data.message)
+        }
+        console.log("this should be the start game respons" +response);
+      })
     console.log("this should be the current game" + this.props.currentGame);
     document.getElementById("linkHome").click()
 

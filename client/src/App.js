@@ -51,11 +51,19 @@ class App extends Component {
       [event.target.name]: event.target.value
     })
   }
-  getCurrentGame = (event) => {
-    console.log("hit the getCurrentGame");
-    console.log(event);
-    this.setState({
-      currentGame: event
+  getCurrentGame = () => {
+    axios
+    .get('/api/game/updateActiveGames')
+    .then(response => {
+      console.log(response)
+      if(response.data){
+        this.setState({
+          currentGame: response.data.activeGames,
+        });
+      }
+    }).catch(error => {
+      console.log(error);
+      
     })
     console.log("this is the current game on state " +this.state.currentGame)
   }
