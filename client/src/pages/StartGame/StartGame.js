@@ -71,11 +71,22 @@ class JoinGame extends Component {
         if (response.data.message) {
           alert(response.data.message)
         }
+
         console.log("this should be the start game response" +response);
+
       })
     console.log("this should be the current game" + this.props.currentGame);
     document.getElementById("linkHome").click()
 
+  }
+  sendGameToJerson = (game) => {
+    axios.post("/api/games/start/startGame", { game: game })
+      .then(function (response) {
+        if (response.data.message) {
+          alert(response.data.message)
+        }
+        console.log("this should be the response from jerson " +response);
+      })
   }
 
   render() {
@@ -100,7 +111,7 @@ class JoinGame extends Component {
                 <h4>Find All Games</h4>
               </button>
               {this.state.allGames.map((game, i) =>
-                <li key={i} onClick={(e) => { this.startSpecificGame(e, game.game) }}>{game.game}</li>
+                <li key={i} onClick={(e) => { this.startSpecificGame(e, game.game), this.sendGameToJerson(game.game) }}>{game.game}</li>
               )}
               <br />
             </div>
