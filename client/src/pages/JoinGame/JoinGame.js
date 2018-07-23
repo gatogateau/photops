@@ -5,7 +5,7 @@ import Navbar from "../../components/Navbar";
 // import API from "../../utils/API";
 // import { Link } from "react-router-dom";
 import { Col, Row, Container } from "../../components/Grid";
-import { Button, Input } from "reactstrap";
+import { Input } from "reactstrap";
 import './JoinGame.css';
 import axios from "axios"
 // import { List, ListItem } from "../../components/List";
@@ -40,7 +40,7 @@ class JoinGame extends Component {
 
   joinGame = (e) => {
     console.log("hit")
-    e.preventDefault;
+    e.preventDefault();
     axios.put("/api/games/joinGameByGameName", { game: this.state.gameName })
       .then(function (response) {
         if (response.data.message) {
@@ -57,7 +57,7 @@ class JoinGame extends Component {
     })
   }
   joinSpecificGame = (e, gameName) => {
-    e.preventDefault;
+    e.preventDefault();
     axios.put("/api/games/joinGameByGameName", { game: gameName })
       .then(function (response) {
         if (response.data.message) {

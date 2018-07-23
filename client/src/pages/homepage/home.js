@@ -10,9 +10,6 @@ import './home.css';
 // import { List, ListItem } from "../../components/List";
 // import { Input, TextArea, FormBtn } from "../../components/Form";
 class Home extends Component {
-  constructor(props){
-    super(props)
-  }
 
   componentWillMount(){
     this.checkLoggedIn();
