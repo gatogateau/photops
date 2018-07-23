@@ -41,6 +41,11 @@ class App extends Component {
     this.getTarget();
     this.getCurrentGame();
   }
+  componentDidlMount = () => {
+    this.isLoggedIn();
+    this.getTarget();
+    this.getCurrentGame();
+  }
   handleChange(event) {
     this.setState({
       [event.target.name]: event.target.value

@@ -258,7 +258,7 @@ module.exports = {
             .catch(err => res.status(422).json(err));
     },
 
-// list of all games the user is in.
+    // list of all games the user is in.
 
 
 
@@ -279,10 +279,15 @@ module.exports = {
     runKillFunction: function (req, res) {
         console.log("kill function working");
         console.log(req.body);
+// username = target  game: game playing
+
         // if target was elimnated page sends a message
-        var target = req.body;
-        var unharmed = "target missed";
-        console.log(target);
+        var target = req.body.username;
+        var theGame=req.body.game;
+
+        // var unharmed = "target missed";
+        console.log("the target is: ",target);
+        console.log("the current game is: ",theGame);
         db.User
             // this works            
             // .findOneAndUpdate({username:req.body.username},{$inc:{"deaths":1,"kills":1}})
@@ -296,7 +301,7 @@ module.exports = {
                 }
             })
             .then(dbModel => {
-                console.log("the UserID inside Kill function ", req.session.passport.user._id);
+                console.log("the user's UserID inside Kill function ", req.session.passport.user._id);
                 // update the user's kills
                 db.User
                     .findOneAndUpdate({
@@ -305,7 +310,7 @@ module.exports = {
                         $inc: {
                             "kills": 1
                         }
-                        
+
                         // working until here
                     })
                     .then(dbModel => {
@@ -315,43 +320,122 @@ module.exports = {
                         // **** need the game Name ******
                         console.log(req.body.game);
                         db.Games
-                        find({
+                            .find({
                                 game: req.body.game
                             })
                             .select({
                                 "playersAlive": 1,
                                 "_id": 0
                             })
-                            .res(dbModel => {
+                            .then(dbModel => {
+                                console.log("next is updating the playersAlive array");
                                 console.log(dbModel);
-                                var playersAlive=dbModel;
+                                // playersLeft = array of playersAlive
+                                let playersLeft=dbModel[0].playersAlive;
+                                console.log(playersLeft);
+                                // remove the target from playersAlive
 
-                                db.Games
-                                    
+                                let indexTarget=playersLeft.indexOf(req.body.username);
+                                console.log(indexTarget);
+                                console.log (playersLeft.indexOf(req.body.username));
+                                if (indexTarget > -1) {
+                                               var playerRemoved= playersLeft.splice(indexTarget, 1);
+                                                
+                                            };
+                                            console.log ("made it this far line 345");
+                                            console.log("new playersLeft ",playersLeft);
+                                             console.log("player was removed ",playerRemoved[0]);
+                                            
+                                            console.log ("working up until this point"); 
+                                            console.log(req.body.game); 
+                                            
+                                            // Set playersAlive to playersLeft
+                                                db.Games
+                                                    .findOneAndUpdate({
+                                                        game: req.body.game
+                                                    },{ $pull: {playersAlive: playerRemoved[0]}})
+                                                    .then(dbModel => {
+                                                        console.log(dbModel);
+                                                        // console.log(game.playersAlive);
+                                                        // get the target
 
-                                    .findOneAndUpdate({
-                                        game: req.body.game
-                                    }, {
-                                        "playersAlive": playersAlive
-                                    })
-                                    .res(dbModel => {
+                                                        // move target to playersDead
+                                                        db.Games
+                                                        .findOneAndUpdate({
+                                                            game: req.body.game
+                                                        },{ $push: {playersDead:playerRemoved[0]}})
+                                                        .then(dbModel => {
+                                                            console.log(dbModel);
+                                                            console.log ("get the target: line 369")
+                                                            // get the target
+                                                            db.User
+                                                                .find({username:req.body.username})
+                                                                .select({
+                                                                    "target": 1,
+                                                                    "_id": 0,
+                                                                })
+                                                                .then(dbModel => {
+                                                                    // findOneAndUpdate to updated target
+                                                                    console.log ("hopefullly this is the new target: ",dbModel[0].target);
+                                                                    console.log("users id    ",req.session.passport.user._id);
+                                                                    console.log ("users username: ",req.session.passport.user.userName);
+                                                                    // if the target = username, reshuffle, else, continue
+
+                                                                    if(req.session.passport.user.userName == dbModel[0].target){
+                                                                        // shuffle and restart
+                                                                        console.log ("you done Fucked up ---line 386");
+                                                                        
+                                                                    } else {
+                                                                        // assign user's target to target's target
+                                                                        console.log("the else statement");
+                                                                    db.User
+                                                                        findOneAndUpdate({
+                                                                            "_id": req.session.passport.user._id
+                                                                        }, {"target": dbModel[0].target})
+                                                                        .then(dbModel => res.json(dbModel))
+
+                                                                        // .then (newTarget => {
+                                                                        //     // console.log(dbModel); 
+                                                                        //     console.log("new target is has been assigned.");  
+                                                                        // })
+                                                                        .catch(err => res.status(4223).json(err)); 
+                                                                    };
+
+                                                                })
+                                                                .catch(err => res.status(422).json(err)); 
+
+                                                            
+                                                        })
+                                                        .catch(err => res.status(422).json(err)); 
+                                                    })
+                                                    .catch(err => res.status(422).json(err));
 
 
-                                        var index = array.indexOf(req.body.username);
-                                        if (index > -1) {
-                                            array.splice(index, 1);
 
-                                        }
-                                        res.json(dbModel);
-                                    })
-                                    .catch(err => res.status(422).json(err));
+
+
+                                // db.Games
+
+
+                                //     .findOneAndUpdate({
+                                //         game: req.body.game
+                                //     }, {
+                                //         "playersAlive": playersAlive
+                                //     })
+                                //     .res(dbModel => {
+
+
+                                //         }
+                                //         res.json(dbModel);
+                                //     })
+                                //     .catch(err => res.status(422).json(err));
 
                             })
                             .catch(err => res.status(422).json(err));
                     })
                     .catch(err => res.status(422).json(err));
 
-                res.json(dbModel)
+
             })
             .catch(err => res.status(422).json(err));
 
@@ -417,9 +501,11 @@ module.exports = {
     // },
 
 
-// Delete game function
-deleteGame: function (req, res) {
-            db.Games
+    // Delete game function
+    deleteGame: function (req, res) {
+        db.Games
+            // change to findOneAndUpdate
+
             .findById({
                 _id: req.params.id
             })
