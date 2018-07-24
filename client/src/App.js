@@ -27,7 +27,8 @@ class App extends Component {
       target: '',
       targetURL: '',
       currentGame: '',
-      getCurrentGame: this.getCurrentGame
+      getCurrentGame: this.getCurrentGame,
+      kills: " "
     }
 
     this.login = this.login.bind(this);
@@ -51,6 +52,24 @@ class App extends Component {
       [event.target.name]: event.target.value
     })
   }
+  getKills = () => {
+    axios
+    .get('/api/users/userStats')
+    .then(response => {
+      console.log(response)
+      if(response.data){
+        this.setState({
+          kills: response.data.kills,
+        });
+      }
+    }).catch(error => {
+      console.log(error);
+      
+    })
+    console.log("this is the current kills on state " +this.state.kills)
+  }
+
+
   getCurrentGame = () => {
     axios
     .get('/api/games/updateActiveGames')
@@ -233,13 +252,13 @@ class App extends Component {
 
           <Route path="/home" exact render={
             () => {
-              return (<Home logOut={this.logOut} loggedIn={this.state.loggedIn} username={this.state.username} target={this.state.target} targetURL={this.state.targetURL} currentGame={this.state.currentGame}/>)
+              return (<Home logOut={this.logOut} loggedIn={this.state.loggedIn} username={this.state.username} target={this.state.target} targetURL={this.state.targetURL} currentGame={this.state.currentGame} kills={this.state.kills}/>)
             }
           } />
 
           <Route path="/JoinGame" exact render={
             () => {
-              return (<JoinGame username={this.state.username} target={this.state.target} logOut={this.logOut} loggedIn={this.state.loggedIn} targetURL={this.state.targetURL} currentGame={this.state.currentGame}/>)
+              return (<JoinGame username={this.state.username} target={this.state.target} logOut={this.logOut} loggedIn={this.state.loggedIn} targetURL={this.state.targetURL} currentGame={this.state.currentGame} kills={this.state.kills}/>)
             }
           } />
           {/*<Example />*/}
@@ -247,12 +266,12 @@ class App extends Component {
            <FacebookLogin />*/}
           <Route path="/creategame" exact render={
             () => {
-              return (<CreateGame username={this.state.username} target={this.state.target} logOut={this.logOut} loggedIn={this.state.loggedIn} targetURL={this.state.targetURL} currentGame={this.state.currentGame}/>)
+              return (<CreateGame username={this.state.username} target={this.state.target} logOut={this.logOut} loggedIn={this.state.loggedIn} targetURL={this.state.targetURL} currentGame={this.state.currentGame} kills={this.state.kills}/>)
             }
           } />
           <Route path="/currentgame" exact render={
             () => {
-              return (<CurrentGame username={this.state.username} target={this.state.target} logOut={this.logOut} loggedIn={this.state.loggedIn} targetURL={this.state.targetURL} currentGame={this.state.currentGame}/>)
+              return (<CurrentGame username={this.state.username} target={this.state.target} logOut={this.logOut} loggedIn={this.state.loggedIn} targetURL={this.state.targetURL} currentGame={this.state.currentGame} kills={this.state.kills}/>)
             }
           } />
           <Route path="/enrollcam" exact render={
@@ -267,7 +286,7 @@ class App extends Component {
           } />
           <Route path="/startgame" exact render={
             () => {
-              return (<StartGame username={this.state.username} target={this.state.target} logOut={this.logOut} loggedIn={this.state.loggedIn} targetURL={this.state.targetURL} getCurrentGame={this.state.getCurrentGame} currentGame={this.state.currentGame}/>)
+              return (<StartGame username={this.state.username} target={this.state.target} logOut={this.logOut} loggedIn={this.state.loggedIn} targetURL={this.state.targetURL} getCurrentGame={this.state.getCurrentGame} currentGame={this.state.currentGame} kills={this.state.kills}/>)
             }
           } />
 
