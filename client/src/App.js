@@ -48,7 +48,7 @@ class App extends Component {
   }
   getCurrentGame = () => {
     axios
-    .get('/api/game/updateActiveGames')
+    .get('/api/games/updateActiveGames')
     .then(response => {
       console.log(response)
       if(response.data){

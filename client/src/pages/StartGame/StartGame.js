@@ -74,7 +74,7 @@ class JoinGame extends Component {
         console.log("this should be the updateActiveGames response " +response);
       })
     console.log("this should be the current game" + this.props.currentGame);
-    document.getElementById("linkHome").click()
+    window.location.pathname = "/";
 
   }
   sendGameToJerson = (game) => {
