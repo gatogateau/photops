@@ -204,6 +204,19 @@ module.exports = {
     },
 
     grabActiveGame: function (req, res) {
+        db.User
+            .findById({
+                 "_id":req.session.passport.user._id
+            })
+            .select({
+                "activeGames": 1,
+                "_id": 0
+            })
+            .then(activeGames => {
+                console.log(activeGames);
+                res.json(activeGames);
+            })
+            .catch(err => res.status(422).json(err));
 
     },
 
@@ -291,23 +304,44 @@ module.exports = {
 
     // list of all games the user is in.
     currentGameToUsers: function (req, res) {
-        console.log("this is the game:--" + game);
-        var players = game[0].allPlayers;
-        console.log(players);
-        // for (let i = 0; i < players.length; i++) {
-        //     players.(players => {
-                db.User
-                .findOneAndUpdate.players.forEach(element => {
-                    
-                });({
-                        username: player[i]
-                    }, {
-                        activeGames: req.body.game
-                    })
-                    .then(dbModel => res.json(dbModel))
-                    .catch(err => res.status(422).json(err));
-            // })
-        
+        console.log("current game to users: this is the game:--", req.body.game);
+        console.log(req.body);
+
+        db.Games
+
+            .find({
+                game: req.body.game
+            })
+            .select({
+                "allPlayers": 1,
+                "_id": 0
+            })
+            .then(players => {
+                console.log("this is the ___game:-- ", players[0].allPlayers)
+                var allplayers = players[0].allPlayers;
+                console.log("variable allplayers", allplayers);
+                // array is allplayers
+                console.log("lets see if we get array[0]: ", allplayers[0]);
+
+                for (var i = 0; i < allplayers.length; i++) {
+                    // const element = allplayers[index];
+                    db.User
+                        .findOneAndUpdate({
+
+                            username: allplayers[i]
+                        }, {
+                            activeGames: req.body.game
+                        })
+                        .then(dbModel => {
+                            console.log("don't know what will happen: ", dbModel);
+                        })
+                        .catch(err => res.status(422).json(err));
+
+                }
+            })
+
+            .catch(err => res.status(422).json(err));
+
     },
 
 
