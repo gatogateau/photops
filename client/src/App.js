@@ -35,7 +35,7 @@ class App extends Component {
     this.signUp = this.signUp.bind(this);
     this.handleChange = this.handleChange.bind(this);
     this.getCurrentGame = this.getCurrentGame.bind(this);
-    this.getKills = this.getKills.bind(this);
+    this.getKills=this.getKills.bind(this);
   }
 
   componentWillMount = () => {
@@ -48,6 +48,7 @@ class App extends Component {
     this.isLoggedIn();
     this.getTarget();
     this.getCurrentGame();
+    this.getKills();
   }
   handleChange(event) {
     this.setState({
