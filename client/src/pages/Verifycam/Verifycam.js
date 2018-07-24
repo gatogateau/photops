@@ -5,7 +5,7 @@ import cloudinary from 'cloudinary';
 import axios from 'axios';
 import Modal from 'react-awesome-modal';
 import './Verifycam.css';
-import { Link } from "react-router-dom";
+// import { Link } from "react-router-dom";
 
 cloudinary.config({
     cloud_name: 'notjarvis',
@@ -160,7 +160,7 @@ class Verifycam extends Component {
                         <a href="javascript:void(0);" onClick={() => this.closeModal2()}>Close</a>
                     </div>
                 </Modal>
-                <Link to="/"><button>Back</button></Link>
+                <a href="/"><button>Back</button></a>
                 <img alt="target"
                     style={this.style.captureImage}
                     ref={(img) => {
