@@ -35,12 +35,14 @@ class App extends Component {
     this.signUp = this.signUp.bind(this);
     this.handleChange = this.handleChange.bind(this);
     this.getCurrentGame = this.getCurrentGame.bind(this);
+    this.getKills = this.getKills.bind(this);
   }
 
   componentWillMount = () => {
     this.isLoggedIn();
     this.getTarget();
     this.getCurrentGame();
+    this.getKills();
   }
   componentDidlMount = () => {
     this.isLoggedIn();
@@ -59,7 +61,7 @@ class App extends Component {
       console.log(response)
       if(response.data){
         this.setState({
-          kills: response.data.kills,
+          kills: response.data[0].kills,
         });
       }
     }).catch(error => {
