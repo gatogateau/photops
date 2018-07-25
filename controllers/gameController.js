@@ -63,14 +63,6 @@ module.exports = {
             .catch(err => res.status(422).json(err));
     },
 
-    // create new Game
-    createGame: function (req, res) {
-        console.log(req.body);
-        db.Games
-            .create(req.body)
-            .then(dbModel => res.json(dbModel))
-            .catch(err => res.status(422).json(err));
-    },
 
     create: function (req, res) {
         db.Games
@@ -96,6 +88,31 @@ module.exports = {
             .then(dbModel => res.json(dbModel))
             .catch(err => res.status(422).json(err));
     },
+
+    // create new Game
+    createGame: function (req, res) {
+        console.log(req.body);
+        db.Games
+            .create(req.body)
+            .then(dbModel => res.json(dbModel))
+            .catch(err => res.status(422).json(err));
+    },
+
+    // add these games to the userProfile
+    // get a list of games the user created
+    iCreatedThese: function (req, res) {
+        db.Games
+            .findById({
+                _id: req.session.passport.user._id
+            })
+            .select({
+                "gameCreator": 1,
+                "_id": 0
+            })
+            .then(dbModel => res.json())
+            .catch(err => res.status(422).json(err))
+    },
+
 
 
     // find a game by game id, add username to allPlayers
@@ -183,7 +200,8 @@ module.exports = {
     },
 
 
-
+    // grabs the user's active games so it can post to the jumbotron
+    // can I call this function from the start game function
     grabActiveGame: function (req, res) {
         db.User
             .findById({
@@ -407,7 +425,7 @@ module.exports = {
                                     var playerRemoved = playersLeft.splice(indexTarget, 1);
 
                                 };
-                                console.log("made it this far line 345");
+                                console.log("made it this far line 411");
                                 // console.log("new playersLeft ", playersLeft);
                                 // console.log("player was removed ", playerRemoved[0]);
 
@@ -439,7 +457,7 @@ module.exports = {
                                             })
                                             .then(dbModel => {
                                                 // console.log(dbModel);
-                                                console.log("get the target: line 369")
+                                                console.log("get the target: line 442")
                                                 // get the target
                                                 db.User
                                                     .find({
