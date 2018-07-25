@@ -10,9 +10,29 @@
     text-align: center;
     margin-bottom: 5px;
     border-radius: 10px;
+    margin-top: -25px;
 }
 #userName {
     margin-top: -60px;
+    font-weight: bolder;
+    background: -webkit-linear-gradient(aliceblue,red);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+.gradient {
+    font-weight: bolder;
+    background: -webkit-linear-gradient(aliceblue,red);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+#kills {
+    margin-top: -11px;
+}
+#tguy {
+    font-size: 40px;
+}
+h3 {
+    margin-top: -10px;
 }
 
 .profile {
