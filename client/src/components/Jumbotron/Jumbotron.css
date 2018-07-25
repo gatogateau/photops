@@ -1,7 +1,8 @@
 .header {
     display: block;
     width: 100% !important;
-    background-color: rgba(10, 4, 3, 0.842);
+    background-color: #086066;
+    opacity: .8;
     color: #fff;
     height: auto;
     padding-top: 150px;

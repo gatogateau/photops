@@ -1,17 +1,24 @@
 .btns {
-    margin: 5% auto 5% auto;
-    padding: 1%;
+    margin: 1% auto 1% auto;
     width: 50%;
     height: auto;
     display: block;
     text-align: center;
     font-size: 25px;
-    background-color: #9d364d;
+    background-color: #000000;
     color: white;
-    border: none;
+    border: 1px solid aliceblue;
+    border-radius: 10px;
     text-decoration: none;
+    opacity: .7;
 }
 
 a:-webkit-any-link {
    text-decoration: none;
+}
+
+#assButt {
+    color: rgb(255, 0, 0);
+    font-weight: bolder;
+    font-size: 30px;
 }

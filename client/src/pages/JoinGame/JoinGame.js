@@ -7,7 +7,8 @@ import Navbar from "../../components/Navbar";
 import { Col, Row, Container } from "../../components/Grid";
 import { Input } from "reactstrap";
 import './JoinGame.css';
-import axios from "axios"
+import axios from "axios";
+import Modal from 'react-awesome-modal';
 // import { List, ListItem } from "../../components/List";
 // import { Input, TextArea, FormBtn } from "../../components/Form";
 class JoinGame extends Component {
@@ -16,12 +17,14 @@ class JoinGame extends Component {
 
     this.state = {
       gameName: "",
-      allGames: [ ]
+      allGames: [ ],
+      visible1: false
     }
     this.findAllGames = this.findAllGames.bind(this);
   }
   
   findAllGames() {
+    this.openModal1();
     let that = this;
     axios.get('/api/games/allGames')
       .then(function (response) {
@@ -67,6 +70,17 @@ class JoinGame extends Component {
       })
 
   } 
+  openModal1() {
+    this.setState({
+      visible1: true
+    });
+  }
+
+  closeModal1() {
+    this.setState({
+      visible1: false
+    });
+  }
 
   render() {
     console.log(this)
@@ -80,9 +94,9 @@ class JoinGame extends Component {
             <Jumbotron username={this.props.username} target={this.props.target} targetURL={this.props.targetURL} currentGame={this.props.currentGame} kills={this.props.kills}/>
           </Col>
           <Col size="md-12">
-            <div className="card">
-              <h1>Join</h1>
-              <form>
+            <div className="joinGameForm">
+            <form>
+              <h1>Join Game</h1>
                 <Input className="inputField" onChange={(e) => this.handleGameNameInput(e)} type="input" name="input" 
                   placeholder="Game Name" bsSize="md" />
                   <br/>
@@ -98,6 +112,7 @@ class JoinGame extends Component {
               >
                 <h4>Find All Games</h4>
               </button>
+              <br/>
               {this.state.allGames.map((game, i) =>
               <li key={i} onClick={(e) =>{this.joinSpecificGame(e, game.game)}}>{game.game}</li>
             )}
@@ -105,6 +120,13 @@ class JoinGame extends Component {
             </div>
           </Col>
         </Row>
+        <Modal visible={this.state.visible1} width="400" height="300" effect="fadeInUp" onClickAway={() => this.closeModal1()}>
+          <div>
+            <h2  id="joinInstructions">Click Game Name to Join</h2>
+            <br/>
+            <a href="javascript:void(0);" onClick={() => this.closeModal1()}>Close</a>
+          </div>
+        </Modal>
       </Container>
     );
   }

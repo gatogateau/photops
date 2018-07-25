@@ -7,7 +7,8 @@ import { Link } from "react-router-dom";
 import { Col, Row, Container } from "../../components/Grid";
 // import { Button, Input } from "reactstrap";
 import './StartGame.css';
-import axios from "axios"
+import axios from "axios";
+import Modal from 'react-awesome-modal';
 // import { List, ListItem } from "../../components/List";
 // import { Input, TextArea, FormBtn } from "../../components/Form";
 class JoinGame extends Component {
@@ -16,12 +17,14 @@ class JoinGame extends Component {
 
     this.state = {
       gameName: "",
-      allGames: []
+      allGames: [],
+      visible1: false
     }
     this.findAllGames = this.findAllGames.bind(this);
   }
 
   findAllGames() {
+    this.openModal1();
     let that = this;
     axios.get('/api/games/allGames')
       .then(function (response) {
@@ -36,6 +39,17 @@ class JoinGame extends Component {
         // handle error
         console.log(error);
       })
+  }
+  openModal1() {
+    this.setState({
+      visible1: true
+    });
+  }
+
+  closeModal1() {
+    this.setState({
+      visible1: false
+    });
   }
 
   joinGame = (e) => {
@@ -64,15 +78,15 @@ class JoinGame extends Component {
         if (response.data.message) {
           alert(response.data.message)
         }
-        console.log("this should be the start game response" +response);
+        console.log("this should be the start game response" + response);
       })
-      axios.post("/api/games/updateActiveGames", { game: gameName })
+    axios.post("/api/games/updateActiveGames", { game: gameName })
       .then(function (response) {
         if (response.data.message) {
           alert(response.data.message)
         }
 
-        console.log("this should be the start game response" +response);
+        console.log("this should be the start game response" + response);
 
       })
     console.log("this should be the current game" + this.props.currentGame);
@@ -85,7 +99,7 @@ class JoinGame extends Component {
         if (response.data.message) {
           alert(response.data.message)
         }
-        console.log("this should be the response from jerson " +response);
+        console.log("this should be the response from jerson " + response);
       })
   }
 
@@ -98,10 +112,10 @@ class JoinGame extends Component {
             <Navbar logOut={this.props.logOut} />
           </Col>
           <Col size="md-12">
-            <Jumbotron username={this.props.username} logOut={this.props.logOut} target={this.props.target} targetURL={this.props.targetURL} currentGame={this.props.currentGame} kills={this.props.kills}/>
+            <Jumbotron username={this.props.username} logOut={this.props.logOut} target={this.props.target} targetURL={this.props.targetURL} currentGame={this.props.currentGame} kills={this.props.kills} />
           </Col>
           <Col size="md-12">
-            <div className="card">
+            <div className="startGameForm">
               <h1>Start</h1>
               <br />
               <button
@@ -110,6 +124,7 @@ class JoinGame extends Component {
               >
                 <h4>Find All Games</h4>
               </button>
+              <br />
               {this.state.allGames.map((game, i) =>
                 <li key={i} onClick={(e) => { this.startSpecificGame(e, game.game), this.sendGameToJerson(game.game) }}>{game.game}</li>
               )}
@@ -117,7 +132,14 @@ class JoinGame extends Component {
             </div>
           </Col>
         </Row>
-        <Link style={{visibility: "hidden"}} to="/" id="linkHome">Home</Link>
+        <Modal visible={this.state.visible1} width="400" height="300" effect="fadeInUp" onClickAway={() => this.closeModal1()}>
+          <div>
+            <h2  id="startInstructions">Click Game Name to Start</h2>
+            <br/>
+            <a href="javascript:void(0);" onClick={() => this.closeModal1()}>Close</a>
+          </div>
+        </Modal>
+        <Link style={{ visibility: "hidden" }} to="/" id="linkHome">Home</Link>
       </Container>
     );
   }

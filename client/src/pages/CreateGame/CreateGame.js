@@ -8,6 +8,7 @@ import { Col, Row, Container } from "../../components/Grid";
 import { Button, Input } from "reactstrap";
 import "./CreateGame.css";
 import axios from "axios";
+import Modal from 'react-awesome-modal';
 // import { List, ListItem } from "../../components/List";
 // import { Input, TextArea, FormBtn } from "../../components/Form";
 class CreateGame extends Component {
@@ -18,7 +19,8 @@ class CreateGame extends Component {
       createGameForm: [
         { game: "", startDate: "", duration: "", gameType: "Public" }
       ],
-      allUsers: []
+      allUsers: [],
+      visible1: false
     };
 
     this.createGame = this.createGame.bind(this);
@@ -60,6 +62,18 @@ class CreateGame extends Component {
         // always executed
       });
   }
+
+  openModal1() {
+    this.setState({
+        visible1: true
+    });
+}
+
+closeModal1() {
+    this.setState({
+        visible1: false
+    });
+}
 
   createGame(event) {
     event.preventDefault();
@@ -151,6 +165,12 @@ class CreateGame extends Component {
                 <li key={i}>{user.username}</li>
               ))}
               </div>
+              <Modal visible={this.state.visible1} width="400" height="300" effect="fadeInUp" onClickAway={() => this.closeModal1()}>
+                    <div>
+                        <h1 className="eliminated">CLick Users Name To Add To Game</h1>
+                        <a href="javascript:void(0);" onClick={() => this.closeModal1()}>Close</a>
+                    </div>
+                </Modal>
             </div>
           </Col>
         </Row>

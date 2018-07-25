@@ -3,34 +3,33 @@
     margin: 5% auto 2% auto;
     text-align: center;
     height: auto;
-    background-color: rgba(54, 54, 54, 0.438);
+    background-color: #086066;
     border-radius: 10px;
-    box-shadow: 0 10px 50px rgba(0,0,0,0.4);
+    box-shadow: 0 10px 50px red;
+    opacity: .8;
 }
 
 .usersResults {
     width: 325px;
-    margin: 15% auto 2% auto;
     text-align: center;
     height: auto;
-    background-color: rgba(27, 27, 27, 0.925);
+    background-color: #086066;
     border-radius: 10px;
     box-shadow: 0 10px 50px rgba(0,0,0,0.4);
-    color: white;
+    color: aliceblue;
 }
 
 .createButton {
 
     margin: 2% auto 2% auto;
     width: 50%;
-    background-color: #9d364d;
-    border: none;
+    background-color: #000000;
+    border: 1px solid aliceblue;
     border-radius: 10px;
 }
 
 #title {
     color: white;
-    padding: 5%;
 }
 
 .gameFormInput {
@@ -50,9 +49,9 @@
 .userButton {
     width: 35%;
     margin: 2% 1% 2% 1%;
-    border: none;
+    border: 1px solid aliceblue;
     border-radius: 10px;
-    background-color: #9d364d;
+    background-color: #000000;
 }
 .searchUserForm {
     margin-top: -1%;
