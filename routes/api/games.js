@@ -17,13 +17,13 @@ router.route("/allGames")
 // matches with /api/games/allOfThem 
 router.route("/allOfThem")
     .get(gamesController.findAllGames);
-    // .get(gamesController.findAllGameName);
+// .get(gamesController.findAllGameName);
 
-    // matches with /api/games/myGames
+// matches with /api/games/myGames
 router.route("/myGames")
     .get(gamesController.findUserGames)
 
-    // matches with /api/games/joinGameByGameName
+// matches with /api/games/joinGameByGameName
 router.route("/joinGameByGameName")
     .put(gamesController.joinGameByGameName);
 
@@ -49,21 +49,21 @@ router.route("/game/:game")
 router.route("/createGame")
     .post(gamesController.createGame);
 
-    // runKillFunction
-    // api/games/killTarget
-    router.route("/killTarget")
-    .put(gamesController.runKillFunction)
-    // .put(gamesController.testtwofinds);
+// runKillFunction
+// api/games/killTarget
+router.route("/killTarget")
+    .put(gamesController.runKillFunction);
+// .put(gamesController.testtwofinds);
 
-    // finds current game's players, adds current game to user's activeGames
+// finds current game's players, adds current game to user's activeGames
 //  api/games/updateActiveGames
 router.route("/updateActiveGames")
-    .post(gamesController.updateActiveGames) 
+    .post(gamesController.updateActiveGames)
     .get(gamesController.grabActiveGame);
 
-
+// finds the games the user created
+//  api/games/icreatedThese
+router.route("/iCreatedThese")
+    .get(gamesController.iCreatedThese);
 
 module.exports = router;
-
-
-
