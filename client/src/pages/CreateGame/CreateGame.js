@@ -17,7 +17,7 @@ class CreateGame extends Component {
 
     this.state = {
       createGameForm: [
-        { game: "", startDate: "", duration: "", gameType: "Public" }
+        { game: "", startDate: "", duration: "", gameType: "Public", gameCreator: "" }
       ],
       allUsers: [],
       visible1: false
@@ -81,7 +81,8 @@ closeModal1() {
     let createGameForm = {
       game: document.getElementById("game").value,
       startDate: document.getElementById("startDate").value,
-      duration: document.getElementById("duration").value
+      duration: document.getElementById("duration").value,
+      gameCreator: this.props.username
     };
     console.log(createGameForm);
 
