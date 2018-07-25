@@ -39,14 +39,12 @@ class CurrentGame extends Component {
             <Jumbotron username={this.props.username} target={this.props.target} targetURL={this.props.targetURL} currentGame={this.props.currentGame} kills={this.props.kills}/>
           </Col>
           <Col size="md-12">
-            <div className="card">
-              <button style={{width:"100px"}} onClick={this.getMyGame}>Get My Game</button>
-              <h1>Group Name</h1>
-              <br />
-              <h2>Players</h2>
-              <li />
-              <ul className="nutDeadYet">Not Dead Yet</ul>
-              <ul className="dead">The Fallen</ul>
+          <div className="currentGameForm">
+              <button style={{visibility: "hidden"}} onClick={this.getMyGame}>Get My Game</button>
+              <h1>{this.props.currentGame}</h1>
+              <h2 className="notDeadYet">Not Dead Yet</h2>
+              <h2 className="dead">The Fallen</h2>
+              <br/>
             </div>
           </Col>
         </Row>

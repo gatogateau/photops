@@ -4,7 +4,7 @@
     padding: 2%;
     top:0;
     left: 0;
-    background-color: #9d364d;
+    background-color: #000000;
     min-height: 65px;
     width: 100%;
     -webkit-box-shadow: 0 14px 28px rgba(0,0,0,.25), 0 10px 10px rgba(0,0,0,.22);
@@ -30,6 +30,14 @@
 
 .nav-pills>li>a:hover {
     background-color: #2c6abb;
+}
+#assassin {
+    color: crimson;
+    font-weight: bolder;
+    font-size: 22px;
+}
+.gameName {
+    display: inline;
 }
 
 /* .btn-group>.btn:first-child

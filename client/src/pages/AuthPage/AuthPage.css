@@ -35,3 +35,18 @@
 .form-horizontal {
     margin-top: 10%;
 }
+@media only screen and (max-width: 770px) {
+    .App {
+        background-repeat: no-repeat;
+        background-size: auto 100%;
+        background-color: black;
+    }
+    
+  }
+  @media only screen and (max-width: 640px) {
+    .App {
+        background-repeat: no-repeat;
+        background-size: auto 100%;
+        background-color: black;
+    }
+  }

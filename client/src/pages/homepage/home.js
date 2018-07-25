@@ -37,11 +37,6 @@ class Home extends Component {
                 Upload Your Face
               </Button>
             </Link>
-            <Link to="/currentgame">
-              <Button className="btns">
-                Current Game
-              </Button>
-            </Link>
             <Link to="/creategame">
               <Button className="btns">
                 Create Game
@@ -52,14 +47,19 @@ class Home extends Component {
                 Join Game
               </Button>
             </Link>
-            <Link to="/verifycam">
-              <Button className="btns">
-                Assassinate
-              </Button>
-            </Link>
             <Link to="/StartGame">
               <Button className="btns">
                 Start Game
+              </Button>
+            </Link>
+            <Link to="/currentgame">
+              <Button className="btns">
+                Current Game
+              </Button>
+            </Link>
+            <Link to="/verifycam">
+              <Button id="assButt" className="btns">
+                Assassinate
               </Button>
             </Link>
           </Col>
