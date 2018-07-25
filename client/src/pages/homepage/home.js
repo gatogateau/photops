@@ -52,11 +52,11 @@ class Home extends Component {
                 Start Game
               </Button>
             </Link>
-            <Link to="/currentgame">
-              <Button className="btns">
+            {/* <Link to="/currentgame">
+              <Button style={{visibility: "hidden"}} className="btns">
                 Current Game
               </Button>
-            </Link>
+            </Link> */}
             <Link to="/verifycam">
               <Button id="assButt" className="btns">
                 Assassinate

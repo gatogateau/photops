@@ -161,7 +161,7 @@ class Verifycam extends Component {
                     </div>
                 </Modal>
                 <a href="/"><button>Back</button></a>
-                <img alt="target"
+                <img 
                     style={this.style.captureImage}
                     ref={(img) => {
                         this.img = img;
