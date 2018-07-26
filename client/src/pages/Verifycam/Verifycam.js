@@ -94,7 +94,10 @@ class Verifycam extends Component {
         })
           .then(function (response) {
             // handle success
-            response == "chad rules" ? this.openModal3() : null;
+            console.log(response.data);
+            if(response.data == "Chad Rules"){
+                that.openModal3(); 
+            }
     
           })
           .catch(function (error) {
