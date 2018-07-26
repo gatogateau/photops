@@ -19,6 +19,7 @@ class Verifycam extends Component {
         this.state = {
             visible1: false,
             visible2: false,
+            visible3: false,
             currentGame: this.props.currentGame
         };
         this.takePicture = this.takePicture.bind(this);
@@ -71,6 +72,17 @@ class Verifycam extends Component {
             visible2: false
         });
     }
+    openModal3() {
+        this.setState({
+            visible3: true
+        });
+    }
+ 
+    closeModal3() {
+        this.setState({
+            visible3: false
+        });
+    }
 
     runKillFunction() {
         let that = this;
@@ -82,7 +94,7 @@ class Verifycam extends Component {
         })
           .then(function (response) {
             // handle success
-            console.log(response);
+            response == "chad rules" ? this.openModal3() : null;
     
           })
           .catch(function (error) {
@@ -158,6 +170,14 @@ class Verifycam extends Component {
                         <h1 className="missed">Oops, you missed!</h1>
                         <p>Please try again.</p>
                         <a href="javascript:void(0);" onClick={() => this.closeModal2()}>Close</a>
+                    </div>
+                </Modal>
+                <Modal visible={this.state.visible3} width="400" height="300" effect="fadeInUp" onClickAway={() => this.closeModal3()}>
+                    <div>
+                        <h1 className="youWin">Congratulations</h1>
+                        <img id="winning" src="https://media0.giphy.com/media/Q56SF4czEtSZG/giphy.gif"/>
+                        <h1 className="win">You Win!</h1>
+                        <a href="javascript:void(0);" onClick={() => this.closeModal3()}>Close</a>
                     </div>
                 </Modal>
                 <a href="/"><button>Back</button></a>
