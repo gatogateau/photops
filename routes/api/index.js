@@ -1,9 +1,9 @@
-const path= require("path");
-const router = require("express").Router();
-const userRoutes = require("./users");
-const gamesRoutes = require("./games");
-const loginRoutes = require("./login");
-const playerRoutes = require("./player");
+var path= require("path");
+var router = require("express").Router();
+var userRoutes = require("./users");
+var gamesRoutes = require("./games");
+var loginRoutes = require("./login");
+var playerRoutes = require("./player");
 // const accountRoutes = require("./signin");
 
 // User routes
