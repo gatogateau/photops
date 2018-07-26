@@ -116,11 +116,7 @@ class JoinGame extends Component {
               </button>
 
               <br/>
-              {this.state.allGames.map((game, i) =>
-              <li key={i} onClick={(e) =>{this.joinSpecificGame(e, game.game)}}>{game.game}</li>
-            )}
 
-              <br />
             </div>
 
             <div className="gameResults">
