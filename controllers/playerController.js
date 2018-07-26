@@ -1,4 +1,4 @@
-const db = require("../models");
+var db = require("../models");
 
 // Defining methods for the playerController
 

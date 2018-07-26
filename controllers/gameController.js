@@ -1,4 +1,4 @@
-const db = require("../models");
+var db = require("../models");
 var shuffleLibrary = require('shuffle-array');
 
 
