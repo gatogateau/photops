@@ -170,7 +170,9 @@ class App extends Component {
   }
 
   login(event, username, password) {
+    if(event) {
     event.preventDefault()
+  }
     console.log('handleSubmit')
     // added login
     axios
@@ -213,17 +215,20 @@ class App extends Component {
         console.log('login response: ')
         console.log(response)
         if (response.status === 200) {
+          this.login(null, username, password)
+
           // update App.js state
           // this.props.updateUser({
           //     loggedIn: true,
           //     username: response.data.username
           // })
           // update the state to redirect to home
-          this.setState({
-            loggedIn: true,
-            username: response.data.username,
-            redirectTo: '/home'
-          })
+
+          // this.setState({
+          //   loggedIn: true,
+          //   username: response.data.username,
+          //   redirectTo: '/home'
+          // })
         }
       }).catch(error => {
         console.log('login error: ')
