@@ -11,7 +11,7 @@ const passport = require('./models/passport');
 
 
 // listen on port 3001
-const PORT = process.env.PORT || 3001;
+var PORT = process.env.PORT || 3001;
 
 
 // Define middleware here
