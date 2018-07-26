@@ -99,17 +99,21 @@ module.exports = {
     },
 
     // add these games to the userProfile
+    // send username
     // get a list of games the user created
     iCreatedThese: function (req, res) {
         db.Games
-            .findById({
-                _id: req.session.passport.user._id
+            .find({
+            "gameCreator": req.body.username
             })
             .select({
-                "gameCreator": 1,
-                "_id": 0
+                "_id": 0,
+                "game":1,   
             })
-            .then(dbModel => res.json())
+            .then(dbModel => {
+                console.log(res.json);
+                res.json(dbModel);
+            })
             .catch(err => res.status(422).json(err))
     },
 
@@ -348,6 +352,7 @@ module.exports = {
     // player assassinates the target, target gets removed from playersAlive  and moved to playersDead in db.Games  -findOneAndUpdate. search db.User "target".  Take the target from the deceased, make sure it is not user==target and add to users target.  If user==target, take playersAlive and reshuffle to targets.
     // work on this functionality. 
     playerKillsTarget: function (req, res) {
+        console.log("playerKillsTarget Running");cl
         db.Games
             .findOneAndUpdate({
                 _id: req.params.id
@@ -480,50 +485,73 @@ module.exports = {
 
                                                         if (req.session.passport.user.userName == dbModel[0].target) {
                                                             // shuffle and restart
-                                                            console.log("target's target = username, recalling all contracts and reassigning contracts")
+                                                            
+                                                            console.log("check if this is the last player")
+
                                                             db.Games
-                                                                .findOneAndUpdate({
-                                                                    "game": req.body.game
-                                                                }, {
-                                                                    "playersAlive": playersAlive
+                                                                .find({
+                                                                    "game":req.body.game
                                                                 })
-                                                                .then(newGameData => {
-                                                                    console.log("this is newGameData", newGameData);
+                                                                .select({
+                                                                    "playersAlive":1,
+                                                                    "_id":0
+                                                                })
+                                                                .then(resPlayersAlive => {
+                                                                    console.log (resPlayersAlive);
+                                                                    console.log (resPlayersAlive[0].playersAlive.length);
 
-                                                                    // set users and target to playersAlive
-                                                                    var users = newGameData.playersAlive;
-                                                                    var targets = JSON.stringify(newGameData.playersAlive);
-                                                                    targets = JSON.parse(targets);
-                                                                    console.log("users: " + users, "targets: " + targets);
+                                                                    if(resPlayersAlive[0].playersAlive.length == 1) {
+                                                                        // winner!!!
+                                                                        // alert("Jerson say's Chad is still better than you");
+                                                                        console.log("Chad is still supreme");
+                                                                    } else {
+                                                                        // no winner yet
 
-                                                                    // shuffle the target
-                                                                    let shuffleTheTargets = shuffle(targets, users);
-                                                                    console.log(shuffleTheTargets);
-                                                                    var obj = [];
-
-                                                                    for (let i = 0; i < users.length; i++) {
-                                                                        obj.push({
-                                                                            user: users[i],
-                                                                            target: shuffleTheTargets[i]
-                                                                        })
-                                                                    }
-                                                                    console.log(obj);
-
-                                                                    for (let i = 0; i < obj.length; i++) {
-                                                                        db.User
+                                                                        console.log("target's target = username, recalling all contracts and reassigning contracts")
+                                                                        db.Games
                                                                             .findOneAndUpdate({
-                                                                                username: users[i]
+                                                                                "game": req.body.game
                                                                             }, {
-                                                                                target: shuffleTheTargets[i]
+                                                                                "playersAlive": playersAlive
                                                                             })
-                                                                            .then(user => {
-                                                                                console.log(user);
+                                                                            .then(newGameData => {
+                                                                                console.log("this is newGameData", newGameData);
+            
+                                                                                // set users and target to playersAlive
+                                                                                var users = newGameData.playersAlive;
+                                                                                var targets = JSON.stringify(newGameData.playersAlive);
+                                                                                targets = JSON.parse(targets);
+                                                                                console.log("users: " + users, "targets: " + targets);
+            
+                                                                                // shuffle the target
+                                                                                let shuffleTheTargets = shuffle(targets, users);
+                                                                                console.log(shuffleTheTargets);
+                                                                                var obj = [];
+            
+                                                                                for (let i = 0; i < users.length; i++) {
+                                                                                    obj.push({
+                                                                                        user: users[i],
+                                                                                        target: shuffleTheTargets[i]
+                                                                                    })
+                                                                                }
+                                                                                console.log(obj);
+            
+                                                                                for (let i = 0; i < obj.length; i++) {
+                                                                                    db.User
+                                                                                        .findOneAndUpdate({
+                                                                                            username: users[i]
+                                                                                        }, {
+                                                                                            target: shuffleTheTargets[i]
+                                                                                        })
+                                                                                        .then(user => {
+                                                                                            console.log(user);
+                                                                                        })
+                                                                                }
                                                                             })
+
                                                                     }
                                                                 })
-
-
-
+                                                                .catch (err => res.status(422).json(err));
 
                                                         } else {
                                                             // assign user's target to target's target
