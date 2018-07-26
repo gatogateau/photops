@@ -1,5 +1,5 @@
-const router = require("express").Router();
-const gamesController = require("../../controllers/gameController");
+var router = require("express").Router();
+var gamesController = require("../../controllers/gameController");
 
 
 // TEST ALL THE ROUTES
