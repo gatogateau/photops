@@ -6,93 +6,105 @@ import Navbar from "../../components/Navbar";
 // import { Link } from "react-router-dom";
 import { Col, Row, Container } from "../../components/Grid";
 import { Button, Input } from "reactstrap";
-import './StartGame.css';
-import axios from "axios"
+import "./StartGame.css";
+import axios from "axios";
 // import { List, ListItem } from "../../components/List";
 // import { Input, TextArea, FormBtn } from "../../components/Form";
 class JoinGame extends Component {
   constructor(props) {
-    super(props)
+    super(props);
 
     this.state = {
       gameName: "",
-      allGames: [ ]
-    }
+      allGames: []
+    };
     this.findAllGames = this.findAllGames.bind(this);
   }
-  
+
   findAllGames() {
     let that = this;
-    axios.get('/api/games/allGames')
-      .then(function (response) {
+    axios
+      .get("/api/games/allGames")
+      .then(function(response) {
         // handle success
         console.log(this, response.data, that);
         that.setState({
-          allGames: response.data,
+          allGames: response.data
         });
-
       })
-      .catch(function (error) {
+      .catch(function(error) {
         // handle error
         console.log(error);
-      })
+      });
   }
 
-  joinGame = (e) => {
-    console.log("hit")
+  joinGame = e => {
+    console.log("hit");
     e.preventDefault;
-    axios.put("/api/games/joinGameByGameName", { game: this.state.gameName })
-      .then(function (response) {
+    axios
+      .put("/api/games/joinGameByGameName", { game: this.state.gameName })
+      .then(function(response) {
         if (response.data.message) {
-          alert(response.data.message)
+          alert(response.data.message);
         }
         console.log(response);
-      })
-  }
+      });
+  };
 
-  handleGameNameInput = (e) => {
-    console.log("hit")
+  handleGameNameInput = e => {
+    console.log("hit");
     this.setState({
       gameName: e.target.value
-    })
-  }
+    });
+  };
   startSpecificGame = (e, gameName) => {
     e.preventDefault;
-    axios.put("/api/games/start/startGame", { game: gameName })
-      .then(function (response) {
+    axios
+      .put("/api/games/start/startGame", { game: gameName })
+      .then(function(response) {
         if (response.data.message) {
-          alert(response.data.message)
+          alert(response.data.message);
         }
         console.log(response);
-      })
-
-   } 
+      });
+  };
 
   render() {
-    console.log(this)
+    console.log(this);
     return (
       <Container fluid>
         <Row>
           <Col size="md-12">
-            <Navbar logOut={this.props.logOut}/>
+            <Navbar logOut={this.props.logOut} />
           </Col>
           <Col size="md-12">
-            <Jumbotron username={this.props.username} logOut={this.props.logOut} targetURL={this.props.targetURL}/>
+            <Jumbotron
+              username={this.props.username}
+              logOut={this.props.logOut}
+              targetURL={this.props.targetURL}
+            />
           </Col>
           <Col size="md-12">
-            <div className="card">
+            <div className="startGame">
               <h1>Start</h1>
               <br />
-              <button
-                className="fag"
-                onClick={this.findAllGames}
-              >
+              <button className="fag" onClick={this.findAllGames}>
                 <h4>Find All Games</h4>
               </button>
-              {this.state.allGames.map((game, i) =>
-              <li key={i} onClick={(e) =>{this.startSpecificGame(e, game.game)}}>{game.game}</li>
-            )}
               <br />
+            </div>
+
+            <div className="gameResults">
+            {this.state.allGames.map((game, i) => (
+              <div
+                key={i}
+                onClick={e => {
+                  this.startSpecificGame(e, game.game);
+                }}
+              >
+                {game.game}
+              </div>
+            ))}
             </div>
           </Col>
         </Row>

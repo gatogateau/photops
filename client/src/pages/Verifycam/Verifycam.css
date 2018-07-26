@@ -4,3 +4,13 @@
 .missed {
     margin-top: 20%;
 }
+
+.back {
+    background-color: #9d364d;
+    width: 25%;
+    font-size: 25px;
+    font-weight: bolder;
+    color: white;
+    border-radius: 10px;
+    border: none;
+}

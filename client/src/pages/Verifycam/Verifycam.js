@@ -157,7 +157,7 @@ class Verifycam extends Component {
                         <a href="javascript:void(0);" onClick={() => this.closeModal2()}>Close</a>
                     </div>
                 </Modal>
-                <a href="/"><button>Back</button></a>
+                <a href="/"><button className="back">Back</button></a>
                 <img
                     style={this.style.captureImage}
                     ref={(img) => {
