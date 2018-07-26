@@ -175,6 +175,7 @@ class Verifycam extends Component {
                         <a href="javascript:void(0);" onClick={() => this.closeModal2()}>Close</a>
                     </div>
                 </Modal>
+
                 <Modal visible={this.state.visible3} width="400" height="300" effect="fadeInUp" onClickAway={() => this.closeModal3()}>
                     <div>
                         <h1 className="youWin">Congratulations</h1>

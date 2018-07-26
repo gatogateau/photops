@@ -124,22 +124,7 @@ closeModal1() {
                   placeholder="Game Name"
                   bsSize="md"
                 />
-                <Input
-                  className="gameFormInput"
-                  type="input"
-                  name="input"
-                  id="startDate"
-                  placeholder="Start Date"
-                  bsSize="md"
-                />
-                <Input
-                  className="gameFormInput"
-                  type="input"
-                  name="input"
-                  id="duration"
-                  placeholder="Duration"
-                  bsSize="md"
-                />
+                
                 <Button
                   className="createButton"
                   onClick={this.createGame}
