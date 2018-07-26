@@ -11,7 +11,7 @@ const passport = require('./models/passport');
 
 
 // listen on port 3001
-const PORT = process.env.PORT || glacial-cove-70213.herokuapp.com:3001/api;
+const PORT = process.env.PORT || 3001;
 
 
 // Define middleware here
