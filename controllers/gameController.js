@@ -3,16 +3,26 @@ var shuffleLibrary = require('shuffle-array');
 
 
 
-function shuffle(a, users) {
+function shuffle( users) {
     console.log('hit');
-    shuffleLibrary(a)
-    for (let i = 0; i < users.length; i++) {
-        if (users[i] == a[i]) {
-            return shuffle(a, users);
-            break;
-        }
-    }
-    return a;
+    var newTargets=[];
+    var secondArray=users;
+    
+    
+    
+    // users.forEach(element => {
+        
+
+        
+    // });
+    // shuffleLibrary(a)
+    // for (let i = 0; i <= users.length; i++) {
+    //     if (users[i] == a[i]) {
+    //         return shuffle(a, users);
+    //         break;
+    //     }
+    // }
+    // return a;
 
 }
 // Defining methods for the gamesController
@@ -263,27 +273,36 @@ module.exports = {
                         console.log("users: " + users, "targets: " + targets);
 
                         // shuffle the target
-                        let shuffleTheTargets = shuffle(targets, users);
-                        console.log(shuffleTheTargets);
+                        // let shuffleTheTargets = shuffle(targets, users);
+                        shuffleLibrary(users);
+                        var targetsNewArray=users.slice();
+                        targetsNewArray.push(targetsNewArray[0]);
+                        targetsNewArray.shift();
+                        console.log("compairing the array ",users);
+                        console.log(" compairing again ", targetsNewArray);
+
+
+                        // console.log(shuffleTheTargets);
                         var obj = [];
 
-                        for (let i = 0; i < users.length; i++) {
+                        for (let i = 0; i <= users.length; i++) {
                             obj.push({
                                 user: users[i],
-                                target: shuffleTheTargets[i]
+                                target: targetsNewArray[i]
+                                // target: shuffleTheTargets[i]
                             })
                         }
                         console.log(obj);
 
-                        for (let i = 0; i < obj.length; i++) {
+                        for (let i = 0; i <= obj.length; i++) {
                             db.User
                                 .findOneAndUpdate({
                                     username: users[i]
                                 }, {
-                                    target: shuffleTheTargets[i]
+                                    target: targetsNewArray[i]
                                 })
                                 .then(user => {
-                                    console.log(user);
+                                    console.log("Here is everyone :users: ", user, "target: ", targetsNewArray);
                                 })
                         }
                     })
@@ -504,6 +523,7 @@ module.exports = {
                                                                         // winner!!!
                                                                         // alert("Jerson say's Chad is still better than you");
                                                                         console.log("Chad is still supreme");
+                                                                        res.json("Chad Rules")
                                                                     } else {
                                                                         // no winner yet
 
