@@ -1,7 +1,7 @@
-const express = require('express')
-const router = express.Router()
-const User = require('../../models/user')
-const passport = require('../../models/passport')
+var express = require('express')
+var router = express.Router()
+var User = require('../../models/user')
+var passport = require('../../models/passport')
 
 
 
@@ -9,7 +9,7 @@ const passport = require('../../models/passport')
 router.post('/signup', (req, res) => {
     console.log('user signup');
 
-    const { username, password } = req.body
+    var { username, password } = req.body
     // ADD VALIDATION
     User.findOne({ username: username }, (err, user) => {
         if (err) {
@@ -20,14 +20,25 @@ router.post('/signup', (req, res) => {
             })
         }
         else {
-            const newUser = new User({
+            var newUser = new User({
                 username: username,
                 password: password
             })
             newUser.save((err, savedUser) => {
+                console.log("saved User", savedUser)
                 if (err) return res.json(err)
                 res.json(savedUser)
             })
+            passport.authenticate('local'), 
+            (req, res) => {
+                console.log('logged in', req.session);
+                var userInfo = {
+                    username: req.user.username
+                };
+                //creating a 'key' called userName and putting it on the passport session object
+                req.session.passport.user.userName = userInfo.username
+                res.send(userInfo);
+            } 
         }
     })
 })

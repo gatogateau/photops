@@ -1,8 +1,10 @@
 .eliminated {
     margin-top: 25%;
+    color: black;
 }
 .missed {
     margin-top: 20%;
+
 }
 
 .back {
@@ -13,4 +15,3 @@
     color: white;
     border-radius: 10px;
     border: none;
-}

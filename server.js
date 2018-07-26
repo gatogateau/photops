@@ -1,17 +1,18 @@
-const express = require("express");
-const bodyParser = require("body-parser");
-const mongoose = require("mongoose");
-const routes = require("./routes");
-const app = express();
-const morgan = require('morgan')
-const session = require('express-session')
-const MongoStore = require('connect-mongo')(session)
-const passport = require('./models/passport');
+var express = require("express");
+var bodyParser = require("body-parser");
+var mongoose = require("mongoose");
+var routes = require("./routes");
+var app = express();
+var morgan = require('morgan')
+var session = require('express-session')
+var MongoStore = require('connect-mongo')(session)
+var passport = require('./models/passport');
 
 
 
 // listen on port 3001
-const PORT = process.env.PORT || 3001;
+var PORT = process.env.PORT || 3001;
+
 
 // Define middleware here
 // commented out from JJ

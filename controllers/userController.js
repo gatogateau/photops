@@ -1,5 +1,5 @@
-const db = require("../models");
-const passport = require("../models/passport");
+var db = require("../models");
+var passport = require("../models/passport");
 
 
 // Defining methods for the userController

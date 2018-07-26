@@ -8,6 +8,7 @@ import { Col, Row, Container } from "../../components/Grid";
 import { Button, Input } from "reactstrap";
 import "./CreateGame.css";
 import axios from "axios";
+import Modal from 'react-awesome-modal';
 // import { List, ListItem } from "../../components/List";
 // import { Input, TextArea, FormBtn } from "../../components/Form";
 class CreateGame extends Component {
@@ -16,9 +17,10 @@ class CreateGame extends Component {
 
     this.state = {
       createGameForm: [
-        { game: "", startDate: "", duration: "", gameType: "Public" }
+        { game: "", startDate: "", duration: "", gameType: "Public", gameCreator: "" }
       ],
-      allUsers: []
+      allUsers: [],
+      visible1: false
     };
 
     this.createGame = this.createGame.bind(this);
@@ -61,13 +63,26 @@ class CreateGame extends Component {
       });
   }
 
+  openModal1() {
+    this.setState({
+        visible1: true
+    });
+}
+
+closeModal1() {
+    this.setState({
+        visible1: false
+    });
+}
+
   createGame(event) {
     event.preventDefault();
 
     let createGameForm = {
       game: document.getElementById("game").value,
       startDate: document.getElementById("startDate").value,
-      duration: document.getElementById("duration").value
+      duration: document.getElementById("duration").value,
+      gameCreator: this.props.username
     };
     console.log(createGameForm);
 
@@ -94,7 +109,7 @@ class CreateGame extends Component {
           </Col>
 
           <Col size="md-12">
-            <Jumbotron username={this.props.username} target={this.props.target} targetURL={this.props.targetURL}/>
+            <Jumbotron username={this.props.username} target={this.props.target} targetURL={this.props.targetURL} currentGame={this.props.currentGame} kills={this.props.kills}/>
           </Col>
 
           <Col size="md-12">
@@ -136,6 +151,12 @@ class CreateGame extends Component {
                 <li key={i}>{user.username}</li>
               ))}
               </div>
+              <Modal visible={this.state.visible1} width="400" height="300" effect="fadeInUp" onClickAway={() => this.closeModal1()}>
+                    <div>
+                        <h1 className="eliminated">CLick Users Name To Add To Game</h1>
+                        <a href="javascript:void(0);" onClick={() => this.closeModal1()}>Close</a>
+                    </div>
+                </Modal>
             </div>
           </Col>
         </Row>

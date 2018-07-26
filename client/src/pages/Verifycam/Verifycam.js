@@ -5,6 +5,7 @@ import cloudinary from 'cloudinary';
 import axios from 'axios';
 import Modal from 'react-awesome-modal';
 import './Verifycam.css';
+// import { Link } from "react-router-dom";
 
 cloudinary.config({
     cloud_name: 'notjarvis',
@@ -17,7 +18,9 @@ class Verifycam extends Component {
         super(props);
         this.state = {
             visible1: false,
-            visible2: false 
+            visible2: false,
+            visible3: false,
+            currentGame: this.props.currentGame
         };
         this.takePicture = this.takePicture.bind(this);
         this.runKillFunction = this.runKillFunction.bind(this);
@@ -69,16 +72,32 @@ class Verifycam extends Component {
             visible2: false
         });
     }
+    openModal3() {
+        this.setState({
+            visible3: true
+        });
+    }
+ 
+    closeModal3() {
+        this.setState({
+            visible3: false
+        });
+    }
 
     runKillFunction() {
         let that = this;
         console.log("pre kill target");
         axios.put('/api/games/killTarget', {
-            username: that.props.target
+            username: that.props.target,
+            game: that.state.currentGame
+
         })
           .then(function (response) {
             // handle success
-            console.log(response);
+            console.log(response.data);
+            if(response.data == "Chad Rules"){
+                that.openModal3(); 
+            }
     
           })
           .catch(function (error) {
@@ -124,7 +143,6 @@ class Verifycam extends Component {
                 //this.img.onload = () => { URL.revokeObjectURL(this.src); }
 
 
-
             })
     }
 
@@ -157,8 +175,17 @@ class Verifycam extends Component {
                         <a href="javascript:void(0);" onClick={() => this.closeModal2()}>Close</a>
                     </div>
                 </Modal>
-                <a href="/"><button className="back">Back</button></a>
-                <img
+
+                <Modal visible={this.state.visible3} width="400" height="300" effect="fadeInUp" onClickAway={() => this.closeModal3()}>
+                    <div>
+                        <h1 className="youWin">Congratulations</h1>
+                        <img id="winning" src="https://media0.giphy.com/media/Q56SF4czEtSZG/giphy.gif"/>
+                        <h1 className="win">You Win!</h1>
+                        <a href="javascript:void(0);" onClick={() => this.closeModal3()}>Close</a>
+                    </div>
+                </Modal>
+                <a href="/"><button>Back</button></a>
+                <img 
                     style={this.style.captureImage}
                     ref={(img) => {
                         this.img = img;
