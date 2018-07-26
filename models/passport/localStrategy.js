@@ -1,7 +1,7 @@
-const User = require('../user')
-const LocalStrategy = require('passport-local').Strategy
+var User = require('../user')
+var LocalStrategy = require('passport-local').Strategy
 
-const strategy = new LocalStrategy(
+var strategy = new LocalStrategy(
 	{
 		usernameField: 'username' // not necessary, DEFAULT
 	},

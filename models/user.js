@@ -1,13 +1,13 @@
-const mongoose = require("mongoose");
-const Schema = mongoose.Schema;
-const bcrypt = require('bcrypt');
+var mongoose = require("mongoose");
+var Schema = mongoose.Schema;
+var bcrypt = require('bcrypt');
 mongoose.promise = Promise
 
 
 // connect and create database photoOps
 mongoose.connect("mongodb://localhost/photops");
 
-const eachUser = new Schema(
+var eachUser = new Schema(
     {
       username: {type:String, unique: true, required: false, default: "username"},
       password: {type:String, unique: false, required: false, default: "password"}, 
@@ -58,6 +58,6 @@ eachUser.pre('save', function (next) {
 	}
 })
 
-    const User = mongoose.model("User", eachUser);
+    var User = mongoose.model("User", eachUser);
 
     module.exports = User;
