@@ -9,14 +9,14 @@ import { Col, Row, Container } from "../../components/Grid";
 import './StartGame.css';
 import axios from "axios";
 import Modal from 'react-awesome-modal';
-
 // import { List, ListItem } from "../../components/List";
 // import { Input, TextArea, FormBtn } from "../../components/Form";
 class JoinGame extends Component {
   constructor(props) {
-    super(props);
+    super(props)
 
     this.state = {
+      gameName: "",
       allGames: [],
       visible1: false
     }
@@ -26,19 +26,19 @@ class JoinGame extends Component {
   findAllGames() {
     this.openModal1();
     let that = this;
-    axios
-      .get("/api/games/allGames")
-      .then(function(response) {
+    axios.get('/api/games/allGames')
+      .then(function (response) {
         // handle success
         console.log(this, response.data, that);
         that.setState({
-          allGames: response.data
+          allGames: response.data,
         });
+
       })
-      .catch(function(error) {
+      .catch(function (error) {
         // handle error
         console.log(error);
-      });
+      })
   }
   openModal1() {
     this.setState({
@@ -51,34 +51,33 @@ class JoinGame extends Component {
       visible1: false
     });
   }
+
   joinGame = (e) => {
     console.log("hit")
     e.preventDefault();
     axios.put("/api/games/joinGameByGameName", { game: this.state.gameName })
       .then(function (response) {
         if (response.data.message) {
-          alert(response.data.message);
+          alert(response.data.message)
         }
         console.log(response);
-      });
-  };
+      })
+  }
 
-  handleGameNameInput = e => {
-    console.log("hit");
+  handleGameNameInput = (e) => {
+    console.log("hit")
     this.setState({
       gameName: e.target.value
-    });
-  };
+    })
+  }
   startSpecificGame = (e, gameName) => {
     console.log('anything')
     e.preventDefault();
     axios.put("/api/games/start/startGame", { game: gameName })
       .then(function (response) {
-
         if (response.data.message) {
-          alert(response.data.message);
+          alert(response.data.message)
         }
-
         console.log("this should be the start game response" + response);
       })
     axios.post("/api/games/updateActiveGames", { game: gameName })
@@ -105,7 +104,7 @@ class JoinGame extends Component {
   }
 
   render() {
-    console.log(this);
+    console.log(this)
     return (
       <Container fluid>
         <Row>
@@ -113,37 +112,23 @@ class JoinGame extends Component {
             <Navbar logOut={this.props.logOut} />
           </Col>
           <Col size="md-12">
-
             <Jumbotron username={this.props.username} logOut={this.props.logOut} target={this.props.target} targetURL={this.props.targetURL} currentGame={this.props.currentGame} kills={this.props.kills} />
           </Col>
           <Col size="md-12">
             <div className="startGameForm">
-
               <h1>Start</h1>
               <br />
-              <button className="fag" onClick={this.findAllGames}>
+              <button
+                className="fag"
+                onClick={this.findAllGames}
+              >
                 <h4>Find All Games</h4>
               </button>
-
               <br />
               {this.state.allGames.map((game, i) =>
                 <li key={i} onClick={(e) => { this.startSpecificGame(e, game.game), this.sendGameToJerson(game.game) }}>{game.game}</li>
               )}
-
               <br />
-            </div>
-
-            <div className="gameResults">
-            {this.state.allGames.map((game, i) => (
-              <div
-                key={i}
-                onClick={e => {
-                  this.startSpecificGame(e, game.game);
-                }}
-              >
-                {game.game}
-              </div>
-            ))}
             </div>
           </Col>
         </Row>
