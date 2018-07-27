@@ -124,7 +124,7 @@ class Verifycam extends Component {
                             "app_id": "3152266b",
                             "app_key": "702449259a83518d27467f43d20715d4"
                         };
-                        $.ajax("http://api.kairos.com/verify", {
+                        $.ajax("https://api.kairos.com/verify", {
                             headers: headers,
                             type: "POST",
                             data: JSON.stringify(payload),
@@ -153,13 +153,13 @@ class Verifycam extends Component {
         return (
             <div style={this.style.container}>
                 <Camera
-                    style={this.style.preview}
+                    className="preview"
                     ref={(cam) => {
                         this.camera = cam;
                     }}
                 >
-                    <view style={this.style.captureContainer} onClick={this.takePicture}>
-                        <button style={this.style.captureButton} />
+                    <view className="captureContainer" onClick={this.takePicture}>
+                        <button className="captureButton" />
                     </view>
                 </Camera>
                 <Modal visible={this.state.visible1} width="400" height="300" effect="fadeInUp" onClickAway={() => this.closeModal1()}>
@@ -186,7 +186,7 @@ class Verifycam extends Component {
                 </Modal>
                 <a href="/"><button>Back</button></a>
                 <img 
-                    style={this.style.captureImage}
+                    className="captureImage"
                     ref={(img) => {
                         this.img = img;
 
