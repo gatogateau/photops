@@ -109,8 +109,6 @@ class Enrollcam extends Component {
                         <button style={this.style.captureButton} />
                     </view>
                 </Camera>
-                <a href="/"><button className="back">Back</button></a>
-                <img
                 <Link to="/"><button>Back</button></Link>
                 <img alt="enrolled"
                     style={this.style.captureImage}
@@ -125,3 +123,4 @@ class Enrollcam extends Component {
 }
 
 export default Enrollcam;
+
