@@ -110,8 +110,7 @@ class Enrollcam extends Component {
                     </view>
                 </Camera>
                 <a href="/"><button className="back">Back</button></a>
-                <img
-                <Link to="/"><button>Back</button></Link>
+    
                 <img alt="enrolled"
                     style={this.style.captureImage}
                     ref={(img) => {

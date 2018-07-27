@@ -5,12 +5,7 @@ import Navbar from "../../components/Navbar";
 // import API from "../../utils/API";
 // import { Link } from "react-router-dom";
 import { Col, Row, Container } from "../../components/Grid";
-
 import { Button, Input } from "reactstrap";
-import "./JoinGame.css";
-import axios from "axios";
-
-import { Input } from "reactstrap";
 import './JoinGame.css';
 import axios from "axios";
 import Modal from 'react-awesome-modal';
@@ -121,11 +116,7 @@ class JoinGame extends Component {
               </button>
 
               <br/>
-              {this.state.allGames.map((game, i) =>
-              <li key={i} onClick={(e) =>{this.joinSpecificGame(e, game.game)}}>{game.game}</li>
-            )}
 
-              <br />
             </div>
 
             <div className="gameResults">
