@@ -25,13 +25,12 @@ router.post('/signup', (req, res) => {
                 password: password
             })
             newUser.save((err, savedUser) => {
-                console.log("saved User", savedUser)
                 if (err) return res.json(err)
                 res.json(savedUser)
             })
             passport.authenticate('local'), 
             (req, res) => {
-                console.log('logged in', req.session);
+                console.log('logged in', req.user);
                 var userInfo = {
                     username: req.user.username
                 };
