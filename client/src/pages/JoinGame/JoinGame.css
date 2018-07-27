@@ -1,4 +1,11 @@
-.joinGameForm {
+<<<<<<< HEAD
+<<<<<<< HEAD
+
+=======
+>>>>>>> parent of 8ef5af9e... styles
+=======
+>>>>>>> parent of 8ef5af9e... styles
+.joinGame {
     width: 50%;
     margin: 5% auto;
     background: #474747c5;
@@ -13,10 +20,42 @@
     margin: 1% auto;
     color: white;
     font-size: 20px;
+  
+.joinGameForm{
+    width: 325px;
+    color: aliceblue;
+    margin: 5% auto 2% auto;
+    text-align: center;
+    height: auto;
+    background-color: #086066;
+    border-radius: 10px;
+    box-shadow: 0 10px 50px red;
+    opacity: .8;
+}
+#joinInstructions {
+    color: black;
+    margin-top: 25%;
+}
+.fag {
+    background: black;
+    width: 82%;
+    text-align: center;
+    margin: 0 auto;
+    color: aliceblue;
     font-weight: bold;
     border-radius: 5px;
     border: none;
     
+}
+
+    border: 1px solid aliceblue;
+    
+}
+h4 {
+    opacity: 1;
+}
+h1 {
+    color: white;
 }
 
 .inputField {
