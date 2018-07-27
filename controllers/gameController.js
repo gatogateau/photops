@@ -520,10 +520,11 @@ module.exports = {
                                                                     console.log (resPlayersAlive[0].playersAlive.length);
 
                                                                     if(resPlayersAlive[0].playersAlive.length == 1) {
+                                                                        result="Chad Rules";
                                                                         // winner!!!
                                                                         // alert("Jerson say's Chad is still better than you");
                                                                         console.log("Chad is still supreme");
-                                                                        res.json("Chad Rules")
+                                                                        res.json(result);
                                                                     } else {
                                                                         // no winner yet
 

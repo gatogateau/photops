@@ -57,6 +57,14 @@ router.route("/snagPhotos")
 
 
 
+    // want to test the functionality
+// will this work?
+// api/users/testme
+router.route("/testme")
+    .get(userController.testMe);
+
+
+
 router.route("/snagPhotos")
     .get(userController.snagPhotos);
 
