@@ -73,7 +73,7 @@ class Enrollcam extends Component {
                             "app_id": "3152266b",
                             "app_key": "702449259a83518d27467f43d20715d4"
                         };
-                        $.ajax("http://api.kairos.com/enroll", {
+                        $.ajax("https://api.kairos.com/enroll", {
                             headers: headers,
                             type: "POST",
                             data: JSON.stringify(payload),
@@ -124,3 +124,4 @@ class Enrollcam extends Component {
 }
 
 export default Enrollcam;
+
