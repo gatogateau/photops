@@ -2,8 +2,45 @@ const db = require("../models");
 const passport = require("../models/passport");
 
 
+
+function willIWork (stuff){
+    console.log (stuff);
+    result="fun";
+    return result;
+        
+};
+
+
+
 // Defining methods for the userController
 module.exports = {
+
+    testMe: function (req,res) {        
+        db.User
+        .find(req.query)
+        .sort({
+            date: -1
+        })
+        .select({
+            "username":1,
+            "_id":0,
+        })
+        .then(dbModel => {
+            willIWork(dbModel);
+            console.log(result);
+            // return result;
+            res.json(result);
+        })
+
+        // .then(dbModel => {
+        //     console.log(dbModel);
+        //     res.json(dbModel)
+        // })
+        .catch(err => res.status(422).json(err));
+
+
+
+    },
 
     // create
 
@@ -270,6 +307,7 @@ module.exports = {
             .catch(err => res.status(422).json(err));
     },
 
+   
     // update stats after user "hits" target.
     // find user by userName and update kills +1
     // find target and update deaths +1
