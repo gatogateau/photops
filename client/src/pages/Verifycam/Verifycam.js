@@ -1,3 +1,4 @@
+
 import React, { Component } from 'react';
 import Camera from 'react-camera';
 import $ from "jquery";
