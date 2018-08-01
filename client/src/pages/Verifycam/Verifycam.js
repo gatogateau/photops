@@ -125,7 +125,7 @@ class Verifycam extends Component {
                             "app_id": "3152266b",
                             "app_key": "702449259a83518d27467f43d20715d4"
                         };
-                        $.ajax("http://api.kairos.com/verify", {
+                        $.ajax("https://api.kairos.com/verify", {
                             headers: headers,
                             type: "POST",
                             data: JSON.stringify(payload),
