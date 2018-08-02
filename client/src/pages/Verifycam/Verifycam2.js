@@ -23,6 +23,7 @@ class Verifycam2 extends Component {
         currentGame: this.props.currentGame,
     };
     this.runKillFunction = this.runKillFunction.bind(this);
+    this.onTakePhoto = this.onTakePhoto.bind(this)
 }
 
   onTakePhoto (dataUri) {

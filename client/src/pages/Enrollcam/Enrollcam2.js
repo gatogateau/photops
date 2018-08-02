@@ -14,6 +14,11 @@ cloudinary.config({
 
  
 class Enrollcam extends Component {
+  constructor(props) {
+    super(props);
+    this.runKillFunction = this.runKillFunction.bind(this);
+    this.onTakePhoto = this.onTakePhoto.bind(this)
+}
   componentDidMount() {
       alert("Please take 3-4 picture to help with detction.");
   }
