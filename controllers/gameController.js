@@ -370,19 +370,19 @@ module.exports = {
     // don't use this one
     // player assassinates the target, target gets removed from playersAlive  and moved to playersDead in db.Games  -findOneAndUpdate. search db.User "target".  Take the target from the deceased, make sure it is not user==target and add to users target.  If user==target, take playersAlive and reshuffle to targets.
     // work on this functionality. 
-    playerKillsTarget: function (req, res) {
-        console.log("playerKillsTarget Running");cl
-        db.Games
-            .findOneAndUpdate({
-                _id: req.params.id
-            }, req.body)
-            .then(dbModel => res.json(dbModel))
-            .catch(err => res.status(422).json(err));
-    },
+    // playerKillsTarget: function (req, res) {
+    //     console.log("playerKillsTarget Running");cl
+    //     db.Games
+    //         .findOneAndUpdate({
+    //             _id: req.params.id
+    //         }, req.body)
+    //         .then(dbModel => res.json(dbModel))
+    //         .catch(err => res.status(422).json(err));
+    // },
 
 
 
-    // need the game name.
+    // kills the opponent and takes their target.  
     runKillFunction: function (req, res) {
         console.log("kill function working");
         console.log(req.body);
