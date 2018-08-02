@@ -127,28 +127,28 @@ runKillFunction() {
           isDisplayStartCameraError = {true}
           sizeFactor = {1}
         />
-      
-      <Modal visible={this.state.visible1} width="400" height="300" effect="fadeInUp" onClickAway={() => this.closeModal1()}>
-        <div>
-          <h1 className="eliminated">Target Eliminated!</h1>
-          <a href="javascript:void(0);" onClick={() => this.closeModal1()}>Close</a>
-        </div>
-      </Modal>
-      <Modal visible={this.state.visible2} width="400" height="300" effect="fadeInDown" onClickAway={() => this.closeModal2()}>
-        <div>
-          <h1 className="missed">Oops, you missed!</h1>
-          <p>Please try again.</p>
-          <a href="javascript:void(0);" onClick={() => this.closeModal2()}>Close</a>
-        </div>
-      </Modal>
-      <Modal visible={this.state.visible3} width="400" height="300" effect="fadeInUp" onClickAway={() => this.closeModal3()}>
-        <div>
-          <h1 className="youWin">Congratulations</h1>
-          <img id="winning" src="https://media0.giphy.com/media/Q56SF4czEtSZG/giphy.gif"/>
-          <h1 className="win">You Win!</h1>
-          <a href="javascript:void(0);" onClick={() => this.closeModal3()}>Close</a>
-        </div>
-      </Modal>
+        <a href="/"><button>Back</button></a>
+        <Modal visible={this.state.visible1} width="400" height="300" effect="fadeInUp" onClickAway={() => this.closeModal1()}>
+          <div>
+            <h1 className="eliminated">Target Eliminated!</h1>
+            <a href="javascript:void(0);" onClick={() => this.closeModal1()}>Close</a>
+          </div>
+        </Modal>
+        <Modal visible={this.state.visible2} width="400" height="300" effect="fadeInDown" onClickAway={() => this.closeModal2()}>
+          <div>
+            <h1 className="missed">Oops, you missed!</h1>
+            <p>Please try again.</p>
+            <a href="javascript:void(0);" onClick={() => this.closeModal2()}>Close</a>
+          </div>
+        </Modal>
+        <Modal visible={this.state.visible3} width="400" height="300" effect="fadeInUp" onClickAway={() => this.closeModal3()}>
+          <div>
+            <h1 className="youWin">Congratulations</h1>
+            <img id="winning" src="https://media0.giphy.com/media/Q56SF4czEtSZG/giphy.gif"/>
+            <h1 className="win">You Win!</h1>
+            <a href="javascript:void(0);" onClick={() => this.closeModal3()}>Close</a>
+          </div>
+        </Modal>
       </div>
     );
   }
