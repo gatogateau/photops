@@ -8,7 +8,7 @@ import AuthPage from './pages/AuthPage/AuthPage';
 // import Example from './components/Nav/Nav';
 import Home from './pages/homepage/home';
 import JoinGame from './pages/JoinGame/JoinGame';
-import Enrollcam from './pages/Enrollcam/Enrollcam';
+import Enrollcam from './pages/Enrollcam/Enrollcam2';
 import Verifycam from './pages/Verifycam/Verifycam2';
 import CreateGame from './pages/CreateGame/CreateGame';
 import CurrentGame from './pages/CurrentGame/CurrentGame';
