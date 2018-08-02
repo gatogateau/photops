@@ -52,7 +52,7 @@ router.route("/capturePic")
 
     // grab the user photo from the DB and display
     // "api/users/snagPhoto"
-router.route("/snagPhotos")
+router.route("/snagPhotos") 
     .post(userController.snagPhotos);
 
 
