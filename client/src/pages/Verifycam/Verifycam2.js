@@ -5,6 +5,13 @@ import $ from "jquery";
 import cloudinary from 'cloudinary';
 import axios from 'axios';
 import Modal from 'react-awesome-modal';
+
+cloudinary.config({
+  cloud_name: 'notjarvis',
+  api_key: '478844584369981',
+  api_secret: 'vxEprjN0c5IMHkQHu_WUpz1b9hA'
+});
+
  
 class Verifycam2 extends Component {
   constructor(props) {
@@ -39,11 +46,13 @@ class Verifycam2 extends Component {
         console.log(response);
           let confidence = JSON.parse(response).images["0"].transaction.confidence;
 
-          if(confidence>=.80) {
-            that.openModal1();
+          if(confidence >= .80) {
+            // that.openModal1();
+            alert("Target Eliminated")
             that.runKillFunction();
           } else {
-            that.openModal2();
+            // that.openModal2();
+            alert("Sorry you missed!")
           // change alert to modal
         } 
           
@@ -53,7 +62,7 @@ class Verifycam2 extends Component {
   }
  
   onCameraError (error) {
-    console.error('onCameraError', error);
+    console.log('onCameraError', error);
   }
 
   openModal1() {
@@ -102,7 +111,8 @@ runKillFunction() {
         // handle success
         console.log(response.data);
         if(response.data == "Chad Rules"){
-            that.openModal3(); 
+            // that.openModal3(); 
+            alert("Congratulations You Win!!!")
         }
 
       })
