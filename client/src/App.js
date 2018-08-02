@@ -9,7 +9,7 @@ import AuthPage from './pages/AuthPage/AuthPage';
 import Home from './pages/homepage/home';
 import JoinGame from './pages/JoinGame/JoinGame';
 import Enrollcam from './pages/Enrollcam/Enrollcam';
-import Verifycam from './pages/Verifycam/Verifycam';
+import Verifycam from './pages/Verifycam/Verifycam2';
 import CreateGame from './pages/CreateGame/CreateGame';
 import CurrentGame from './pages/CurrentGame/CurrentGame';
 import StartGame from './pages/StartGame/StartGame';
