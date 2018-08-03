@@ -28,7 +28,7 @@ class Verifycam2 extends Component {
   
   onTakePhoto (dataUri) {
     let that = this;
-    alert(dataUri);
+    alert(dataUri.data);
     // Do stuff with the dataUri photo...
     cloudinary.uploader.upload(dataUri, function (result) {
       console.log(result);
