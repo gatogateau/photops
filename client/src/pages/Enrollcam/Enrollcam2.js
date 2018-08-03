@@ -16,16 +16,16 @@ class Enrollcam extends Component {
       alert("Please take 3-4 picture to help with detction.");
   }
   onTakePhoto (dataUri) {
-    alert("onTakePhoto")
     let that = this;
     // Do stuff with the dataUri photo...
     cloudinary.config({
       cloud_name: 'notjarvis',
       api_key: '478844584369981',
       api_secret: 'vxEprjN0c5IMHkQHu_WUpz1b9hA'
-  });
+    });
     cloudinary.uploader.upload(dataUri, function (result) {
       console.log(result);
+      alert("onTakePhoto")
       let payload = { "image": result.url, "subject_id": that.props.username, "gallery_name": "players" };
       let headers = {
         "Content-type": "application/json",
