@@ -6,30 +6,29 @@ import cloudinary from 'cloudinary';
 import axios from 'axios';
 import Modal from 'react-awesome-modal';
 
-cloudinary.config({
-  cloud_name: 'notjarvis',
-  api_key: '478844584369981',
-  api_secret: 'vxEprjN0c5IMHkQHu_WUpz1b9hA'
-});
 
- 
+
 class Verifycam2 extends Component {
   constructor(props) {
     super(props);
     this.state = {
-        visible1: false,
-        visible2: false,
-        visible3: false,
-        currentGame: this.props.currentGame,
+      visible1: false,
+      visible2: false,
+      visible3: false,
+      currentGame: this.props.currentGame,
     };
     this.runKillFunction = this.runKillFunction.bind(this);
     this.onTakePhoto = this.onTakePhoto.bind(this);
-}
-
+  }
+  
   onTakePhoto (dataUri) {
     let that = this;
     // Do stuff with the dataUri photo...
-    console.log(dataUri);
+    cloudinary.config({
+      cloud_name: 'notjarvis',
+      api_key: '478844584369981',
+      api_secret: 'vxEprjN0c5IMHkQHu_WUpz1b9hA'
+    });
     cloudinary.uploader.upload(dataUri, function (result) {
       console.log(result);
       let payload = { "image": result.url, "subject_id": that.props.target, "gallery_name": "players" };
