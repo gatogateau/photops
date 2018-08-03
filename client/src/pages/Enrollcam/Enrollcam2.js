@@ -16,6 +16,7 @@ class Enrollcam extends Component {
       alert("Please take 3-4 picture to help with detction.");
   }
   onTakePhoto (dataUri) {
+    alert("onTakePhoto")
     let that = this;
     // Do stuff with the dataUri photo...
     cloudinary.config({
