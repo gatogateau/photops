@@ -6,12 +6,6 @@ import cloudinary from 'cloudinary';
 import axios from 'axios';
 import Modal from 'react-awesome-modal';
 
-cloudinary.config({
-    cloud_name: 'notjarvis',
-    api_key: '478844584369981',
-    api_secret: 'vxEprjN0c5IMHkQHu_WUpz1b9hA'
-});
-
  
 class Enrollcam extends Component {
   constructor(props) {
@@ -24,7 +18,11 @@ class Enrollcam extends Component {
   onTakePhoto (dataUri) {
     let that = this;
     // Do stuff with the dataUri photo...
-    console.log(dataUri);
+    cloudinary.config({
+      cloud_name: 'notjarvis',
+      api_key: '478844584369981',
+      api_secret: 'vxEprjN0c5IMHkQHu_WUpz1b9hA'
+  });
     cloudinary.uploader.upload(dataUri, function (result) {
       console.log(result);
       let payload = { "image": result.url, "subject_id": that.props.username, "gallery_name": "players" };
