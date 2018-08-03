@@ -24,6 +24,7 @@
     "react-scripts": "1.0.14",
     "reactstrap": "^6.2.0",
     "regjsparser": "^0.3.0",
+    "sane": "^3.0.0",
     "uglifyjs": "^2.4.11"
   },
   "scripts": {
