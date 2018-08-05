@@ -25,8 +25,7 @@ class Enrollcam extends Component {
     // Do stuff with the dataUri photo...
     cloudinary.v2.uploader.unsigned_upload(dataUri, "yg8xsc2x", 
     { cloud_name: "notjarvis" }, 
-    function(error, result) {console.log(result, error) 
-      alert("onTakePhoto")
+    function(error, result) {alert(result, error) 
       let payload = { "image": result.url, "subject_id": that.props.username, "gallery_name": "players" };
       let headers = {
         "Content-type": "application/json",
