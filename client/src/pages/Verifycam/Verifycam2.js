@@ -32,7 +32,7 @@ class Verifycam2 extends Component {
     // Do stuff with the dataUri photo...
     cloudinary.v2.uploader.unsigned_upload(dataUri, "yg8xsc2x", 
     { cloud_name: "notjarvis" }, 
-    function(error, result) {alert(result, error) 
+    function(error, result) {alert(error) 
       let payload = { "image": result.url, "subject_id": that.props.target, "gallery_name": "players" };
       let headers = {
         "Content-type": "application/json",
