@@ -7,22 +7,25 @@ import axios from 'axios';
 import Modal from 'react-awesome-modal';
 
 cloudinary.config({
-    cloud_name: 'notjarvis',
-    api_key: '478844584369981',
-    api_secret: 'vxEprjN0c5IMHkQHu_WUpz1b9hA'
+  cloud_name: 'notjarvis',
+  api_key: '478844584369981',
+  api_secret: 'vxEprjN0c5IMHkQHu_WUpz1b9hA'
 });
-
  
 class Enrollcam extends Component {
+  constructor(props) {
+    super(props);
+    this.onTakePhoto = this.onTakePhoto.bind(this);
+}
   componentDidMount() {
       alert("Please take 3-4 picture to help with detction.");
   }
   onTakePhoto (dataUri) {
     let that = this;
     // Do stuff with the dataUri photo...
-    console.log(dataUri);
-    cloudinary.uploader.upload(dataUri, function (result) {
-      console.log(result);
+    cloudinary.v2.uploader.unsigned_upload(dataUri, "yg8xsc2x", 
+    { cloud_name: "notjarvis" }, 
+    function(error, result) {alert(result, error.message) 
       let payload = { "image": result.url, "subject_id": that.props.username, "gallery_name": "players" };
       let headers = {
         "Content-type": "application/json",

@@ -5,7 +5,13 @@
     text-align: center;
     height: auto;
 }
-
+.btn {
+    margin: 2%;
+    width: 30%;
+    background-color: #000000;
+    border: 1px solid aliceblue;
+    border-radius: 10px;
+}
 #tab {
     width: 50%;
     height: 95px;

@@ -12,25 +12,27 @@ cloudinary.config({
   api_secret: 'vxEprjN0c5IMHkQHu_WUpz1b9hA'
 });
 
- 
+
 class Verifycam2 extends Component {
   constructor(props) {
     super(props);
     this.state = {
-        visible1: false,
-        visible2: false,
-        visible3: false,
-        currentGame: this.props.currentGame,
+      visible1: false,
+      visible2: false,
+      visible3: false,
+      currentGame: this.props.currentGame,
     };
     this.runKillFunction = this.runKillFunction.bind(this);
-}
-
+    this.onTakePhoto = this.onTakePhoto.bind(this);
+  }
+  
   onTakePhoto (dataUri) {
     let that = this;
+    alert(dataUri.data);
     // Do stuff with the dataUri photo...
-    console.log(dataUri);
-    cloudinary.uploader.upload(dataUri, function (result) {
-      console.log(result);
+    cloudinary.v2.uploader.unsigned_upload(dataUri, "yg8xsc2x", 
+    { cloud_name: "notjarvis" }, 
+    function(error, result) {alert(error) 
       let payload = { "image": result.url, "subject_id": that.props.target, "gallery_name": "players" };
       let headers = {
         "Content-type": "application/json",
