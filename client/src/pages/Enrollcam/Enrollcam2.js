@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import Camera, { FACING_MODES, IMAGE_TYPES } from 'react-html5-camera-photo';
 import 'react-html5-camera-photo/build/css/index.css';
 import $ from "jquery";
+import "jquery";
 import cloudinary from 'cloudinary';
 import axios from 'axios';
 import Modal from 'react-awesome-modal';
