@@ -14,11 +14,15 @@ var passport = require('./models/passport');
 var PORT = process.env.PORT || 3001;
 
 
-app.use(function(req, res, next) {
-	res.header("Access-Control-Allow-Origin", "*");
-	res.header("Access-Control-Allow-Methods", "GET,HEAD,OPTIONS,POST,PUT");
-	res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, User-Agent, Accept, Authorization");
-	next();
+app.all('*', function(req, res, next) {
+    res.header('Access-Control-Allow-Origin', 'URLs to trust of allow');
+    res.header('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
+    res.header('Access-Control-Allow-Headers', 'Content-Type, User-Agent');
+    if ('OPTIONS' == req.method) {
+    res.sendStatus(200);
+    } else {
+      next();
+    }
   });
 // Define middleware here
 // commented out from JJ
