@@ -13,20 +13,9 @@ var passport = require('./models/passport');
 // listen on port 3001
 var PORT = process.env.PORT || 3001;
 
-
-app.all('*', function(req, res, next) {
-    res.header('Access-Control-Allow-Origin', 'URLs to trust of allow');
-    res.header('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
-    res.header('Access-Control-Allow-Headers', 'User-Agent');
-    if ('OPTIONS' == req.method) {
-    res.sendStatus(200);
-    } else {
-      next();
-    }
-  });
 // Define middleware here
 // commented out from JJ
-app.use(morgan('dev'))		
+app.use(morgan('dev'));		
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 // Serve up static assets (usually on heroku)
@@ -42,16 +31,23 @@ app.use(
 		resave: false, //required
 		saveUninitialized: false //required
 	})
-)
+);
 
 // Passport
-app.use(passport.initialize())
-app.use(passport.session()) // calls the deserializeUser
+app.use(passport.initialize());
+app.use(passport.session()); // calls the deserializeUser
 
 // Add routes, both API and view
 
 // Connect to the Mongo DB
 mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/photops");
+
+app.use(function(req, res, next) {
+	res.header("Access-Control-Allow-Origin", "*");
+	res.header("Access-Control-Allow-Methods", "GET,HEAD,OPTIONS,POST,PUT");
+	res.header("Access-Control-Allow-Headers", "User-Agent");
+	next();
+  });
 
 app.use(routes);
 
