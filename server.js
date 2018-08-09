@@ -13,9 +13,16 @@ var passport = require('./models/passport');
 // listen on port 3001
 var PORT = process.env.PORT || 3001;
 
+
+app.use(function(req, res, next) {
+	res.header("Access-Control-Allow-Origin", "*");
+	res.header("Access-Control-Allow-Methods", "GET,HEAD,OPTIONS,POST,PUT");
+	res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept, Authorization, User-Agent");
+	next();
+  });
 // Define middleware here
 // commented out from JJ
-app.use(morgan('dev'));		
+app.use(morgan('dev'))		
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 // Serve up static assets (usually on heroku)
@@ -31,11 +38,11 @@ app.use(
 		resave: false, //required
 		saveUninitialized: false //required
 	})
-);
+)
 
 // Passport
-app.use(passport.initialize());
-app.use(passport.session()); // calls the deserializeUser
+app.use(passport.initialize())
+app.use(passport.session()) // calls the deserializeUser
 
 // Add routes, both API and view
 
