@@ -49,6 +49,11 @@ app.use(passport.session()) // calls the deserializeUser
 // Connect to the Mongo DB
 mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/photops");
 
+app.use(function(req, res, next) {
+	req.header("Access-Control-Allow-Headers", "User-Agent");
+	next();
+  });
+
 app.use(routes);
 
 // Start the API server
