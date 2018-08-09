@@ -43,7 +43,7 @@ app.use(passport.session()); // calls the deserializeUser
 mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/photops");
 
 app.use(function(req, res, next) {
-	res.header("Access-Control-Allow-Headers", "User-Agent");
+	req.header("Access-Control-Allow-Headers", "User-Agent");
 	next();
   });
 
