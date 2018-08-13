@@ -3,6 +3,7 @@ var bodyParser = require("body-parser");
 var mongoose = require("mongoose");
 var routes = require("./routes");
 var app = express();
+var cors = require('cors');
 var morgan = require('morgan')
 var session = require('express-session')
 var MongoStore = require('connect-mongo')(session)
@@ -49,10 +50,11 @@ app.use(passport.session()) // calls the deserializeUser
 // Connect to the Mongo DB
 mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/photops");
 
-app.use(function(req, res, next) {
-	req.header("Access-Control-Allow-Headers", "User-Agent");
-	next();
-  });
+app.use(cors());
+ 
+app.get('/products/:id', function (req, res, next) {
+  res.json({msg: 'This is CORS-enabled for all origins!'})
+});
 
 app.use(routes);
 
