@@ -8,6 +8,7 @@
     "babylon": "^6.18.0",
     "browserslist": "^4.0.1",
     "cloudinary": "^1.11.0",
+    "cors": "^2.8.4",
     "expo": "^29.0.0",
     "jest": "^23.4.2",
     "jquery": "^3.3.1",

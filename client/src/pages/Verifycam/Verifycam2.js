@@ -6,6 +6,7 @@ import "jquery";
 import cloudinary from 'cloudinary';
 import axios from 'axios';
 import Modal from 'react-awesome-modal';
+import Cors from 'cors';
 
 cloudinary.config({
   cloud_name: 'notjarvis',
@@ -31,7 +32,7 @@ class Verifycam2 extends Component {
     let that = this;
     alert(dataUri.data);
     // Do stuff with the dataUri photo...
-    cloudinary.v2.uploader.unsigned_upload(dataUri, "yg8xsc2x", 
+    Cors(cloudinary.v2.uploader.unsigned_upload(dataUri, "yg8xsc2x", 
     { cloud_name: "notjarvis" }, 
     function(error, result) {alert(error) 
       let payload = { "image": result.url, "subject_id": that.props.target, "gallery_name": "players" };
@@ -61,7 +62,7 @@ class Verifycam2 extends Component {
           
       });
 
-  });
+  }));
   }
  
   onCameraError (error) {
