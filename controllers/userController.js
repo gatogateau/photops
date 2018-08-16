@@ -315,17 +315,20 @@ module.exports = {
     // update games move target death to players killed, and remove from current players
 
     //upload picture to cloudinar from the server just kidding the picture is too big to send to the server 
-    // cloudinary: function (req,res) {
-    //     cloudinary.config({
-    //         cloud_name: 'notjarvis',
-    //         api_key: '478844584369981',
-    //         api_secret: 'vxEprjN0c5IMHkQHu_WUpz1b9hA'
-    //       });
-    //     cloudinary.v2.uploader.unsigned_upload(req.body.picture, "yg8xsc2x", 
-    //     { cloud_name: "notjarvis" }, 
-    //     function(error, result) {console.log(error, result)
-    //     })
-    // },
+    cloudinary: function (req,res) {
+        cloudinary.config({
+            cloud_name: 'notjarvis',
+            api_key: '478844584369981',
+            api_secret: 'vxEprjN0c5IMHkQHu_WUpz1b9hA'
+          });
+        cloudinary.v2.uploader.unsigned_upload(req.body.picture, "yg8xsc2x", 
+        { cloud_name: "notjarvis" }, 
+        function(error, result) {
+            console.log(error, result)
+            res.send(result.url)
+        })
+
+    },
 
 
 

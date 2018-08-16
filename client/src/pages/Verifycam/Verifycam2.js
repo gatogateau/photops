@@ -6,7 +6,7 @@ import "jquery";
 import cloudinary from 'cloudinary';
 import axios from 'axios';
 import Modal from 'react-awesome-modal';
-import Cors from 'cors';
+import Base64 from 'compact-base64';
 
 cloudinary.config({
   cloud_name: 'notjarvis',
@@ -27,15 +27,42 @@ class Verifycam2 extends Component {
     this.runKillFunction = this.runKillFunction.bind(this);
     this.onTakePhoto = this.onTakePhoto.bind(this);
   }
+
+  b64toBlob(b64Data, contentType, sliceSize) {
+    contentType = contentType || '';
+    sliceSize = sliceSize || 512;
+
+    var byteCharacters = atob(b64Data);
+    var byteArrays = [];
+
+    for (var offset = 0; offset < byteCharacters.length; offset += sliceSize) {
+        var slice = byteCharacters.slice(offset, offset + sliceSize);
+
+        var byteNumbers = new Array(slice.length);
+        for (var i = 0; i < slice.length; i++) {
+            byteNumbers[i] = slice.charCodeAt(i);
+        }
+
+        var byteArray = new Uint8Array(byteNumbers);
+
+        byteArrays.push(byteArray);
+    }
+
+  var blob = new Blob(byteArrays, {type: contentType});
+  return blob;
+}
   
   onTakePhoto (dataUri) {
     let that = this;
-    alert(dataUri.data);
+    console.log(dataUri);
+  
     // Do stuff with the dataUri photo...
-    Cors(cloudinary.v2.uploader.unsigned_upload(dataUri, "yg8xsc2x", 
-    { cloud_name: "notjarvis" }, 
-    function(error, result) {alert(error) 
-      let payload = { "image": result.url, "subject_id": that.props.target, "gallery_name": "players" };
+    // 
+    axios
+    .post('/api/users/cloudinary', { picture: dataUri })
+    .then(response => {
+      console.log(response)
+      let payload = { "image": response.data, "subject_id": that.props.target, "gallery_name": "players" };
       let headers = {
         "Content-type": "application/json",
         "app_id": "3152266b",
@@ -62,7 +89,10 @@ class Verifycam2 extends Component {
           
       });
 
-  }));
+  }).catch(error => {
+    console.log(error);
+    
+  });
   }
  
   onCameraError (error) {
@@ -135,7 +165,7 @@ runKillFunction() {
           idealFacingMode = {FACING_MODES.ENVIRONMENT}
           idealResolution = {{width: 640, height: 480}}
           imageType = {IMAGE_TYPES.JPG}
-          imageCompression = {0.97}
+          imageCompression = {.5}
           isMaxResolution = {false}
           isImageMirror = {false}
           isDisplayStartCameraError = {true}
