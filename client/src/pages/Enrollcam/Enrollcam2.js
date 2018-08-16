@@ -24,10 +24,11 @@ class Enrollcam extends Component {
   onTakePhoto (dataUri) {
     let that = this;
     // Do stuff with the dataUri photo...
-    cloudinary.v2.uploader.unsigned_upload(dataUri, "yg8xsc2x", 
-    { cloud_name: "notjarvis" }, 
-    function(error, result) {alert(result, error.message) 
-      let payload = { "image": result.url, "subject_id": that.props.username, "gallery_name": "players" };
+    axios
+    .post('/api/users/cloudinary', { picture: dataUri })
+    .then(response => {
+      console.log(response)
+      let payload = { "image": response.data, "subject_id": that.props.username, "gallery_name": "players" };
       let headers = {
         "Content-type": "application/json",
         "app_id": "3152266b",
@@ -60,7 +61,7 @@ class Enrollcam extends Component {
           idealFacingMode = {FACING_MODES.USER}
           idealResolution = {{width: 640, height: 480}}
           imageType = {IMAGE_TYPES.JPG}
-          imageCompression = {0.97}
+          imageCompression = {0.5}
           isMaxResolution = {false}
           isImageMirror = {false}
           isDisplayStartCameraError = {true}

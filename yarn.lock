@@ -1818,6 +1818,10 @@ commondir@^1.0.1:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/commondir/-/commondir-1.0.1.tgz#ddd800da0c66127393cca5950ea968a3aaf1253b"
 
+compact-base64@^1.1.0:
+  version "1.1.0"
+  resolved "https://registry.yarnpkg.com/compact-base64/-/compact-base64-1.1.0.tgz#842835463dc793536c40a3ece22db171d7602627"
+
 component-emitter@^1.2.1:
   version "1.2.1"
   resolved "https://registry.yarnpkg.com/component-emitter/-/component-emitter-1.2.1.tgz#137918d6d78283f7df7a6b7c5a63e140e69425e6"

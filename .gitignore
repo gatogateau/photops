@@ -1,6 +1,7 @@
 .env
 public/assets/bootstrap
 public/assets/jquery
+node_modules
 
 .vscode
 

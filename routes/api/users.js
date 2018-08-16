@@ -68,8 +68,8 @@ router.route("/testme")
 router.route("/snagPhotos")
     .get(userController.snagPhotos);
 
-// router.route("/cloudinary") 
-//     .post(userController.cloudinary);
+router.route("/cloudinary") 
+    .post(userController.cloudinary);
 
 
 module.exports = router;
