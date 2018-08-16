@@ -14,6 +14,11 @@ var passport = require('./models/passport');
 // listen on port 3001
 var PORT = process.env.PORT || 3001;
 
+app.use(cors());
+ 
+app.get('/products/:id', function (req, res, next) {
+  res.json({msg: 'This is CORS-enabled for all origins!'})
+});
 
 app.use(function(req, res, next) {
 	res.header("Access-Control-Allow-Origin", "*");
@@ -49,12 +54,6 @@ app.use(passport.session()) // calls the deserializeUser
 
 // Connect to the Mongo DB
 mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/photops");
-
-app.use(cors());
- 
-app.get('/products/:id', function (req, res, next) {
-  res.json({msg: 'This is CORS-enabled for all origins!'})
-});
 
 app.use(routes);
 
