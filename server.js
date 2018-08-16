@@ -16,7 +16,7 @@ var PORT = process.env.PORT || 3001;
 app.use(function(req, res, next) {
 	res.header("Access-Control-Allow-Origin", "*");
 	res.header("Access-Control-Allow-Methods", "GET,HEAD,OPTIONS,POST,PUT");
-	res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, User-Agent, Accept, Authorization");
+	res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,User-Agent,**Authorization**');
 	next();
   });
 // Define middleware here
