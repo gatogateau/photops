@@ -35,10 +35,6 @@ class Verifycam2 extends Component {
     Cors(cloudinary.v2.uploader.unsigned_upload(dataUri, "yg8xsc2x", 
     { cloud_name: "notjarvis" }, 
     function(error, result) {alert(error) 
-      response.setHeader("Access-Control-Allow-Origin", "*");
-      response.setHeader("Access-Control-Allow-Credentials", "true");
-      response.setHeader("Access-Control-Allow-Methods", "GET,HEAD,OPTIONS,POST,PUT");
-      response.setHeader("Access-Control-Allow-Headers", "Access-Control-Allow-Headers, Origin,Accept, X-Requested-With, Content-Type, User-Agent, Access-Control-Request-Method, Access-Control-Request-Headers");
       let payload = { "image": result.url, "subject_id": that.props.target, "gallery_name": "players" };
       let headers = {
         "Content-type": "application/json",
