@@ -28,6 +28,15 @@ class Enrollcam extends Component {
     .post('/api/users/cloudinary', { picture: dataUri })
     .then(response => {
       console.log(response)
+      axios.put('/api/users/capturePic', {
+        userPicture: response.data
+      })
+      .then(function (response) {
+        console.log(response);
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
       let payload = { "image": response.data, "subject_id": that.props.username, "gallery_name": "players" };
       let headers = {
         "Content-type": "application/json",
