@@ -3,7 +3,6 @@ var bodyParser = require("body-parser");
 var mongoose = require("mongoose");
 var routes = require("./routes");
 var app = express();
-var cors = require('cors');
 var morgan = require('morgan')
 var session = require('express-session')
 var MongoStore = require('connect-mongo')(session)
@@ -14,16 +13,10 @@ var passport = require('./models/passport');
 // listen on port 3001
 var PORT = process.env.PORT || 3001;
 
-app.use(cors());
- 
-app.get('/products/:id', function (req, res, next) {
-  res.json({msg: 'This is CORS-enabled for all origins!'})
-});
-
 app.use(function(req, res, next) {
 	res.header("Access-Control-Allow-Origin", "*");
 	res.header("Access-Control-Allow-Methods", "GET,HEAD,OPTIONS,POST,PUT");
-	res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept, Authorization, User-Agent");
+	res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, User-Agent, Accept, Authorization");
 	next();
   });
 // Define middleware here
