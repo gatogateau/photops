@@ -1,10 +1,11 @@
 
 //sets up the reusable Jumbotron component
-import React from "react";
+import React, { Component } from 'react';
 import "./Jumbotron.css";
 // import Background from "../../images/Wallpaper-HD.jpg";
 
-const Jumbotron = (props) => (
+class Jumbotron extends Component {
+	render (props) {
 	<header className = "header">
 	<h1 id="userName">{props.username.toUpperCase()}</h1>
 		<h5 id="kills">Kills : {props.kills}</h5>
@@ -14,5 +15,6 @@ const Jumbotron = (props) => (
 		
 		
 	</header>
-);
+	}
+};
 export default Jumbotron;
