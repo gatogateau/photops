@@ -24,7 +24,6 @@
     "react-dom": "^16.0.0",
     "react-facebook-auth": "^1.4.0",
     "react-html5-camera-photo": "^1.2.3-beta.0",
-    "react-native": "^0.56.0",
     "react-router-dom": "^4.1.2",
     "react-scripts": "1.0.14",
     "reactstrap": "^6.2.0",
